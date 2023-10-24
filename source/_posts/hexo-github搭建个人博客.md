@@ -91,6 +91,35 @@ hexo d
 
 ### 主题选择
 
+在 Hexo 中有两份主要的配置文件，其名称都是 `_config.yml`。 其中，一份位于站点根目录下，主要包含 Hexo 本身的配置；另一份位于主题目录下，这份配置由主题作者提供，主要用于配置主题相关的选项。
+
+为了描述方便，在以下说明中，将前者称为 **站点配置文件**， 后者称为 **主题配置文件**。
+
+Hexo 安装主题的方式非常简单，只需要将主题文件拷贝至站点目录的 `themes` 目录下， 然后修改下配置文件即可。具体到 NexT 来说，安装步骤如下。
+
+在终端窗口下，定位到 Hexo 站点目录下。使用 `Git` checkout 代码：
+
+```shell
+$ cd your-hexo-site
+$ git clone https://github.com/iissnan/hexo-theme-next themes/next
+```
+
+启用主题
+
+与所有 Hexo 主题启用的模式一样。 当 克隆/下载 完成后，打开 **站点配置文件**， 找到 `theme` 字段，并将其值更改为 `next`。
+
+```
+theme: next
+```
+
+验证主题
+
+```
+hexo d -g
+```
+
+配置主题配置文件
+
 
 
 ## 多端部署
@@ -152,9 +181,34 @@ npm ERR!     C:\Users\Administrator\AppData\Local\npm-cache\_logs\2023-10-24T05_
 
 这是由于之前可能装过hexo，需要在npm的appdata中删除原有的hexo modules
 
+* hexo主题切换导致乱码
+
+```
+{% extends '_layout.swig' %} {% import '_macro/post.swig' as post_template %}....................
+```
+
+hexo在5.0之后把swig给删除了需要自己手动安装
+
+```
+npm i hexo-renderer-swig
+```
+
+重新生成
+
+```
+hexo clean          
+hexo generate      
+hexo server
+```
+
 
 
 ## 参考链接
 
-[github+hexo搭建个人博客](https://zz2summer.github.io/github-hexo-%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/)
+* [github+hexo搭建个人博客](https://zz2summer.github.io/github-hexo-%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/)
 
+* [hexo主题切换乱码问题解决](https://www.cnblogs.com/lanhualan/p/14588669.html)
+
+* [next主题配置](http://theme-next.iissnan.com/getting-started.html)
+
+* [hexo跨平台搭建](https://dora-cmon.github.io/posts/454ba26/)
