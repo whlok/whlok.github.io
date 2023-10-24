@@ -1,7 +1,7 @@
 ---
 title: hexo+github搭建个人博客
 date: 2023-10-24 12:39:05
-tags: 
+categories: 工具使用
 ---
 
 ## 环境准备
