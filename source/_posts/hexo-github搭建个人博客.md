@@ -205,10 +205,10 @@ hexo server
 
 ## 参考链接
 
-* [github+hexo搭建个人博客](https://zz2summer.github.io/github-hexo-%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/)
+[github+hexo搭建个人博客](https://zz2summer.github.io/github-hexo-%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/)
 
-* [hexo主题切换乱码问题解决](https://www.cnblogs.com/lanhualan/p/14588669.html)
+[hexo主题切换乱码问题解决](https://www.cnblogs.com/lanhualan/p/14588669.html)
 
-* [next主题配置](http://theme-next.iissnan.com/getting-started.html)
+[fluid主题配置](https://fluid-dev.github.io/hexo-fluid-docs/start/#%E5%88%9B%E5%BB%BA%E3%80%8C%E5%85%B3%E4%BA%8E%E9%A1%B5%E3%80%8D)
 
-* [hexo跨平台搭建](https://dora-cmon.github.io/posts/454ba26/)
+[hexo跨平台搭建](https://dora-cmon.github.io/posts/454ba26/)
