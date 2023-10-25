@@ -24,10 +24,10 @@
 <meta property="og:description" content="基于Prometheus+Grafana搭建性能监测工具需求 监测数据类型：JVM数据、玩家在线人数、消息时延等  接入Prometheus性能监测工具，暴露服务器性能监测数据   模式：pull&#x2F;push   接入Grafana可视化数据  Prometheus框架图    搭建流程准备环境Java客户端配置 12345678910111213141516171819202122232">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/image/develop/promethus.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/40764d3b8f1f439da60566905e317c1d.png#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/3d3e23c555af40b2801e252ed316e69c.png#pic_center">
+<meta property="og:image" content="http://example.com/image/develop/grafana_interface.png">
+<meta property="og:image" content="http://example.com/image/develop/prometheus_bucket.png">
 <meta property="article:published_time" content="2023-10-25T04:23:35.000Z">
-<meta property="article:modified_time" content="2023-10-25T04:33:51.359Z">
+<meta property="article:modified_time" content="2023-10-25T04:36:33.465Z">
 <meta property="article:author" content="Whlok">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/image/develop/promethus.png">
@@ -315,8 +315,8 @@
 <p>● 在HTTP URL中填写本机IP+Prometheus服务器运行的port.<br>● HTTP Method选择Get方法</p>
 <h3 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h3><p><strong>1.Error reading Prometheus: An error occurred within the plugin</strong><br>将添加数据源的ip设置为本机ip，当设置为localhost时由于容器环境运行的grafana，所以localhost在容器内部可能有自己的定义。</p>
 <p><strong>2.prometheus有数据 grafana无数据</strong><br>grafana可以通过PromeSQL语句查询对应的参数</p>
-<p><a target="_blank" rel="noopener" href="https://www.modb.pro/db/412613">Prometheus | Grafana导入模板后发现没有数据排查步骤 - 墨天轮</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_52837796/article/details/120768817">prometheus+grafana监控jvm，grafana上没有数据_吃葡萄不吐西瓜皮~的博客-CSDN博客_grafana没有监控数据</a><br><img src="https://img-blog.csdnimg.cn/40764d3b8f1f439da60566905e317c1d.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
-<p><strong>3 Prometheus Histogram</strong><br>prometheus的histogram是一个累计直方图，正常理解直方图的桶内时对应范围（a&lt;x&lt;b）的数据，prometheus的直方图的桶是累计的值，即当前这个桶的数据包含前一个桶，方便函数筛选，用户最后自己想要啥数据，自己用函数筛选；使用计时相关的api单位默认就是秒，自定义的数据类型就是自定义的数据类型对应的单位。<br>rate(histogram_showcase_metric_bucket[1m]) 查看每个 bucket 的每秒变化率来了解这些 bucket 是如何随时间变化；histogram_quantile() 可以计算出哪个 bucket 标签包含给定的分位数（例如第 95 个百分位数）。<br><img src="https://img-blog.csdnimg.cn/3d3e23c555af40b2801e252ed316e69c.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p><a target="_blank" rel="noopener" href="https://www.modb.pro/db/412613">Prometheus | Grafana导入模板后发现没有数据排查步骤 - 墨天轮</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_52837796/article/details/120768817">prometheus+grafana监控jvm，grafana上没有数据_吃葡萄不吐西瓜皮~的博客-CSDN博客_grafana没有监控数据</a><br><img src="/../image/develop/grafana_interface.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p><strong>3 Prometheus Histogram</strong><br>prometheus的histogram是一个累计直方图，正常理解直方图的桶内时对应范围（a&lt;x&lt;b）的数据，prometheus的直方图的桶是累计的值，即当前这个桶的数据包含前一个桶，方便函数筛选，用户最后自己想要啥数据，自己用函数筛选；使用计时相关的api单位默认就是秒，自定义的数据类型就是自定义的数据类型对应的单位。<br>rate(histogram_showcase_metric_bucket[1m]) 查看每个 bucket 的每秒变化率来了解这些 bucket 是如何随时间变化；histogram_quantile() 可以计算出哪个 bucket 标签包含给定的分位数（例如第 95 个百分位数）。<br><img src="/../image/develop/prometheus_bucket.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">histogram_quantile(0.95,rate(requests_latency_seconds_bucket[1m]))<br></code></pre></td></tr></table></figure>
 
 <p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1495303">一文搞懂 Prometheus 的直方图 - 腾讯云开发者社区-腾讯云</a><br><a target="_blank" rel="noopener" href="https://juejin.cn/post/7152837166190739486">深入理解和使用 Prometheus 的 Histogram 指标类型 - 掘金</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34556414/article/details/123151789">PromQL 直方图 跟踪请求的延迟或响应大小 99%的请求是在多少延迟下完成的？_富士康质检员张全蛋的博客-CSDN博客_promql 直方图</a></p>
@@ -412,6 +412,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2023/10/25/TopK%E7%90%86%E8%A7%A3%E4%B8%8E%E5%AE%9E%E7%8E%B0/" title="TopK理解与实现">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">TopK理解与实现</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

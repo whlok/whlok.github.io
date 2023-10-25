@@ -16,15 +16,15 @@
   <meta name="author" content="Whlok">
   <meta name="keywords" content="">
   
-    <meta name="description" content="环境准备install node.js install git 1git --version    流程搭建安装hexo新建一个文件夹，存放博客文件，如取名为&#x2F;blog 在&#x2F;blog文件夹下安装hexo 1npm i hexo-cli -g  验证hexo是否安装 1hexo -v  初始化文件夹 1hexo init  安装必备组件 1npm installs  生成静态网页">
+    <meta name="description" content="堆实现Topk时间复杂度：O(nlogk)思路：  通过小顶堆实现TopK（小顶堆的堆顶元素小于左右子树的值，当设定堆空间为K时，每次选择是否更新堆顶元素，若更新则进行相应调整） 构建堆：构建一个heap,元素个数为K，以完全二叉树的结构去理解数组中元素之间的关系，根节点为i(下标从0开始)，则左儿子下标为2i+1,右儿子为2i+2； 调整小顶堆：从n&#x2F;2-1的下标开始构建（完全二叉树的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo+github搭建个人博客">
-<meta property="og:url" content="http://example.com/2023/10/24/hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:title" content="TopK理解与实现">
+<meta property="og:url" content="http://example.com/2023/10/25/TopK%E7%90%86%E8%A7%A3%E4%B8%8E%E5%AE%9E%E7%8E%B0/index.html">
 <meta property="og:site_name" content="Whlok">
-<meta property="og:description" content="环境准备install node.js install git 1git --version    流程搭建安装hexo新建一个文件夹，存放博客文件，如取名为&#x2F;blog 在&#x2F;blog文件夹下安装hexo 1npm i hexo-cli -g  验证hexo是否安装 1hexo -v  初始化文件夹 1hexo init  安装必备组件 1npm installs  生成静态网页">
+<meta property="og:description" content="堆实现Topk时间复杂度：O(nlogk)思路：  通过小顶堆实现TopK（小顶堆的堆顶元素小于左右子树的值，当设定堆空间为K时，每次选择是否更新堆顶元素，若更新则进行相应调整） 构建堆：构建一个heap,元素个数为K，以完全二叉树的结构去理解数组中元素之间的关系，根节点为i(下标从0开始)，则左儿子下标为2i+1,右儿子为2i+2； 调整小顶堆：从n&#x2F;2-1的下标开始构建（完全二叉树的">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-10-24T04:39:05.000Z">
-<meta property="article:modified_time" content="2023-10-25T04:38:41.266Z">
+<meta property="article:published_time" content="2023-10-25T04:40:03.000Z">
+<meta property="article:modified_time" content="2023-10-25T04:43:23.189Z">
 <meta property="article:author" content="Whlok">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>hexo+github搭建个人博客 - Whlok</title>
+  <title>TopK理解与实现 - Whlok</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="hexo+github搭建个人博客"></span>
+            <span id="subtitle" data-typed-text="TopK理解与实现"></span>
           
         </div>
 
@@ -209,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-24 12:39" pubdate>
-          2023年10月24日 下午
+        <time datetime="2023-10-25 12:40" pubdate>
+          2023年10月25日 下午
         </time>
       </span>
     
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k 字
+          2.4k 字
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          17 分钟
+          21 分钟
         
       </span>
     
@@ -269,100 +269,25 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">hexo+github搭建个人博客</h1>
+            <h1 id="seo-header">TopK理解与实现</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><p>install node.js</p>
-<p>install git</p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">git <span class="hljs-comment">--version</span><br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="流程搭建"><a href="#流程搭建" class="headerlink" title="流程搭建"></a>流程搭建</h2><h3 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h3><p>新建一个文件夹，存放博客文件，如取名为&#x2F;blog</p>
-<p>在&#x2F;blog文件夹下安装hexo</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">npm i hexo-cli -g<br></code></pre></td></tr></table></figure>
-
-<p>验证hexo是否安装</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">hexo -v<br></code></pre></td></tr></table></figure>
-
-<p>初始化文件夹</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">hexo init<br></code></pre></td></tr></table></figure>
-
-<p>安装必备组件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">npm installs<br></code></pre></td></tr></table></figure>
-
-<p>生成静态网页</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">hexo g<br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="本地部署"><a href="#本地部署" class="headerlink" title="本地部署"></a>本地部署</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">hexo s<br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="github远程部署"><a href="#github远程部署" class="headerlink" title="github远程部署"></a>github远程部署</h3><p>新建一个远程仓库</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/username/u</span>sername.github.io.git<br></code></pre></td></tr></table></figure>
-
-<p>配置&#x2F;blog下的_config.yaml中</p>
-<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-meta"># Deployment</span><br><span class="hljs-meta">## Docs: https:<span class="hljs-comment">//hexo.io/docs/one-command-deployment</span></span><br><span class="hljs-symbol">deploy:</span><br><span class="hljs-symbol">  type:</span> git<br><span class="hljs-symbol">  repository:</span> https:<span class="hljs-comment">//github.com/username/username.github.io.git</span><br><span class="hljs-symbol">  branch:</span> main<br></code></pre></td></tr></table></figure>
-
-<p>远程部署</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo d</span><br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="主题选择"><a href="#主题选择" class="headerlink" title="主题选择"></a>主题选择</h3><p>在 Hexo 中有两份主要的配置文件，其名称都是 <code>_config.yml</code>。 其中，一份位于站点根目录下，主要包含 Hexo 本身的配置；另一份位于主题目录下，这份配置由主题作者提供，主要用于配置主题相关的选项。</p>
-<p>为了描述方便，在以下说明中，将前者称为 <strong>站点配置文件</strong>， 后者称为 <strong>主题配置文件</strong>。</p>
-<p>Hexo 安装主题的方式非常简单，只需要将主题文件拷贝至站点目录的 <code>themes</code> 目录下， 然后修改下配置文件即可。具体到 NexT 来说，安装步骤如下。</p>
-<p>在终端窗口下，定位到 Hexo 站点目录下。使用 <code>Git</code> checkout 代码：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> your-hexo-site</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/iissnan/hexo-theme-next themes/next</span><br></code></pre></td></tr></table></figure>
-
-<p>启用主题</p>
-<p>与所有 Hexo 主题启用的模式一样。 当 克隆&#x2F;下载 完成后，打开 <strong>站点配置文件</strong>， 找到 <code>theme</code> 字段，并将其值更改为 <code>next</code>。</p>
-<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vbnet"><span class="hljs-symbol">theme:</span> <span class="hljs-keyword">next</span><br></code></pre></td></tr></table></figure>
-
-<p>验证主题</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo d -g</span><br></code></pre></td></tr></table></figure>
-
-<p>配置主题配置文件</p>
-<h2 id="多端部署"><a href="#多端部署" class="headerlink" title="多端部署"></a>多端部署</h2><h3 id="原理简介"><a href="#原理简介" class="headerlink" title="原理简介"></a>原理简介</h3><h3 id="流程实现"><a href="#流程实现" class="headerlink" title="流程实现"></a>流程实现</h3><p>新建一个branch并设置为默认分支,比如新分支叫hexo</p>
-<p>克隆github仓库到本地，将原来的博客根目录下的文件拷贝过来（除.deploy_git, node_modules&#x2F;, public&#x2F;），</p>
-<p>确认.gitignore内容</p>
-<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-meta">.DS_Store</span><br>Thumbs<span class="hljs-number">.</span><span class="hljs-built_in">db</span><br><span class="hljs-built_in">db</span><span class="hljs-number">.</span>json<br>*.log<br>node_modules/<br><span class="hljs-meta">public</span>/<br><span class="hljs-meta">.deploy</span>*/<br></code></pre></td></tr></table></figure>
-
-<p>push源文件到远程仓库</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">git add .<br>git commit -m &quot;add branch&quot;<br>git push<br></code></pre></td></tr></table></figure>
-
-<p>在当前文件夹安装hexo，</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">npm install -g hexo-cli<br>hexo -v ## 验证下是否安装成功<br>npm install<br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="问题汇总"><a href="#问题汇总" class="headerlink" title="问题汇总"></a>问题汇总</h2><ul>
-<li>npm install -g hexo-cli 异常</li>
-</ul>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs stata">$ npm install -<span class="hljs-keyword">g</span> hexo-<span class="hljs-keyword">cli</span><br>npm <span class="hljs-keyword">ERR</span>! code EEXIST<br>npm <span class="hljs-keyword">ERR</span>! path C:\Users\Administrator\AppData\Roaming\npm\hexo.ps1<br>npm <span class="hljs-keyword">ERR</span>! EEXIST: <span class="hljs-keyword">file</span> already exists<br>npm <span class="hljs-keyword">ERR</span>! <span class="hljs-keyword">File</span> exists: C:\Users\Administrator\AppData\Roaming\npm\hexo.ps1<br>npm <span class="hljs-keyword">ERR</span>! Remove the existing <span class="hljs-keyword">file</span> and try again, or <span class="hljs-keyword">run</span> npm<br>npm <span class="hljs-keyword">ERR</span>! with --force to overwrite files recklessly.<br><br>npm <span class="hljs-keyword">ERR</span>! A complete <span class="hljs-keyword">log</span> of this <span class="hljs-keyword">run</span> can be found <span class="hljs-keyword">in</span>:<br>npm <span class="hljs-keyword">ERR</span>!     C:\Users\Administrator\AppData\<span class="hljs-keyword">Local</span>\npm-cache\_logs\2023-10-24T05_13_02_159Z-debug-0.<span class="hljs-keyword">log</span><br></code></pre></td></tr></table></figure>
-
-<p>这是由于之前可能装过hexo，需要在npm的appdata中删除原有的hexo modules</p>
-<ul>
-<li>hexo主题切换导致乱码</li>
-</ul>
-<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs lasso">&#123;% extends <span class="hljs-string">&#x27;_layout.swig&#x27;</span> %&#125; &#123;% <span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;_macro/post.swig&#x27;</span> as post_template %&#125;<span class="hljs-params">...</span><span class="hljs-params">...</span><span class="hljs-params">...</span><span class="hljs-params">...</span><span class="hljs-params">...</span><span class="hljs-params">...</span>..<br></code></pre></td></tr></table></figure>
-
-<p>hexo在5.0之后把swig给删除了需要自己手动安装</p>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs coffeescript"><span class="hljs-built_in">npm</span> i hexo-renderer-swig<br></code></pre></td></tr></table></figure>
-
-<p>重新生成</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs verilog">hexo clean          <br>hexo <span class="hljs-keyword">generate</span>      <br>hexo server<br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a target="_blank" rel="noopener" href="https://zz2summer.github.io/github-hexo-%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">github+hexo搭建个人博客</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lanhualan/p/14588669.html">hexo主题切换乱码问题解决</a></p>
-<p><a target="_blank" rel="noopener" href="https://fluid-dev.github.io/hexo-fluid-docs/start/#%E5%88%9B%E5%BB%BA%E3%80%8C%E5%85%B3%E4%BA%8E%E9%A1%B5%E3%80%8D">fluid主题配置</a></p>
-<p><a target="_blank" rel="noopener" href="https://dora-cmon.github.io/posts/454ba26/">hexo跨平台搭建</a></p>
+                <h2 id="堆实现Topk"><a href="#堆实现Topk" class="headerlink" title="堆实现Topk"></a>堆实现Topk</h2><p>时间复杂度：O(nlogk)<br>思路：</p>
+<ol>
+<li>通过小顶堆实现TopK（小顶堆的堆顶元素小于左右子树的值，当设定堆空间为K时，每次选择是否更新堆顶元素，若更新则进行相应调整）</li>
+<li>构建堆：构建一个heap,元素个数为K，以完全二叉树的结构去理解数组中元素之间的关系，根节点为i(下标从0开始)，则左儿子下标为2<em>i+1,右儿子为2</em>i+2；</li>
+<li>调整小顶堆：从n&#x2F;2-1的下标开始构建（完全二叉树的最后一个分支），选择左右子节点的最小值，进行交换，为确保最后所有分支都满足小顶堆，所以当每次交换后，以被换掉的下标重新开始调整</li>
+<li>如果当前元素比堆顶元素大，则更新堆顶元素，从堆顶元素的下标开始调整。<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">uptodown</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; heap, <span class="hljs-type">int</span> k, <span class="hljs-type">int</span> pos)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-type">int</span> i = pos;<br>	<span class="hljs-type">int</span> j = <span class="hljs-number">2</span> * i + <span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">while</span> (j &lt; k)<br>	&#123;<br>		<span class="hljs-keyword">if</span> (j &lt; k - <span class="hljs-number">1</span> &amp;&amp; heap[j] &gt; heap[j + <span class="hljs-number">1</span>])<br>			j++;<br>		<span class="hljs-keyword">if</span> (heap[i] &lt;= heap[j])<br>			<span class="hljs-keyword">break</span>;<br>		<span class="hljs-keyword">else</span><br>		&#123;<br>			<span class="hljs-built_in">swap</span>(heap[i], heap[j]);<br>			i = j;<br>			j = <span class="hljs-number">2</span> * i + <span class="hljs-number">1</span>;<br>		&#125;<br>	&#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">create_heap</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; heap, <span class="hljs-type">int</span> k)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-type">int</span> pos = k / <span class="hljs-number">2</span> - <span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = pos; i &gt;= <span class="hljs-number">0</span>; i--)<br>	&#123;<br>		<span class="hljs-built_in">uptodown</span>(heap, k, i);<br>	&#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-type">int</span> k = <span class="hljs-number">5</span>;<br>	vector&lt;<span class="hljs-type">int</span>&gt; nums = &#123; <span class="hljs-number">12</span>,<span class="hljs-number">52</span>,<span class="hljs-number">78</span>,<span class="hljs-number">59</span>,<span class="hljs-number">46</span>,<span class="hljs-number">49</span>,<span class="hljs-number">65</span>,<span class="hljs-number">42</span>,<span class="hljs-number">15</span>,<span class="hljs-number">34</span>,<span class="hljs-number">28</span>,<span class="hljs-number">9</span>,<span class="hljs-number">5</span> &#125;;<br>	<span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">heap</span><span class="hljs-params">(k, <span class="hljs-number">0</span>)</span></span>;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; k; ++i)<br>	&#123;<br>		heap[i] = nums[i];<br>	&#125;<br>	<span class="hljs-built_in">create_heap</span>(heap, k);<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = k; i &lt; nums.<span class="hljs-built_in">size</span>(); ++i)<br>	&#123;<br>		<span class="hljs-comment">// 小顶堆</span><br>		<span class="hljs-keyword">if</span> (nums[i] &gt; heap[<span class="hljs-number">0</span>])<br>		&#123;<br>			heap[<span class="hljs-number">0</span>] = nums[i];<br>			<span class="hljs-built_in">uptodown</span>(heap, k, <span class="hljs-number">0</span>);<br>		&#125;<br>	&#125;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i &lt; heap.<span class="hljs-built_in">size</span>(); i++)<br>    &#123;<br>        cout &lt;&lt; heap[i] &lt;&lt;<span class="hljs-string">&quot; &quot;</span>;<br>    &#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="快排实现Topk"><a href="#快排实现Topk" class="headerlink" title="快排实现Topk"></a>快排实现Topk</h2><p>时间复杂度：平均O(N)<br>思路：</p>
+<ol>
+<li>利用快排的思想实现，每次可以得到一个元素下标，在这个元素下标左边，所有元素比这个元素小，在这个元素右边，所有元素都比这个元素大</li>
+<li>如果右边的元素个数等于K-1，则加上当前元素，达到K个，可知TOPK的元素为这K个；</li>
+<li>如果右边的元素个数小于K-1, 则在左边范围寻找K-len个元素</li>
+<li>如果右边的元素个数大于K-1, 则在右边范围寻找K个元素<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">partition</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums, <span class="hljs-type">int</span> low, <span class="hljs-type">int</span> high)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> pk = nums[low];<br>    <span class="hljs-keyword">while</span>(low &lt; high)<br>    &#123;<br>        <span class="hljs-keyword">while</span>(low &lt; high &amp;&amp; nums[high] &gt;= pk)<br>            high--;<br>        nums[low] = nums[high];<br>        <span class="hljs-keyword">while</span>(low &lt; high &amp;&amp; nums[low] &lt; pk)<br>            low++;<br>        nums[high] = nums[low];<br>    &#125;<br>    nums[high] = pk;<br>    <span class="hljs-keyword">return</span> low;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">quick_topk</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums, <span class="hljs-type">int</span> low, <span class="hljs-type">int</span> high, <span class="hljs-type">int</span> k)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> index = <span class="hljs-number">-1</span>;<br>    <span class="hljs-keyword">if</span>(low &lt; high)<br>    &#123;<br>        <span class="hljs-type">int</span> pos = <span class="hljs-built_in">partition</span>(nums, low, high);<br>        <span class="hljs-type">int</span> len = high - pos - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span>(len == k)<br>            index = pos;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(len &lt; k)<br>        &#123;<br>            index = <span class="hljs-built_in">quick_topk</span>(nums, low, pos<span class="hljs-number">-1</span>, k-len);<br>        &#125;<br>        <span class="hljs-keyword">else</span><br>        &#123;<br>            index = <span class="hljs-built_in">quick_topk</span>(nums, pos+<span class="hljs-number">1</span>, high, k);<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> index;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-type">int</span> k = <span class="hljs-number">5</span>;<br>	vector&lt;<span class="hljs-type">int</span>&gt; nums = &#123; <span class="hljs-number">12</span>,<span class="hljs-number">52</span>,<span class="hljs-number">1</span>,<span class="hljs-number">59</span>,<span class="hljs-number">46</span>,<span class="hljs-number">49</span>,<span class="hljs-number">65</span>,<span class="hljs-number">58</span>,<span class="hljs-number">15</span>,<span class="hljs-number">34</span>,<span class="hljs-number">28</span>,<span class="hljs-number">9</span>,<span class="hljs-number">5</span> &#125;;<br>    <span class="hljs-type">int</span> index = <span class="hljs-built_in">quick_topk</span>(nums, <span class="hljs-number">0</span>, nums.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>, k);<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=nums.<span class="hljs-built_in">size</span>()-k; i &lt; nums.<span class="hljs-built_in">size</span>(); i++)<br>    &#123;<br>        cout &lt;&lt; nums[i] &lt;&lt;<span class="hljs-string">&quot; &quot;</span>;<br>    &#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
 
                 
               </div>
@@ -381,7 +306,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E8%BF%90%E7%BB%B4%E9%83%A8%E7%BD%B2/" class="category-chain-item">运维部署</a>
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
   
   
 
@@ -401,8 +326,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>hexo+github搭建个人博客</div>
-      <div>http://example.com/2023/10/24/hexo-github搭建个人博客/</div>
+      <div>TopK理解与实现</div>
+      <div>http://example.com/2023/10/25/TopK理解与实现/</div>
     </div>
     <div class="license-meta">
       
@@ -414,7 +339,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年10月24日</div>
+          <div>2023年10月25日</div>
         </div>
       
       
@@ -446,15 +371,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/10/24/A-%E7%AE%97%E6%B3%95/" title="A* 算法">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">A* 算法</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2023/10/25/%E5%9F%BA%E4%BA%8EPrometheus-Grafana%E6%90%AD%E5%BB%BA%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/" title="基于Prometheus+Grafana搭建性能监控系统">
+                        <span class="hidden-mobile">基于Prometheus+Grafana搭建性能监控系统</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
