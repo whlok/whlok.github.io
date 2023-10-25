@@ -64,7 +64,7 @@ $ git mv [file-original] [file-renamed]
 
 
 
-# **代码提交*
+# 代码提交
 
 ```
 # 提交暂存区到仓库区
