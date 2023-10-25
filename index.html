@@ -226,15 +226,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2023/10/25/Effective-C/" target="_self">
-          Effective C++
+        <a href="/2023/10/25/%E8%A7%A3%E5%86%B3TimeWait%E8%BF%87%E5%A4%9A%E7%9A%84%E9%97%AE%E9%A2%98/" target="_self">
+          解决TimeWait过多的问题
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/25/Effective-C/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/25/%E8%A7%A3%E5%86%B3TimeWait%E8%BF%87%E5%A4%9A%E7%9A%84%E9%97%AE%E9%A2%98/" target="_self">
         <div>
-          条款02：尽量以const,enum,inline替换#define为什么尽量不用#define？（1）#define的记号名称可能在编译器处理源码时就已经被预处理器移走了，记号名称未能进入记号表，从而可能获得编译错误的信息。如果又是定义在非你所写的头文件中，你更将毫无概念，并耗时追踪。（2）无法用#define创建一个class专属常量，#define并不注重于（scope），一旦编译除非#
+          [转载]原文链接：https://www.tiejiang.org/27040.html服务端客户端通信连接示意图 1、 time_wait的作用：TIME_WAIT状态存在的理由：1）可靠地实现TCP全双工连接的终止在进行关闭连接四次挥手协议时，最后的ACK是由主动关闭端发出的，如果这个最终的ACK丢失，服务器将重发最终的FIN，因此客户端必须维护状态信息允许它重发最终的ACK。如果不维持这个状
         </div>
       </a>
 
@@ -242,7 +242,61 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-25 12:53" pubdate>
+            <time datetime="2023-10-25 18:58" pubdate>
+              2023-10-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="category-chain-item">计算机网络</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/25/C-C-%E5%93%AA%E4%BA%9B%E6%83%85%E5%86%B5%E4%B8%8B%E4%BC%9A%E5%8F%91%E7%94%9FCoreDump/" target="_self">
+          C/C++哪些情况下会发生CoreDump?
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/25/C-C-%E5%93%AA%E4%BA%9B%E6%83%85%E5%86%B5%E4%B8%8B%E4%BC%9A%E5%8F%91%E7%94%9FCoreDump/" target="_self">
+        <div>
+          CoreDump coredump是指当程序出错而异常中断时，OS会把程序工作的当前状态存储成一个coredunmp文件。通常情况下coredump文件包含了程序运行时的内存，寄存器状态，堆栈指针，内存管理信息等。百度百科  常见造成程序coredump的原因 内存访问越界（比如数组下标越界） 堆栈溢出（使用了过大的局部变量，因为局部变量存储在栈中，容易导致溢出；函数递归的深度太大等等） 非法指针
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-25 18:54" pubdate>
               2023-10-25
             </time>
           </div>
@@ -280,15 +334,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2023/10/25/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E6%8E%92%E5%BA%8F/" target="_self">
-          数据结构之排序
+        <a href="/2023/10/25/%E5%89%91%E6%8C%87offer/" target="_self">
+          剑指offer
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/25/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E6%8E%92%E5%BA%8F/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/25/%E5%89%91%E6%8C%87offer/" target="_self">
         <div>
-          本文将对数据结构中的排序进行归纳学习 排序框图整理通常排序有以下俩种操作：（1）比较俩个关键字大小（2)将记录从一个位置移动到另一个位置 程序实现插入排序思想：将序列分为有序和无序俩部分，每次取一无序最左边元素插入有序元素中，一直与其前一元素比较，直至找到合适位置。第一次时，有序元素为array[0]  直接插入：  1234567891011121314151617181920212223voi
+          剑指 Offer 48. 最长不含重复字符的子字符串请从字符串中找出一个最长的不包含重复字符的子字符串，计算该最长子字符串的长度。  输入: “abcabcbb”输出: 3解释: 因为无重复字符的最长子串是 “abc”，所以其长度为 3。  12345678910111213141516class Solution &#123;public:    int lengthOfLongestSubst
         </div>
       </a>
 
@@ -296,7 +350,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-25 12:45" pubdate>
+            <time datetime="2023-10-25 18:53" pubdate>
               2023-10-25
             </time>
           </div>
@@ -334,15 +388,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2023/10/25/TopK%E7%90%86%E8%A7%A3%E4%B8%8E%E5%AE%9E%E7%8E%B0/" target="_self">
-          TopK理解与实现
+        <a href="/2023/10/25/Leetcode%E7%AE%97%E6%B3%95%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2/" target="_self">
+          Leetcode算法之字符串
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/25/TopK%E7%90%86%E8%A7%A3%E4%B8%8E%E5%AE%9E%E7%8E%B0/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/25/Leetcode%E7%AE%97%E6%B3%95%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2/" target="_self">
         <div>
-          堆实现Topk时间复杂度：O(nlogk)思路：  通过小顶堆实现TopK（小顶堆的堆顶元素小于左右子树的值，当设定堆空间为K时，每次选择是否更新堆顶元素，若更新则进行相应调整） 构建堆：构建一个heap,元素个数为K，以完全二叉树的结构去理解数组中元素之间的关系，根节点为i(下标从0开始)，则左儿子下标为2i+1,右儿子为2i+2； 调整小顶堆：从n&#x2F;2-1的下标开始构建（完全二叉树的
+          3. 无重复字符的最长子串给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。  输入: “abcabcbb”输出: 3解释: 因为无重复字符的最长子串是 “abc”，所以其长度为 3。  思路：  明确字串含义：连续的字符串，区别于子序列 如何区别字符串重复？哈希表 如何计算长度？利用下标，右下标-左下标（双指针）12345678910111213141516class Soluti
         </div>
       </a>
 
@@ -350,224 +404,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-25 12:40" pubdate>
+            <time datetime="2023-10-25 18:49" pubdate>
               2023-10-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2023/10/25/%E5%9F%BA%E4%BA%8EPrometheus-Grafana%E6%90%AD%E5%BB%BA%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/" target="_self">
-          基于Prometheus+Grafana搭建性能监控系统
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/25/%E5%9F%BA%E4%BA%8EPrometheus-Grafana%E6%90%AD%E5%BB%BA%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/" target="_self">
-        <div>
-          基于Prometheus+Grafana搭建性能监测工具需求 监测数据类型：JVM数据、玩家在线人数、消息时延等  接入Prometheus性能监测工具，暴露服务器性能监测数据   模式：pull&#x2F;push   接入Grafana可视化数据  Prometheus框架图    搭建流程准备环境Java客户端配置 12345678910111213141516171819202122232
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-25 12:23" pubdate>
-              2023-10-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E8%BF%90%E7%BB%B4%E9%83%A8%E7%BD%B2/" class="category-chain-item">运维部署</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2023/10/24/Operating-System-Three-Pieces/" target="_self">
-          Operating System Three Pieces
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/24/Operating-System-Three-Pieces/" target="_self">
-        <div>
-          第 9 章 调度：比例份额关键问题：如何按比例分配 CPU 比例份额算法基于一个简单的想法：调度程序的最终目标，是确保每个工作获得一定比例的 CPU 时间，而不是优化周转时间和响应时间。 比例份额调度程序有一个非常优秀的现代例子，由 Waldspurger 和 Weihl 发现，名为彩 票调度（lottery scheduling） [WW94]。 彩票调度（lottery scheduling）
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-24 23:20" pubdate>
-              2023-10-24
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="category-chain-item">操作系统</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2023/10/24/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B%E6%B5%85%E5%AD%A6/" target="_self">
-          多线程编程浅学
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/24/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B%E6%B5%85%E5%AD%A6/" target="_self">
-        <div>
-          多线程编程由浅入深概念程序(program)：为完成特定任务、用某种语言编写的一组指令的集合。即指一段静态的代码，静态对象。 进程(process)：程序的一次执行过程，或是正在运行的一个程序。是一个动态的过程：有它自身的产生、存在和消亡的过程。——生命周期 （1）进程为资源分配的单位，系统在运行时会为每个进程分配不同的内存区域 线程(thread)，进程可进一步细化为线程，是一个程序内部的一条执
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-24 23:13" pubdate>
-              2023-10-24
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2023/10/24/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%B5%85%E5%AD%A6/" target="_self">
-          动态规划浅学
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/24/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%B5%85%E5%AD%A6/" target="_self">
-        <div>
-          现在，你点进来可能是准备弄清楚啥是动态规划，，，好学的孩子呀，请问你想了解的是金规划还是银规划呀？ 很抱歉，本文没有准备将动态规划给讲的透彻，但是如果能让你对动态规划有一些新的体会，那么，这扇门就可以关上了。。。 引例每当听到动态规划这个词的时候，总有一种抽象，排斥的想法，我们准备先不管TM的动态规划是个啥，家在哪，在哪工作？玩个游戏先，这个游戏叫爬楼梯 爬楼梯邻居家的小孩总是爱爬楼梯，有一天你去
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-24 22:00" pubdate>
-              2023-10-24
             </time>
           </div>
         
@@ -597,7 +435,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">#动态规划</a>
+              <a href="/tags/Leetcode/">#Leetcode</a>
             
           </div>
         
@@ -611,15 +449,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2023/10/24/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E5%9F%BA%E7%A1%80%E4%B8%8E%E5%88%86%E6%9E%90/" target="_self">
-          算法设计基础与分析
+        <a href="/2023/10/25/Leetcode%E7%AE%97%E6%B3%95%E4%B9%8B%E6%A0%88/" target="_self">
+          Leetcode算法之栈
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/24/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E5%9F%BA%E7%A1%80%E4%B8%8E%E5%88%86%E6%9E%90/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/25/Leetcode%E7%AE%97%E6%B3%95%E4%B9%8B%E6%A0%88/" target="_self">
         <div>
-          绪论什么是算法一系列解决问题的明确指令，对于符合一定规范的输入，能够在有限的时间内获得要求的输出。 例子：最大公约数：俩个不全为0 的非负整数$m$和$n$的最大公约数记为$gcd(m,n)$​,代表能够整除（即余数为0）$m$ 和$n$的最大正整数。 欧几里得算法 $gcd(m,n)&#x3D;gcd(n, m \ mod \ n)(m \ mod \ n 表示m除以n 之后的余数)$​​​ $
+          20. 有效的括号  给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串 s ，判断字符串是否有效。有效字符串需满足：左括号必须用相同类型的右括号闭合。左括号必须以正确的顺序闭合。  分析  判断字符串是否有效的规则是括号能匹配上且正确顺序闭合； 括号匹配有先来后匹配的顺序要求，类似于栈的存储方式，考虑用栈实现 字符串中除了左括号就是右括号，遍历时遇见左括号就压入栈中对应的
         </div>
       </a>
 
@@ -627,8 +465,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-24 21:28" pubdate>
-              2023-10-24
+            <time datetime="2023-10-25 18:47" pubdate>
+              2023-10-25
             </time>
           </div>
         
@@ -655,6 +493,13 @@
           </div>
         
         
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Leetcode/">#Leetcode</a>
+            
+          </div>
+        
       </div>
     </article>
   </div>
@@ -665,15 +510,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2023/10/24/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/" target="_self">
-          Java集合框架
+        <a href="/2023/10/25/Leetcode%E7%AE%97%E6%B3%95%E4%B9%8B%E8%AE%BE%E8%AE%A1/" target="_self">
+          Leetcode算法之设计
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/24/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/25/Leetcode%E7%AE%97%E6%B3%95%E4%B9%8B%E8%AE%BE%E8%AE%A1/" target="_self">
         <div>
-          java中的集合包括三大类，它们是Set、List和Map。它们都处于java.util包中，Set、List和Map都是接口。 本文参考源码为 jdk1.7u79。开始之前，先简单描述下类之间的关系，方便后续看类图。    集合架构 特性    Collection 接口存储一组不唯一，无序的对象   List 接口存储一组不唯一，有序（索引顺序）的对象   Set 接口存储一组唯一，无序的对
+          707. 设计链表设计链表的实现。您可以选择使用单链表或双链表。单链表中的节点应该具有两个属性：val 和 next。val 是当前节点的值，next 是指向下一个节点的指针&#x2F;引用。如果要使用双向链表，则还需要一个属性 prev 以指示链表中的上一个节点。假设链表中的所有节点都是 0-index 的。 在链表类中实现这些功能： get(index)：获取链表中第 index 个节点的值。
         </div>
       </a>
 
@@ -681,8 +526,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-24 18:54" pubdate>
-              2023-10-24
+            <time datetime="2023-10-25 18:46" pubdate>
+              2023-10-25
             </time>
           </div>
         
@@ -697,7 +542,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
   
   
 
@@ -709,6 +554,13 @@
           </div>
         
         
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Leetcode/">#Leetcode</a>
+            
+          </div>
+        
       </div>
     </article>
   </div>
@@ -719,15 +571,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2023/10/24/Java%E8%B8%A9%E5%9D%91%E5%B0%8F%E8%AE%B0/" target="_self">
-          Java踩坑小记
+        <a href="/2023/10/25/Leetcode%E7%AE%97%E6%B3%95%E4%B9%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" target="_self">
+          Leetcode算法之动态规划
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/24/Java%E8%B8%A9%E5%9D%91%E5%B0%8F%E8%AE%B0/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/25/Leetcode%E7%AE%97%E6%B3%95%E4%B9%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" target="_self">
         <div>
-          Iterator迭代器Iterator在遍历时能remove但是不能往集合里添加元素问题。我们都知道如果是像List集合这样的，如果用循环遍历，访问没问题，在这期间如果删除就会报错，这个问题是因为你改变了集合的长度，但是遍历用的原来的长度的原因， 所以Iterator优秀点就出现了，它的出现让你可以在遍历时删除你想删除的元素，它用while循环遍历，它往下循环也就是while里的判定条件是Iter
+          70. 爬楼梯假设你正在爬楼梯。需要 n 阶你才能到达楼顶。每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？注意：给定 n 是一个正整数。  输入： 2输出： 2解释： 有两种方法可以爬到楼顶。.  1 阶 + 1 阶       ;  2 阶  思路：  dp[i]爬到第i阶的方法 dp[i] &#x3D; dp[i-1] + dp[i-2] dp[0] &#x3D; 1;
         </div>
       </a>
 
@@ -735,8 +587,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-24 18:50" pubdate>
-              2023-10-24
+            <time datetime="2023-10-25 18:45" pubdate>
+              2023-10-25
             </time>
           </div>
         
@@ -751,7 +603,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
   
   
 
@@ -762,6 +614,196 @@
 
           </div>
         
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Leetcode/">#Leetcode</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/25/Leetcode%E7%AE%97%E6%B3%95%E4%B9%8B%E9%93%BE%E8%A1%A8/" target="_self">
+          Leetcode算法之链表
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/25/Leetcode%E7%AE%97%E6%B3%95%E4%B9%8B%E9%93%BE%E8%A1%A8/" target="_self">
+        <div>
+          2. 两数相加给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。 如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。 您可以假设除了数字 0 之外，这两个数都不会以 0 开头  输入：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)输出：7 -&gt; 0 -&gt
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-25 18:44" pubdate>
+              2023-10-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Leetcode/">#Leetcode</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/25/Leetcode%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91/" target="_self">
+          Leetcode算法之二叉树
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/25/Leetcode%E7%AE%97%E6%B3%95%E4%B9%8B%E4%BA%8C%E5%8F%89%E6%A0%91/" target="_self">
+        <div>
+          105. 从前序与中序遍历序列构造二叉树根据一棵树的前序遍历与中序遍历构造二叉树。 注意:你可以假设树中没有重复的元素。 例如，给出  前序遍历 preorder &#x3D; [3,9,20,15,7]中序遍历 inorder &#x3D; [9,3,15,20,7]  12345  3 / \9  20  /  \ 15   7 思路：（1）前序遍历：根节点-&gt;左节点-&gt;右节点；中
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-25 18:43" pubdate>
+              2023-10-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Leetcode/">#Leetcode</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/25/Leetcode%E7%AE%97%E6%B3%95%E4%B9%8B%E5%9B%9E%E6%BA%AF/" target="_self">
+          Leetcode算法之回溯
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/25/Leetcode%E7%AE%97%E6%B3%95%E4%B9%8B%E5%9B%9E%E6%BA%AF/" target="_self">
+        <div>
+          79. 单词搜索给定一个二维网格和一个单词，找出该单词是否存在于网格中。 单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母不允许被重复使用。  board &#x3D;[[‘A’,’B’,’C’,’E’],[‘S’,’F’,’C’,’S’],[‘A’,’D’,’E’,’E’]]给定 word &#x3D; “ABCCED”
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-25 18:41" pubdate>
+              2023-10-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Leetcode/">#Leetcode</a>
+            
+          </div>
         
       </div>
     </article>
@@ -771,7 +813,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

@@ -16,23 +16,24 @@
   <meta name="author" content="Whlok">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Iterator迭代器Iterator在遍历时能remove但是不能往集合里添加元素问题。我们都知道如果是像List集合这样的，如果用循环遍历，访问没问题，在这期间如果删除就会报错，这个问题是因为你改变了集合的长度，但是遍历用的原来的长度的原因， 所以Iterator优秀点就出现了，它的出现让你可以在遍历时删除你想删除的元素，它用while循环遍历，它往下循环也就是while里的判定条件是Iter">
+    <meta name="description" content="概念关于有向图的环路检测，首先我想先补充几个关于图的概念。顶点：图中的每个点称为顶点。顶点的入度：在有向图中，指以该顶点为终点的边的数目顶点的出度：在有向图中，指以该顶点为起点的边的数目 方法方法一：图中有环则表示至少有一条路径上出现俩个相同的顶点。该路径满足起点入度为0，终点出度为0.可以使用一个集合表示每个顶点的状态，是否被标记过，但需要注意，这个点被检查过后需要去掉这个标记，因为一条路径上有">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java踩坑小记">
-<meta property="og:url" content="http://example.com/2023/10/24/Java%E8%B8%A9%E5%9D%91%E5%B0%8F%E8%AE%B0/index.html">
+<meta property="og:title" content="有向图环路检测">
+<meta property="og:url" content="http://example.com/2023/10/25/%E6%9C%89%E5%90%91%E5%9B%BE%E7%8E%AF%E8%B7%AF%E6%A3%80%E6%B5%8B/index.html">
 <meta property="og:site_name" content="Whlok">
-<meta property="og:description" content="Iterator迭代器Iterator在遍历时能remove但是不能往集合里添加元素问题。我们都知道如果是像List集合这样的，如果用循环遍历，访问没问题，在这期间如果删除就会报错，这个问题是因为你改变了集合的长度，但是遍历用的原来的长度的原因， 所以Iterator优秀点就出现了，它的出现让你可以在遍历时删除你想删除的元素，它用while循环遍历，它往下循环也就是while里的判定条件是Iter">
+<meta property="og:description" content="概念关于有向图的环路检测，首先我想先补充几个关于图的概念。顶点：图中的每个点称为顶点。顶点的入度：在有向图中，指以该顶点为终点的边的数目顶点的出度：在有向图中，指以该顶点为起点的边的数目 方法方法一：图中有环则表示至少有一条路径上出现俩个相同的顶点。该路径满足起点入度为0，终点出度为0.可以使用一个集合表示每个顶点的状态，是否被标记过，但需要注意，这个点被检查过后需要去掉这个标记，因为一条路径上有">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-10-24T10:50:47.000Z">
-<meta property="article:modified_time" content="2023-10-25T10:36:02.179Z">
+<meta property="article:published_time" content="2023-10-25T10:37:19.000Z">
+<meta property="article:modified_time" content="2023-10-25T10:38:16.595Z">
 <meta property="article:author" content="Whlok">
+<meta property="article:tag" content="图论">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Java踩坑小记 - Whlok</title>
+  <title>有向图环路检测 - Whlok</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Java踩坑小记"></span>
+            <span id="subtitle" data-typed-text="有向图环路检测"></span>
           
         </div>
 
@@ -209,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-24 18:50" pubdate>
-          2023年10月24日 晚上
+        <time datetime="2023-10-25 18:37" pubdate>
+          2023年10月25日 晚上
         </time>
       </span>
     
@@ -221,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          741 字
+          588 字
         
       </span>
     
@@ -232,7 +233,7 @@
         
         
         
-          7 分钟
+          5 分钟
         
       </span>
     
@@ -269,20 +270,14 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Java踩坑小记</h1>
+            <h1 id="seo-header">有向图环路检测</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Iterator"><a href="#Iterator" class="headerlink" title="Iterator"></a>Iterator</h2><p>迭代器Iterator在遍历时能remove但是不能往集合里添加元素问题。我们都知道如果是像List集合这样的，如果用循环遍历，访问没问题，在这期间如果删除就会报错，这个问题是因为你改变了集合的长度，但是遍历用的原来的长度的原因，</p>
-<p>所以Iterator优秀点就出现了，它的出现让你可以在遍历时删除你想删除的元素，它用while循环遍历，它往下循环也就是while里的判定条件是Iterator.hasNext() 返回的是boolean类型，看这个也明白，它是在你想继续往下遍历时先查询是否存在下一个元素。</p>
-<p>而且集合转Iterator也不麻烦，集合本身就有这个方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Java">Iterator&lt;泛型&gt; it = 集合.iterator();<br></code></pre></td></tr></table></figure>
-
-<p>敲黑板 下面要讲两点重要的还容易忘的误区</p>
-<p>如果在遍历时删除元素不要用集合的 remove() 方法，要用迭代器的 iterator.remove() 方法，虽然没有参数，但是它移除的是当前的。 在用迭代器迭代的时候千万不要修改集合和给集合添加元素，这样会报错，因为你迭代时添加元素会破坏迭代器的结构，所以会报错，因为拿ArrayList为例，在遍历到中间的时候，你往集合头部插入元素，集合的结构肯定变吧，那迭代器的数据结构也会跟着变，它就会主动报错，，但是删除就没问题了，因为你用的是迭代器的删除方法，而迭代器没有添加元素的方法</p>
-<p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43113679/article/details/99775014">https://blog.csdn.net/weixin_43113679/article/details/99775014</a></p>
-<h2 id="HashMap未覆写Hash算法"><a href="#HashMap未覆写Hash算法" class="headerlink" title="HashMap未覆写Hash算法"></a>HashMap未覆写Hash算法</h2><p>HashMap以其元素唯一性为开发人员所青睐，然后当元素类型是自定义类型时，需要覆写自定义对象的hashcode和equals方法，否则将无法保证元素唯一。</p>
+                <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>关于有向图的环路检测，首先我想先补充几个关于图的概念。<br>顶点：图中的每个点称为顶点。<br>顶点的入度：在有向图中，指以该顶点为终点的边的数目<br>顶点的出度：在有向图中，指以该顶点为起点的边的数目</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><strong>方法一</strong>：图中有环则表示至少有一条路径上出现俩个相同的顶点。该路径满足起点入度为0，终点出度为0.<br>可以使用一个集合表示每个顶点的状态，是否被标记过，但需要注意，这个点被检查过后需要去掉这个标记，因为一条路径上有环意味着会出现重复的顶点，但不同路径上出现相同的顶点上是允许的。<br>缺点：大量的点可能将被重复检查<br>优点：思路清晰，简单，递归实现。<br><strong>方法二</strong>：图中若没有环，则必有一个节点的入度为0，依次删除入度为0的点及其相邻的边，最终的集合为空。<br>先构建俩个集合，一个入度为0的点集合，一个入度不为0的点集合，遍历入度为0的集合，依次删除，并更新入度为0的集合（删除就的点同时可能会增加新的点），直到入度为0的点的集合为空后，去检查出度为0的点是否为空，空则无环，否则有环。<br>缺点：内存组装对象麻烦<br>优点：所有的点只需要一次删除。快。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>方法1其实就是dfs；<br>方法2利用拓扑排序；拓扑排序，其实就是将一个有向无环图(Directed Acyclic Graph简称DAG)进行排序进而得到一个有序的线性序列。通常用来对具有依赖关系的任务进行排序，因此是从入度为0的点作为起始点，遍历整个图，输出顶点之间的顺序。</p>
 
                 
               </div>
@@ -301,7 +296,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
   
   
 
@@ -313,6 +308,13 @@
     </div>
   
   
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%9B%BE%E8%AE%BA/" class="print-no-link">#图论</a>
+      
+    </div>
+  
 </div>
 
 
@@ -321,8 +323,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Java踩坑小记</div>
-      <div>http://example.com/2023/10/24/Java踩坑小记/</div>
+      <div>有向图环路检测</div>
+      <div>http://example.com/2023/10/25/有向图环路检测/</div>
     </div>
     <div class="license-meta">
       
@@ -334,7 +336,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年10月24日</div>
+          <div>2023年10月25日</div>
         </div>
       
       
@@ -366,9 +368,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/10/24/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/" title="Java集合框架">
+                      <a href="/2023/10/25/Leetcode%E7%AE%97%E6%B3%95%E4%B9%8B%E5%9B%9E%E6%BA%AF/" title="Leetcode算法之回溯">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Java集合框架</span>
+                        <span class="hidden-mobile">Leetcode算法之回溯</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -376,8 +378,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/10/24/Shuffle-%E7%AE%97%E6%B3%95/" title="Shuffle 算法">
-                        <span class="hidden-mobile">Shuffle 算法</span>
+                      <a href="/2023/10/25/Effective-C/" title="Effective C++">
+                        <span class="hidden-mobile">Effective C++</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
