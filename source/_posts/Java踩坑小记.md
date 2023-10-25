@@ -22,3 +22,6 @@ Iterator<泛型> it = 集合.iterator();
 
 参考链接：https://blog.csdn.net/weixin_43113679/article/details/99775014
 
+## HashMap未覆写Hash算法
+
+HashMap以其元素唯一性为开发人员所青睐，然后当元素类型是自定义类型时，需要覆写自定义对象的hashcode和equals方法，否则将无法保证元素唯一。
