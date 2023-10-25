@@ -1,0 +1,795 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/hugh.png">
+  <link rel="icon" href="/img/hugh.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Whlok">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="条款02：尽量以const,enum,inline替换#define为什么尽量不用#define？（1）#define的记号名称可能在编译器处理源码时就已经被预处理器移走了，记号名称未能进入记号表，从而可能获得编译错误的信息。如果又是定义在非你所写的头文件中，你更将毫无概念，并耗时追踪。（2）无法用#define创建一个class专属常量，#define并不注重于（scope），一旦编译除非#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Effective C++">
+<meta property="og:url" content="http://example.com/2023/10/25/Effective-C/index.html">
+<meta property="og:site_name" content="Whlok">
+<meta property="og:description" content="条款02：尽量以const,enum,inline替换#define为什么尽量不用#define？（1）#define的记号名称可能在编译器处理源码时就已经被预处理器移走了，记号名称未能进入记号表，从而可能获得编译错误的信息。如果又是定义在非你所写的头文件中，你更将毫无概念，并耗时追踪。（2）无法用#define创建一个class专属常量，#define并不注重于（scope），一旦编译除非#">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/image/c++/effectiveC++0.png">
+<meta property="og:image" content="http://example.com/image/c++/effectiveC++.png">
+<meta property="og:image" content="http://example.com/image/c++/effectiveC++1.png">
+<meta property="article:published_time" content="2023-10-25T04:53:42.000Z">
+<meta property="article:modified_time" content="2023-10-25T04:59:10.654Z">
+<meta property="article:author" content="Whlok">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/image/c++/effectiveC++0.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Effective C++ - Whlok</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Whlok</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Effective C++"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-10-25 12:53" pubdate>
+          2023年10月25日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          12k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          99 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Effective C++</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><img src="/../image/c++/effectiveC++0.png" srcset="/img/loading.gif" lazyload alt="effectiveC++0"></p>
+<p><img src="/../image/c++/effectiveC++.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h3 id="条款02：尽量以const-enum-inline替换-define"><a href="#条款02：尽量以const-enum-inline替换-define" class="headerlink" title="条款02：尽量以const,enum,inline替换#define"></a>条款02：尽量以const,enum,inline替换#define</h3><h5 id="为什么尽量不用-define？"><a href="#为什么尽量不用-define？" class="headerlink" title="为什么尽量不用#define？"></a>为什么尽量不用#define？</h5><p>（1）#define的记号名称可能在编译器处理源码时就已经被预处理器移走了，记号名称未能进入记号表，从而可能获得编译错误的信息。如果又是定义在非你所写的头文件中，你更将毫无概念，并耗时追踪。<br>（2）无法用#define创建一个class专属常量，#define并不注重于（scope），一旦编译除非#undef,定义区间均有效。因此，无法提供任何封装性。<br>（3）以#define实现宏时,格式可能较为繁琐，，易出错，且效率难以保障。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> CALL_WITH_MAX(a,b) f((a)&gt;(b) ? (a):(b))</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span> a = <span class="hljs-number">5</span>; <span class="hljs-type">int</span> b = <span class="hljs-number">0</span>;<br><span class="hljs-built_in">CALL_WITH_MAX</span>(++a,b); <span class="hljs-meta">#a被累加2次</span><br><span class="hljs-built_in">CALL_WITH_MAX</span>(++a,b+<span class="hljs-number">10</span>);<span class="hljs-meta">#a被累加1次</span><br></code></pre></td></tr></table></figure>
+
+<p>在这里，f调用前，a的递增次数会取决于“它被拿来和谁比较”</p>
+<h6 id="尽量多的使用const-enum-inline"><a href="#尽量多的使用const-enum-inline" class="headerlink" title="尽量多的使用const,enum,inline"></a>尽量多的使用const,enum,inline</h6><h6 id="const"><a href="#const" class="headerlink" title="const"></a>const</h6><p>(1) 使用常量可能比用#define导致较小的代码量<br>(2) 可以作为class的专属常量，static 从上图，可以确保此常量至多只有一份实体</p>
+<h6 id="enum"><a href="#enum" class="headerlink" title="enum"></a>enum</h6><p>(1) 某些行为较像#define 而不像const,取#define的地址也不合法，取enum的地址不合法，因此约束指针指向，同时于#define一样不会导致非必要的内存分配<br>(2) 实用，“enum hack”是templat metaprogramming（模板元编程）的基础技术</p>
+<h6 id="inline"><a href="#inline" class="headerlink" title="inline"></a>inline</h6><p>可以获得宏带来的效率以及一般函数的所有可预料行为和类型安全，只要你写出template inline函数。</p>
+<p><img src="/../image/c++/effectiveC++1.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h3 id="条款03：尽可能用const"><a href="#条款03：尽可能用const" class="headerlink" title="条款03：尽可能用const"></a>条款03：尽可能用const</h3><h5 id="const的作用"><a href="#const的作用" class="headerlink" title="const的作用"></a>const的作用</h5><p>（1）变量<br>常量，该变量不可被修改, 因此定义时必须被初始化<br>（2）指针<br>常量指针和指针常量<br>允许非const对象的地址赋给指向const对象的指针<br>因此可以简单的理解为，谁被const修饰，谁就不能改变。没有被修饰的不可轻易下结论。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp">#常量指针<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> a = <span class="hljs-number">0</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> *p = &amp;a; <span class="hljs-meta"># p本身并不是常量，*p是指向 const int的指针,因此*p可以被重新赋值，或者更改指向</span><br>#指针常量<br><span class="hljs-type">int</span> a = <span class="hljs-number">0</span>;<br><span class="hljs-type">int</span>* <span class="hljs-type">const</span> p = &amp;a; <span class="hljs-meta"># p是指向int类型的指针，p本身是常量，不可被修改</span><br>#指向常量的指针常量<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> a = <span class="hljs-number">0</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span>* <span class="hljs-type">const</span> p = &amp;a;<br></code></pre></td></tr></table></figure>
+<p>（3）参数<br>避免了拷贝，又避免了函数对值的修改</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">display</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">int</span> &amp;a)</span></span>; <br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">int</span> a)</span></span>; #避免对函数值的修改<br></code></pre></td></tr></table></figure>
+<p>（4）函数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span><br>&#123;<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span></span>;<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>;# (<span class="hljs-number">1</span>) 可用于区分重载<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">print</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>;# (<span class="hljs-number">2</span>) 常成员函数在函数体内不能对成员变量进行修改<br>	<span class="hljs-function"><span class="hljs-type">const</span> <span class="hljs-type">int</span> <span class="hljs-title">misp</span><span class="hljs-params">()</span></span>; # (<span class="hljs-number">3</span>) 修饰返回值，返回值为常量不可修改<br>	<span class="hljs-function"><span class="hljs-type">const</span> <span class="hljs-type">int</span> *<span class="hljs-title">mis</span><span class="hljs-params">()</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h5 id="const-static"><a href="#const-static" class="headerlink" title="const &amp;&amp; static"></a>const &amp;&amp; static</h5><h3 id="条款04：确定对象使用前已经被初始化"><a href="#条款04：确定对象使用前已经被初始化" class="headerlink" title="条款04：确定对象使用前已经被初始化"></a>条款04：确定对象使用前已经被初始化</h3><h2 id="构造-析构-赋值运算"><a href="#构造-析构-赋值运算" class="headerlink" title="构造&#x2F;析构&#x2F;赋值运算"></a>构造&#x2F;析构&#x2F;赋值运算</h2><h3 id="条款05：了解C-默默编写并调用哪些函数"><a href="#条款05：了解C-默默编写并调用哪些函数" class="headerlink" title="条款05：了解C++默默编写并调用哪些函数"></a>条款05：了解C++默默编写并调用哪些函数</h3><h3 id="条款06：若不想使用编译器自动生成的函数，就该明确拒绝"><a href="#条款06：若不想使用编译器自动生成的函数，就该明确拒绝" class="headerlink" title="条款06：若不想使用编译器自动生成的函数，就该明确拒绝"></a>条款06：若不想使用编译器自动生成的函数，就该明确拒绝</h3><h3 id="条款07：为多态基类声明virtual析构函数"><a href="#条款07：为多态基类声明virtual析构函数" class="headerlink" title="条款07：为多态基类声明virtual析构函数"></a>条款07：为多态基类声明virtual析构函数</h3><p><strong>问题</strong>：对于具有多态性质的基类，在没有virtual析构函数的情况下，派生类的对象会经由一个基类指针被删除，其中基类成分通常会被销毁，但派生类很可能没被销毁，这就造成了一个”局部销毁“的对象，可能引起资源泄露。<br><strong>解决</strong>：给基类添加一个virtual析构函数。virtual函数的目的是允许派生类的实现得以客制化，在不同的派生类中有对应不同的实现码。<br><strong>注意</strong>：classes的设计目的如果不是作为基类使用，或者不是为了具备多态性质，就不该声明virtual函数。virtual函数的实现会使对象的体积增加约50%-100%，因此可能不再能传递给其他语言所写的函数。<br><strong>总结</strong>：带多态性质的基类应该声明一个virtual析构函数，如果类中有任何virtual函数，它就应该拥有一个virtual析构函数。</p>
+<h3 id="条款08：别让异常逃离析构函数"><a href="#条款08：别让异常逃离析构函数" class="headerlink" title="条款08：别让异常逃离析构函数"></a>条款08：别让异常逃离析构函数</h3><p><strong>问题</strong>：在析构函数中吐过抛出异常可能会导致剩下的析构工作未完成，出现资源泄露。<br><strong>解决</strong>：<br>方案1：抛出异常时粗暴结束，常常通过abort完成；<br>方案2：吞下异常并记录异常；<br>方案3：设计接口使得用户对可能出现的异常做出反应。<br><strong>注意</strong>：如果客户需要对某个操作函数进行运行期间抛出的异常作出反应，那么class应该提供一个普通函数（而非在析构函数中）执行操作。<br><strong>总结</strong>：析构函数绝对不要吐出异常，如果一个析构函数调用的函数可能抛出异常，析构函数应该捕捉任何异常，然后吞下它们（不传播）或结束程序。</p>
+<h3 id="条款09：绝不在构造和析构过程中调用virtual函数"><a href="#条款09：绝不在构造和析构过程中调用virtual函数" class="headerlink" title="条款09：绝不在构造和析构过程中调用virtual函数"></a>条款09：绝不在构造和析构过程中调用virtual函数</h3><p><strong>问题</strong>：在派生类对象的基类构造期间对象的类型是基类而不是派生类<br><strong>注意</strong>：在基类构造期间，virtual函数不是virtual函数<br><strong>总结</strong>：在构造和析构期间不要调用virtual函数，因为这类调用从不下降至派生类（比起当前执行构造函数和析构函数的那层）。</p>
+<h3 id="条款10：令operato-返回一个reference-to-this"><a href="#条款10：令operato-返回一个reference-to-this" class="headerlink" title="条款10：令operato&#x3D; 返回一个reference to *this"></a>条款10：令operato&#x3D; 返回一个reference to *this</h3><p><strong>说明</strong>：实现赋值操作符时应该遵循的协议（实现“连锁赋值”：a &#x3D; b &#x3D; c &#x3D; 20）<br><strong>总结</strong>：令赋值操作符返回一个 reference to *this。</p>
+<h3 id="条款11：在operator-中处理“自我赋值"><a href="#条款11：在operator-中处理“自我赋值" class="headerlink" title="条款11：在operator&#x3D; 中处理“自我赋值"></a>条款11：在operator&#x3D; 中处理“自我赋值</h3><p><strong>问题</strong>：自我赋值时容易掉进“在停止使用资源之前意外释放了它”的陷阱</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Bitmap</span>&#123;...&#125;;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Widget</span>&#123;<br>...<br><span class="hljs-keyword">private</span>:<br>	Bitmap* pb;              <span class="hljs-comment">//指针，指向一个从heap分配而得的对象</span><br>&#125;<br>Widget&amp; Wisget:: <span class="hljs-keyword">operator</span>=(<span class="hljs-type">const</span> Widget&amp; rhs)<br>&#123;<br>	<span class="hljs-keyword">delete</span> pb;               <span class="hljs-comment">//停止使用当前的bitmap</span><br>	pb = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Bitmap</span>(*rhs.pb);<span class="hljs-comment">//使用rhs‘s bitmap的副本</span><br>	<span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;           <br>&#125;<br></code></pre></td></tr></table></figure>
+<p>这里operator&#x3D; 函数内的*this（赋值目的端）和rhs有可能是同一个对象，在这种情况下，delete就不只是销毁当前对象的bitmap,它也销毁rhs的bitmap,最后this会指向一个被删除的对象。<br><strong>解决</strong>：<br>方案一(传统做法):判断是否是自我赋值（“证同测试”）<br>方案二：在复制pb所指东西之前别删除pb</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp">Widget&amp; Widget::<span class="hljs-keyword">operator</span>=(<span class="hljs-type">const</span> Widget&amp; rhs)<br>&#123;<br>	Bitmap* pOrig = pb;<br>	pb = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Bitmap</span>(*rhs.pb);<br>	<span class="hljs-keyword">delete</span> pOrig;<br>	<span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>方案三：copy and swap</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp">Widget&amp; Widget::<span class="hljs-keyword">operator</span>=(<span class="hljs-type">const</span> Widget rhs) <span class="hljs-comment">//rhs被传递时是一份副本</span><br>&#123;                                           <span class="hljs-comment">//这里是值传递</span><br>	<span class="hljs-built_in">swap</span>(rhs);                              <span class="hljs-comment">//将*this的数据和复件的数据互换</span><br>	<span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;                           <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>（1）某class的拷贝赋值操作符可能被声明为“以值方式接受实参”；<br>（2）值传递会造成一份副本<br><strong>注意</strong>：确定任何函数如果操作一个以上的对象，而其中多个对象是同一个对象时，其行为仍然正确。<br><strong>总结</strong>：确保当对象自我赋值时 operator&#x3D; 有良好行为，其中技术包括比较“来源对象”和“目标对象”的地址，精心周到的语句顺序，以及copy-and-swap。</p>
+<h3 id="条款12：复制对象时勿忘其每一个成分"><a href="#条款12：复制对象时勿忘其每一个成分" class="headerlink" title="条款12：复制对象时勿忘其每一个成分"></a>条款12：复制对象时勿忘其每一个成分</h3><p><strong>注意</strong>：不要尝试以某个copying函数实现另一个copying函数，应该将共同机能放进第三个函数中，并由俩个copying函数共同调用。<br><strong>总结</strong>：Copying函数应该确保复制“对象内的所有成员变量”及“所有基类成分”</p>
+<h2 id="资源管理"><a href="#资源管理" class="headerlink" title="资源管理"></a>资源管理</h2><h3 id="条款13：以对象管理资源"><a href="#条款13：以对象管理资源" class="headerlink" title="条款13：以对象管理资源"></a>条款13：以对象管理资源</h3><p><strong>问题</strong>：单纯依赖某个函数总会去执行delete语句“是行不通的，中途可能由于continue，goto等操作使得delete语句被跳过去，引发资源泄露<br><strong>解决</strong>：将资源放进对象内，当控制流离开f函数，该对象的析构函数会自动释放那些资源。<br><strong>注意</strong>：俩个常被使用的RAIL classes分别是tr1::shared_ptr和auto_ptr,前者通常是较佳选择，因为其copy行为较为直观，若选择auto_ptr,复制动作会使它（被复制物）指向NULL.<br><strong>总结</strong>：为防止资源泄露，请使用RAIL对象，它们在构造函数中获得资源并在析构函数中释放资源</p>
+<h3 id="条款14：在资源管理类中小心copying行为"><a href="#条款14：在资源管理类中小心copying行为" class="headerlink" title="条款14：在资源管理类中小心copying行为"></a>条款14：在资源管理类中小心copying行为</h3><p><strong>说明</strong>：RAII（Resource Acquisition Is Intialization）:资源取得时机便是便是初始化时机。<br><strong>注意</strong>：普遍而常见的RAII class copying 行为是： 抑制copying、施行引用计数法（reference counting）。不过其他行为也都可能被实现。<br><strong>总结</strong>：复制RAII对象必须一并复制它所管理的资源，所以资源的copying行为决定RAII对象的copying行为。</p>
+<h3 id="条款15：在资源管理类中提供对原始资源的访问"><a href="#条款15：在资源管理类中提供对原始资源的访问" class="headerlink" title="条款15：在资源管理类中提供对原始资源的访问"></a>条款15：在资源管理类中提供对原始资源的访问</h3><p><strong>注意</strong>：对原始资源的访问可能经由显式转换或隐式转换。一般而言显式转换比较安全，但隐式转换对客户比较方便。<br><strong>总结</strong>：APIs往往要求访问原始资源，所以每一个RAII class 应该提供一个“取得其所管理之资源”的办法</p>
+<h3 id="条款16：成对使用new和delete时要采取相同形式"><a href="#条款16：成对使用new和delete时要采取相同形式" class="headerlink" title="条款16：成对使用new和delete时要采取相同形式"></a>条款16：成对使用new和delete时要采取相同形式</h3><p><strong>总结</strong>：如果你在new表达式中使用[ ],必须在相应的delete表达式中也使用[ ]。如果你在new表达式中不使用[ ],一定不要在相应的delete表达式中使用[ ]。</p>
+<h3 id="条款17：以独立语句将newed对象置入智能指针"><a href="#条款17：以独立语句将newed对象置入智能指针" class="headerlink" title="条款17：以独立语句将newed对象置入智能指针"></a>条款17：以独立语句将newed对象置入智能指针</h3><p><strong>总结</strong>：以独立语句将newed对象存储于智能指针内，如果不这样做，一旦异常被抛出，有可能导致难以察觉的资源泄露。</p>
+<h2 id="设计与声明"><a href="#设计与声明" class="headerlink" title="设计与声明"></a>设计与声明</h2><h3 id="条款18：让接口容易被正确使用，不易被误用"><a href="#条款18：让接口容易被正确使用，不易被误用" class="headerlink" title="条款18：让接口容易被正确使用，不易被误用"></a>条款18：让接口容易被正确使用，不易被误用</h3><p><strong>问题</strong>：<br>接口可能出现的错误：<br>（1）或许会以错误的次序传递参数<br>（2）可能传递一个无效的参数</p>
+<p><strong>解决</strong>：<br>（1）限制类型内哪些可以做，哪些不能做(常见的限制是加上const)<br>（2）先发制人，由于客户可能会有着“不正确的使用倾向”，比如忘记通过智能指针来管理某些动态分配的对象，那么就令factory函数返回一个智能指针。<br><strong>注意</strong>：<br>（1）”促进正确使用”的办法包括一切接口的一致性，以及与内置类型的行为兼容。<br>（2）“阻止误用”的办法包括建立新类型，限制类型上的操作，束缚对象值，以及消除客户的资源管理责任。<br>（3）tr1::shared_ptr支持定制型删除器（custom deleter）。这可防范DLL问题，可被用来自动解除互斥锁（mutexes）等等。<br><strong>总结</strong>：好的接口很容易被正确使用，不容易被误用。你应该在你的所有接口中努力达成这些性质。</p>
+<h3 id="条款19：设计class犹如设计type"><a href="#条款19：设计class犹如设计type" class="headerlink" title="条款19：设计class犹如设计type"></a>条款19：设计class犹如设计type</h3><p><strong>总结</strong>：class的设计就是type的设计，在定义一个新的type之前，请确定你已经考虑过本条款覆盖的所有讨论问题。</p>
+<h3 id="条款20：宁以pass-by-reference-to-const替换pass-by-value"><a href="#条款20：宁以pass-by-reference-to-const替换pass-by-value" class="headerlink" title="条款20：宁以pass-by-reference-to-const替换pass-by-value"></a>条款20：宁以pass-by-reference-to-const替换pass-by-value</h3><p><strong>问题</strong>：对一般函数而言，对象参数的传递成本是“一次拷贝构造+一次析构调用”，其中对象内有几个成员，或者对象，也会增加传递成本。与此同时，引用传参的效率要高的多，没有任何构造函数的析构函数被调用，因为没有任何对象被创建，同时参数声明为const，避免参数被改变。7<br><strong>总结</strong>：尽量以pass-by-reference-to-const替换pass-by-value.前者通常比较高效，并可避免切割问题（splice problem）。<br><strong>注意</strong>：以上规则并不适用内置类型，以及STL的迭代器和函数对象。对它们而言，pass-by-value往往比较适当。</p>
+<h3 id="条款21：必须返回对象时，别妄想返回其reference"><a href="#条款21：必须返回对象时，别妄想返回其reference" class="headerlink" title="条款21：必须返回对象时，别妄想返回其reference"></a>条款21：必须返回对象时，别妄想返回其reference</h3><p><strong>总结</strong>：绝不用返回pointer或reference指向一个local stack对象，或返回reference指向一个heap-allocated对象，或返回pointer或reference指向一个local static对象而言而有可能同时需要多个这样的对象。</p>
+<h3 id="条款22：将成员变量声明为private"><a href="#条款22：将成员变量声明为private" class="headerlink" title="条款22：将成员变量声明为private"></a>条款22：将成员变量声明为private</h3><p><strong>注意</strong>：protected并不比private更具有封装性<br><strong>总结</strong>：切记将成员变量声明private。这可赋予客户访问数据的一致性、可细微划分访问控制、允许约束条件获得保证，并提供class作者以充分的实现弹性。</p>
+<h3 id="条款23：宁以non-member、non-friend替换member函数"><a href="#条款23：宁以non-member、non-friend替换member函数" class="headerlink" title="条款23：宁以non-member、non-friend替换member函数"></a>条款23：宁以non-member、non-friend替换member函数</h3><p><strong>总结</strong>：宁以non-member、non-friend替换member函数，这样做可以增加封装性，包裹弹性（package flexibility）和机能扩充性。</p>
+<h3 id="条款24：若所有参数皆需要类型转换，请为此采用non-member函数"><a href="#条款24：若所有参数皆需要类型转换，请为此采用non-member函数" class="headerlink" title="条款24：若所有参数皆需要类型转换，请为此采用non-member函数"></a>条款24：若所有参数皆需要类型转换，请为此采用non-member函数</h3><p><strong>总结</strong>：如果你需要为某个函数的所有参数（包括被this指针所指的那个隐喻参数）进行类型转换，那么这个函数必须是个non-member。</p>
+<h3 id="条款25：考虑写出一个不抛出异常的swap函数"><a href="#条款25：考虑写出一个不抛出异常的swap函数" class="headerlink" title="条款25：考虑写出一个不抛出异常的swap函数"></a>条款25：考虑写出一个不抛出异常的swap函数</h3><p><strong>注意</strong>：<br>（1）如果你提供一个member swap，也该提供一个non-member swap用来调用前者。对于class(而非templates),也请特化std::swap<br>（2）调用swap时针对std::swap使用using声明式，然后调用swap并且不带任何“命名空间资格修饰”。<br>（3）为“用户定义类型”进行是std::templates全特化是好的，但千万不要尝试在std内加入某些对std而言全新的东西。<br><strong>总结</strong>：当std::swap对你的类型效率不高时，提供一个swap成员函数，并确定这个函数不抛出异常</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="条款26：尽可能延后变量定义式的出现时间"><a href="#条款26：尽可能延后变量定义式的出现时间" class="headerlink" title="条款26：尽可能延后变量定义式的出现时间"></a>条款26：尽可能延后变量定义式的出现时间</h3><p><strong>问题</strong>：变量定义式会带来构造和析构的成本，一旦定义变量的该函数抛出异常，你仍得夫付出变量定义的构造和析构成本。<br><strong>注意</strong>：不只是延后变量的定义，直到非得使用该变量的前一刻为止，甚至应该尝试延后这份定义，直到能够给它初值实参为止。如果这样，不仅能够避免构造（和析构）非必要对象还可以比避免无意义的deafult构造行为。更深一层说，以”具明显意义之初值“将变量初始化，还可以附带说明变量的目的。</p>
+<p><strong>总结</strong>：尽可能延后变量定义式的出现，这样做会增加程序的清晰度并改善程序效率</p>
+<h3 id="条款27：尽可能少做转型动作"><a href="#条款27：尽可能少做转型动作" class="headerlink" title="条款27：尽可能少做转型动作"></a>条款27：尽可能少做转型动作</h3><p><strong>说明</strong>：<br>（1）C++规则的设计目标之一是，保证”类型错误“绝不可能发生<br>（2）旧式转换：T（expression） （T）expression<br>（3）新式转换：const_cast&amp;dynamic_cast&amp;reinterpret_cast&amp;static_cast</p>
+<p><strong>注意</strong>：<br>（1）任何一个类型转换（不论是通过转型操作而进行的显式转换，或通过编译器完成的隐式转换）往往真的令编译器编译出运行期间执行的码。<br>其中新式转换较为欢迎，原因：<br>（1）代码中易辨识<br>（2）各转型动作的目标愈窄化，编译器愈能诊断出错误的运用</p>
+<p>（1）const_cast通常被用来将对象的常量性去除，也是唯一具有此能力的C++ style转型操作符<br>（2）dynamic_cast主要用来执行“安全向下转型”，也就是用来决定某对象是否归属体系中的某个类型，他是唯一无法由旧式语法执行的动作，也是唯一可能消耗重大运行成本的转型动作<br>（3）reinterpret_cast意图执行低级转型，实际动作可能取决于编译器，这也就表示它不可移植，<br>（4）static_cast用来强迫隐式转换</p>
+<p><strong>总结</strong>：<br>（1）如果可以，尽量避免转型，特别是在注重效率的代码中避免dynamic_casts。如果有这个设计需要转型动作，试着发展无需转型的替代设计<br>（2）如果转型是必要的，试着将它隐藏于某个函数背后，客户随后可以调用该函数，而不需要将转型放进他们自己的代码内。<br>（3）宁可使用C++style（新式）转型，不要使用旧式转型。前者很容易辨识出来，而且也比较有着分门别类的执掌。</p>
+<h3 id="条款28：避免返回handles指向对象内部成分"><a href="#条款28：避免返回handles指向对象内部成分" class="headerlink" title="条款28：避免返回handles指向对象内部成分"></a>条款28：避免返回handles指向对象内部成分</h3><p><strong>问题</strong>：Reference,指针，迭代器统统都是所谓的handles（号码牌，用来取得某个对象），而返回一个”代表对象内部“的handle,随之而来的式”降低对象封装性“的风险。同时，它也可能导致”虽然调用const成员函数却造成对象状态被更改“。<br><strong>解决</strong>：<br>留心不要返回他们的handles,对const成员函数的返回类型加上const<br><strong>总结</strong>：<br>避免返回handles,（包括references，指针，迭代器）指向对象内部。遵守这个条款可增加封装性，帮助const成员函数的行为像个const,并将发生“虚吊号码牌”（dangling handles）的可能性降至最低。</p>
+<h3 id="条款29：为“异常安全”而努力是值得的"><a href="#条款29：为“异常安全”而努力是值得的" class="headerlink" title="条款29：为“异常安全”而努力是值得的"></a>条款29：为“异常安全”而努力是值得的</h3><p><strong>总结</strong>：<br>（1）异常安全函数（Exceptional functions）即使发生异常也不会泄露资源或允许任何数据结构破坏，这样的函数区分为三种可能的保证：基本型，强烈型，不抛异常型。<br>（2）“强烈保证”往往能够实现以copy-and-swap实现出来，但“强烈保证”并非对所有函数都可实现或具备现实意义。<br>（3）函数提供的“异常安全保证”通常最高只等于其所调用之各个函数的“异常安全保证”中的最弱者。</p>
+<h3 id="条款30：透彻了解inlining的里里外外"><a href="#条款30：透彻了解inlining的里里外外" class="headerlink" title="条款30：透彻了解inlining的里里外外"></a>条款30：透彻了解inlining的里里外外</h3><p><strong>说明</strong>：<br>（1）inline函数背后的整体观念是，将”对此函数的每一个调用“都以函数本体替换之。<br>（2）过度热衷inlining会造成程序体积太大（对可用空间而言）。即使拥有虚内存，inline造成的代码膨胀亦会导致额外的换页行为（paging),降低指令高速缓存装置的击中率（instruction cache hit rate），以及伴随这些而来的效率损失。<br>（3）inline只是对编译器的一个申请，不是强制命令。这项申请可以隐喻提出，也可以明确提出，隐喻方式是将函数定义于class定义式内</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span>&#123;<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">age</span><span class="hljs-params">()</span><span class="hljs-type">const</span> </span>&#123;<span class="hljs-keyword">return</span> theAge;&#125;<span class="hljs-comment">//一个隐喻的inline申请</span><br>								   <span class="hljs-comment">//age被定义于class定义式内</span><br><span class="hljs-keyword">private</span>:<br>	<span class="hljs-type">int</span> theAge;                    <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>总结</strong>：<br>（1）将大多数inlining限制在小型，被频繁调用的函数身上。这可使日后的调试过程和大多数二进制升级更容易，也可使潜在的代码膨胀问题最小化，使程序的速度提升机会最大化。<br>（2）不要只因为function templates出现在头文件，就将它们声明为inline</p>
+<h3 id="条款31：将文件间的编译依存关系降至最低"><a href="#条款31：将文件间的编译依存关系降至最低" class="headerlink" title="条款31：将文件间的编译依存关系降至最低"></a>条款31：将文件间的编译依存关系降至最低</h3><p><strong>说明</strong>：接口与实现分离的关键在于”声明的依存性“替代”定义的依存性“，那正是编译依存性最小化的本质：现实中让头文件尽可能自我满足，万一做不到，则让它与其他文件内的声明式（而非定义式）相依。<br><strong>总结</strong>：<br>（1）支持“编译依存性最小化”的一般构想是：相依存于定义式。基于此构想的俩个手段是handle class和Interface classes<br>（2）程序库头文件应该以“”完全且仅有声明式的形式存在，这种做法不论是否涉及templates都适用。</p>
+<h2 id="继承与面向对象设计"><a href="#继承与面向对象设计" class="headerlink" title="继承与面向对象设计"></a>继承与面向对象设计</h2><h3 id="条款32：确定你的public继承塑模出is-a关系"><a href="#条款32：确定你的public继承塑模出is-a关系" class="headerlink" title="条款32：确定你的public继承塑模出is-a关系"></a>条款32：确定你的public继承塑模出is-a关系</h3><p><strong>总结</strong>：public继承意味is-a。适用于base classes身上的每一件事请也一定适用于derived classes身上，因为每一个derived classes对象也都是一个base classes对象。</p>
+<h3 id="条款33：避免遮掩继承而来的名称"><a href="#条款33：避免遮掩继承而来的名称" class="headerlink" title="条款33：避免遮掩继承而来的名称"></a>条款33：避免遮掩继承而来的名称</h3><p><strong>总结</strong>：<br>（1）derived classes内的名称会遮掩base classes内的名称，在public继承下从来没有人希望如此。<br>（2）为了让被遮掩的名称再见天日，可使用using声明式或转交函数</p>
+<h3 id="条款34：区分接口继承和实现继承"><a href="#条款34：区分接口继承和实现继承" class="headerlink" title="条款34：区分接口继承和实现继承"></a>条款34：区分接口继承和实现继承</h3><p><strong>总结</strong>：<br>（1）接口继承和实现继承不同。在public继承之下，派生类总是继承基类的接口<br>（2）纯虚函数只具体指定接口继承<br>（3）非纯虚函数具体指定接口继承及缺省实现继承<br>（4）non-virtual函数具体指定接口继承及强制性实现继承</p>
+<h3 id="条款35：考虑virtual函数以外的其他选择"><a href="#条款35：考虑virtual函数以外的其他选择" class="headerlink" title="条款35：考虑virtual函数以外的其他选择"></a>条款35：考虑virtual函数以外的其他选择</h3><p><strong>总结</strong>：<br>（1）virtual函数的替代方案包括NVI手法及Strategy设计模式的多种形式。NVI手法自身是一个特殊形式的Template Method设计模式<br>（2）将机能从成员函数移到class外部函数，带来的一个缺点是，非成员函数无法访问class的non-public成员<br>（3）tr1::function对象的行为就像一般函数指针。这样的对象可接纳“与给定之目标签名式兼容”的所有可调用物（callable entities）。</p>
+<h3 id="条款36：绝不重新定义继承而来的non-virtual函数"><a href="#条款36：绝不重新定义继承而来的non-virtual函数" class="headerlink" title="条款36：绝不重新定义继承而来的non-virtual函数"></a>条款36：绝不重新定义继承而来的non-virtual函数</h3><p><strong>总结</strong>：绝不重新定义继承而来的non-virtual函数</p>
+<h3 id="条款37：绝不重新定义继承而来的缺省参数值"><a href="#条款37：绝不重新定义继承而来的缺省参数值" class="headerlink" title="条款37：绝不重新定义继承而来的缺省参数值"></a>条款37：绝不重新定义继承而来的缺省参数值</h3><p><strong>总结</strong>：绝不重新定义继承而来的缺省参数值，因为缺省参数值都是静态绑定，而virtual函数-你唯一应该覆写的东西-却是动态绑定</p>
+<h3 id="条款38：通过复合塑模出has-a或“根据某物实现出”"><a href="#条款38：通过复合塑模出has-a或“根据某物实现出”" class="headerlink" title="条款38：通过复合塑模出has-a或“根据某物实现出”"></a>条款38：通过复合塑模出has-a或“根据某物实现出”</h3><p><strong>总结</strong>：<br>（1）复合（composition）的意义和public继承完全不同<br>（2）在应用域（application domian），复合意味着has-a（有一个）。在实现域（implementation domain），复合意味着is-implementation-in-terms-of(根据某物实现出)</p>
+<h3 id="条款39：明智而审慎地使用private继承"><a href="#条款39：明智而审慎地使用private继承" class="headerlink" title="条款39：明智而审慎地使用private继承"></a>条款39：明智而审慎地使用private继承</h3><p><strong>总结</strong>：<br>（1）Private继承意味着is-implemented-in-terms-of（根据某物实现出）。它通常比复合（composition）的级别低，但是当derived-class需要访问protected base class的成员，或需要重新定义继承而来的virtual函数时，这么设计时合理的。<br>（2）和复合（composition）不同，private继承可以造成empty base最优化。这对致力于“对象尺寸最小化”的程序库开发者而言，可能很重要</p>
+<h3 id="条款40：明智而审慎地使用多重继承"><a href="#条款40：明智而审慎地使用多重继承" class="headerlink" title="条款40：明智而审慎地使用多重继承"></a>条款40：明智而审慎地使用多重继承</h3><p><strong>总结</strong>：<br>（1）多重继承比单一继承复杂，它可能导致新的歧义性，以及对virtual继承的需要。<br>（2）virtual继承会增加大小，速度，初始化（及赋值）复杂度等等成本，如果virtual base classes不带任何数据，将是最具实用价值的情况。<br>（3）多重继承的确有正当用途，其中一个情节涉及“public”继承某个“Interface class”和“private继承某个协助实现的class”的俩相结合。</p>
+<h2 id="模型与泛型编程"><a href="#模型与泛型编程" class="headerlink" title="模型与泛型编程"></a>模型与泛型编程</h2><h3 id="条款41：了解隐式接口和编译期多态"><a href="#条款41：了解隐式接口和编译期多态" class="headerlink" title="条款41：了解隐式接口和编译期多态"></a>条款41：了解隐式接口和编译期多态</h3><p><strong>总结</strong>：<br>（1）classes和templates都支持接口（interface）和多态（polymorphism）。<br>（2）对classes而言接口是显式的（explicit），以函数签名为中心。多态则是通过virtual函数发生于运行期。<br>（3）对template参数而言，接口是隐式的（implicit），奠基于有效表达式。多态则是通过template具现化和函数重载解析（function overloading resolution）发生于编译期</p>
+<h3 id="条款42：了解typename的双重意义"><a href="#条款42：了解typename的双重意义" class="headerlink" title="条款42：了解typename的双重意义"></a>条款42：了解typename的双重意义</h3><p><strong>总结</strong>：<br>（1）声明template参数时，前缀关键字class和typename可互换<br>（2）请使用关键字typename标识嵌套从属类型名称；但不得在base class lists(基类列)或member intialization list（成员初值列）内以它作为base class修饰符。</p>
+<h3 id="条款43：学习处理模板化基类内的名称"><a href="#条款43：学习处理模板化基类内的名称" class="headerlink" title="条款43：学习处理模板化基类内的名称"></a>条款43：学习处理模板化基类内的名称</h3><p><strong>总结</strong>：可在派生类内通过“this-&gt;”指涉base class templates内的成员名称，或藉由一个明白写出的“base class资格修饰符“完成。</p>
+<h3 id="条款44：将与参数无关的代码抽离"><a href="#条款44：将与参数无关的代码抽离" class="headerlink" title="条款44：将与参数无关的代码抽离"></a>条款44：将与参数无关的代码抽离</h3><p><strong>总结</strong>：<br>（1）Templates生成多个classes和多个函数，所以任何template代码都不该与某个造成膨胀的template参数产生相依关系<br>（2）因非类型模板参数（non-type template parameters）而造成的代码膨胀，往往可消除，做法是以函数参数或class成员变量替换template参数<br>（3）因类型参数（type parameters）而造成的代码膨胀，往往可降低，做法是让带有完全相同二进制表述（binary representation）的具现类型（instantiation tyes）共享实现代码</p>
+<h3 id="条款45：运用成员函数模板接受所有兼容类型"><a href="#条款45：运用成员函数模板接受所有兼容类型" class="headerlink" title="条款45：运用成员函数模板接受所有兼容类型"></a>条款45：运用成员函数模板接受所有兼容类型</h3><p><strong>总结</strong>：<br>（1）请使用member function template(成员函数模板)生成”可接受所有兼容类型“的函数<br>（2）如果声明member templates用于”泛化copy构造“或”泛化assignment操作“你还是需要声明正常的copy构造函数和copy assignment操作符。</p>
+<h3 id="条款46：需要类型转换时请为模板定义非成员函数"><a href="#条款46：需要类型转换时请为模板定义非成员函数" class="headerlink" title="条款46：需要类型转换时请为模板定义非成员函数"></a>条款46：需要类型转换时请为模板定义非成员函数</h3><p><strong>总结</strong>：<br>当我们编写一个class template,而它所提供之”与此template相关的“函数支持”所有参数之隐式类型转换“时，请将那些函数定义为”class template内部的friend 函数”</p>
+<h3 id="条款47：请使用traits-classes表现类型信息"><a href="#条款47：请使用traits-classes表现类型信息" class="headerlink" title="条款47：请使用traits classes表现类型信息"></a>条款47：请使用traits classes表现类型信息</h3><p><strong>总结</strong>：<br>（1）Traits classes使得“类型相关信息”在编译期可用，它们以templates和“templates特化”完成实现<br>（2）整合重载技术（overloading）后，traits classes有可能在编译期对类型执行if …else…测试。</p>
+<h3 id="条款48：认识template元编程"><a href="#条款48：认识template元编程" class="headerlink" title="条款48：认识template元编程"></a>条款48：认识template元编程</h3><p><strong>总结</strong>：<br>（1）Template metaprogramming(TMP，模板元编程)可将工作由运行期移往编译期，因而得以实现早期错误侦测和更高的执行效率<br>（2）TMP可被用来生成“基于政策选择组合”（based on combrinations of policy choices）的客户定制代码，也可用来避免生成某些特殊类型并不适合的代码。</p>
+<h2 id="定制new和delete"><a href="#定制new和delete" class="headerlink" title="定制new和delete"></a>定制new和delete</h2><h3 id="条款49：了解new-handler的行为"><a href="#条款49：了解new-handler的行为" class="headerlink" title="条款49：了解new-handler的行为"></a>条款49：了解new-handler的行为</h3><p><strong>总结</strong>：<br>（1）set_new_handler允许客户指定一个函数，在内存分配无法获得满足时被调用<br>（2）Nothrow new时一个颇为局限的工具，因为它只适用于内存分配：后继的构造函数调用还是可能抛出异常</p>
+<h3 id="条款50：了解new和delete的合理替换时机"><a href="#条款50：了解new和delete的合理替换时机" class="headerlink" title="条款50：了解new和delete的合理替换时机"></a>条款50：了解new和delete的合理替换时机</h3><p><strong>总结</strong>：<br>有许多理由需要写个自定的new和delete，包括改善效能，对heap运用错误进行调试，收集heap使用信息。</p>
+<h3 id="条款51：编写new和delete时需要固守常规"><a href="#条款51：编写new和delete时需要固守常规" class="headerlink" title="条款51：编写new和delete时需要固守常规"></a>条款51：编写new和delete时需要固守常规</h3><p><strong>总结</strong>：<br>（1）operator new 应该内含一个无穷循环，并在其中尝试分配内存，如果它无法满足内存需求，就应该调用new-handler。它也应该有能力处理0 bytes申请。class专属版本则还应该处理“比正确大小更大的（错误）申请”。<br>（2）operator delete应该在收到null指针时不做任何事。Class专属版本则还应该处理“比正确大小更大的（错误）申请”。</p>
+<h3 id="条款52：写了placement-new-也要写-placement-delete"><a href="#条款52：写了placement-new-也要写-placement-delete" class="headerlink" title="条款52：写了placement new 也要写 placement delete"></a>条款52：写了placement new 也要写 placement delete</h3><p><strong>总结</strong>：<br>（1）当你写一个placement operator new，请确定也写出对应的placement operator delete。如果没有这样做，你的程序可能会发生隐微而时断的内存泄露。<br>（2）当你声明placement new和placement delete,请不要无意识（非故意）地遮掩了他们的正常版本</p>
+<h2 id="杂项讨论"><a href="#杂项讨论" class="headerlink" title="杂项讨论"></a>杂项讨论</h2><h3 id="条款53：不要轻忽编译器的警告"><a href="#条款53：不要轻忽编译器的警告" class="headerlink" title="条款53：不要轻忽编译器的警告"></a>条款53：不要轻忽编译器的警告</h3><p><strong>总结</strong>：<br>（1）严肃对待编译器发出的警告信息。努力在你的编译器最高（最严苛）警告级别下争取“无任何警告”的荣誉<br>（2）不要过度依赖编译器的报警能力，因为不同的编译器对待事请的态度并不相同。一旦移植到另一个编译器上，你原本依赖的警告信息有可能消失。</p>
+<h3 id="条款54：让自己熟悉包括TR1在内的标准程序库"><a href="#条款54：让自己熟悉包括TR1在内的标准程序库" class="headerlink" title="条款54：让自己熟悉包括TR1在内的标准程序库"></a>条款54：让自己熟悉包括TR1在内的标准程序库</h3><p><strong>总结</strong>：<br>（1）C++标准程序库的主要机能由STL、iostreams、locales组成，并包含C99标准程序库<br>（2）TR1添加了智能指针（例如 tr1::shanred_ptr）、一般化函数指针（tr1::function）、hash-based容器、正则表达式（regular expressions）以及另外10个组件的支持<br>（3）TR1自身只是一份规范。为获得TR1提供的好处，你需要一份实物。一个好的实物来源是Boost</p>
+<h3 id="条款54：让自己熟悉Boost"><a href="#条款54：让自己熟悉Boost" class="headerlink" title="条款54：让自己熟悉Boost"></a>条款54：让自己熟悉Boost</h3><p><strong>总结</strong>：<br>（1）Boost时一个社群，也是一个网站，致力于免费、源码开放、同僚复审的C++程序库开发。Boost C++标准化过程中扮演深具影响力的角色。<br>（2）Boost提供许多TR1组件实现品，以及其他许多程序库.</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/C/" class="category-chain-item">C++</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Effective C++</div>
+      <div>http://example.com/2023/10/25/Effective-C/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Whlok</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年10月25日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/10/25/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E6%8E%92%E5%BA%8F/" title="数据结构之排序">
+                        <span class="hidden-mobile">数据结构之排序</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
