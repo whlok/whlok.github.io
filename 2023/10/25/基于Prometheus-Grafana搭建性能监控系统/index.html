@@ -1,0 +1,764 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/hugh.png">
+  <link rel="icon" href="/img/hugh.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Whlok">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="基于Prometheus+Grafana搭建性能监测工具需求 监测数据类型：JVM数据、玩家在线人数、消息时延等  接入Prometheus性能监测工具，暴露服务器性能监测数据   模式：pull&#x2F;push   接入Grafana可视化数据  Prometheus框架图    搭建流程准备环境Java客户端配置 12345678910111213141516171819202122232">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于Prometheus+Grafana搭建性能监控系统">
+<meta property="og:url" content="http://example.com/2023/10/25/%E5%9F%BA%E4%BA%8EPrometheus-Grafana%E6%90%AD%E5%BB%BA%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="Whlok">
+<meta property="og:description" content="基于Prometheus+Grafana搭建性能监测工具需求 监测数据类型：JVM数据、玩家在线人数、消息时延等  接入Prometheus性能监测工具，暴露服务器性能监测数据   模式：pull&#x2F;push   接入Grafana可视化数据  Prometheus框架图    搭建流程准备环境Java客户端配置 12345678910111213141516171819202122232">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/image/develop/promethus.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/40764d3b8f1f439da60566905e317c1d.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/3d3e23c555af40b2801e252ed316e69c.png#pic_center">
+<meta property="article:published_time" content="2023-10-25T04:23:35.000Z">
+<meta property="article:modified_time" content="2023-10-25T04:33:51.359Z">
+<meta property="article:author" content="Whlok">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/image/develop/promethus.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>基于Prometheus+Grafana搭建性能监控系统 - Whlok</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Whlok</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="基于Prometheus+Grafana搭建性能监控系统"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-10-25 12:23" pubdate>
+          2023年10月25日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          34 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">基于Prometheus+Grafana搭建性能监控系统</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="基于Prometheus-Grafana搭建性能监测工具"><a href="#基于Prometheus-Grafana搭建性能监测工具" class="headerlink" title="基于Prometheus+Grafana搭建性能监测工具"></a><strong>基于Prometheus+Grafana搭建性能监测工具</strong></h1><h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a><strong>需求</strong></h2><ul>
+<li><p>监测数据类型：JVM数据、玩家在线人数、消息时延等</p>
+</li>
+<li><p>接入Prometheus性能监测工具，暴露服务器性能监测数据</p>
+</li>
+<li><ul>
+<li>模式：pull&#x2F;push</li>
+</ul>
+</li>
+<li><p>接入Grafana可视化数据</p>
+</li>
+<li><p>Prometheus框架图</p>
+</li>
+</ul>
+<p><img src="/../image/develop/promethus.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h2 id="搭建流程"><a href="#搭建流程" class="headerlink" title="搭建流程"></a>搭建流程</h2><h3 id="准备环境"><a href="#准备环境" class="headerlink" title="准备环境"></a>准备环境</h3><p>Java客户端配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs bash">&lt;!-- The client --&gt;<br>&lt;dependency&gt;<br>    &lt;groupId&gt;io.prometheus&lt;/groupId&gt;<br>    &lt;artifactId&gt;simpleclient&lt;/artifactId&gt;<br>    &lt;version&gt;<span class="hljs-variable">$&#123;prometheus.version&#125;</span>&lt;/version&gt;<br>&lt;/dependency&gt;<br>&lt;!-- Hotspot JVM metrics--&gt;<br>&lt;dependency&gt;<br>    &lt;groupId&gt;io.prometheus&lt;/groupId&gt;<br>    &lt;artifactId&gt;simpleclient_hotspot&lt;/artifactId&gt;<br>    &lt;version&gt;<span class="hljs-variable">$&#123;prometheus.version&#125;</span>&lt;/version&gt;<br>&lt;/dependency&gt;<br>&lt;!-- Exposition HTTPServer--&gt;<br>&lt;dependency&gt;<br>    &lt;groupId&gt;io.prometheus&lt;/groupId&gt;<br>    &lt;artifactId&gt;simpleclient_httpserver&lt;/artifactId&gt;<br>    &lt;version&gt;<span class="hljs-variable">$&#123;prometheus.version&#125;</span>&lt;/version&gt;<br>&lt;/dependency&gt;<br>&lt;!-- Pushgateway exposition--&gt;<br>&lt;dependency&gt;<br>    &lt;groupId&gt;io.prometheus&lt;/groupId&gt;<br>    &lt;artifactId&gt;simpleclient_pushgateway&lt;/artifactId&gt;<br>    &lt;version&gt;<span class="hljs-variable">$&#123;prometheus.version&#125;</span>&lt;/version&gt;<br>&lt;/dependency&gt;<br>&lt;!-- JMX Collector--&gt;<br>&lt;dependency&gt;<br>    &lt;groupId&gt;io.prometheus.jmx&lt;/groupId&gt;<br>    &lt;artifactId&gt;collector&lt;/artifactId&gt;<br>    &lt;version&gt;<span class="hljs-variable">$&#123;prometheus.jmx.version&#125;</span>&lt;/version&gt;<br>&lt;/dependency&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p>在本文的背景下，需要配置俩个文件：<br><strong>1.jmx 的yaml文件，主要用于管理JMX Exporter的数据，即需要暴露的JVM参数；</strong><br><a target="_blank" rel="noopener" href="https://github.com/jetbrains-infra/prometheus-jmx-exporter/blob/master/config.yml.template">jmx 的yaml文件</a><br>其中hostPort,username,password可以选择先屏蔽掉</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#hostPort: $&#123;JMX_HOSTPORT&#125;</span><br><span class="hljs-comment">#username:</span><br><span class="hljs-comment">#password:</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>2.prometheus服务器的运行配置文件,注意替换配置文件中的ip和port</strong><br>● ip直接设置为本机IP, windows下ipconfig可以查询，Mac下ipconfig<br>● 在pull模式下，配置的port1为暴露的Http端口<br>● 在push模式下，配置的port2为push-gateway运行的端口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs bash">global:<br>  scrape_interval:     15s<br>  evaluation_interval: 15s<br> <br>scrape_configs:<br>	<span class="hljs-comment"># pull mode</span><br>  - job_name: game-pull<br>    static_configs:<br>      - targets: [<span class="hljs-string">&#x27;ip:port1&#x27;</span>]<br>        labels:<br>          instance: app-pull<br>	<span class="hljs-comment"># push mode</span><br>  - job_name: game-push<br>    static_configs:<br>      - targets: [<span class="hljs-string">&#x27;ip:port2&#x27;</span>]<br>        labels:<br>          instance: app-push<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="部署-Prometheus"><a href="#部署-Prometheus" class="headerlink" title="部署 Prometheus"></a>部署 Prometheus</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run --name prometheus -d -p 127.0.0.1:9090:9090 prom/prometheus<br><span class="hljs-comment">#指定prometheus配置文件运行</span><br>docker run -d -p 9090:9090 -v E://project//hotel//hotel-script//prometheus.yml:/etc/prometheus/prometheus.yml  prom/prometheus<br></code></pre></td></tr></table></figure>
+
+<h3 id="部署-Prometheus-PushGateWay"><a href="#部署-Prometheus-PushGateWay" class="headerlink" title="部署 Prometheus-PushGateWay"></a>部署 Prometheus-PushGateWay</h3><p><a target="_blank" rel="noopener" href="https://github.com/Prometheus/pushgateway">Prometheus-PushGateWay</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker pull prom/pushgateway<br>docker run -d -p 9091:9091 prom/pushgateway<br></code></pre></td></tr></table></figure>
+
+<p>部署 Grafana</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run -d -p 3000:3000 --name=grafana  grafana/grafana<br></code></pre></td></tr></table></figure>
+
+<p>启动后，访问：<a href="http://localhost:3000，默认用户名密码">http://localhost:3000，默认用户名密码</a> admin&#x2F;admin。</p>
+<h3 id="添加-Prometheus-数据源"><a href="#添加-Prometheus-数据源" class="headerlink" title="添加 Prometheus 数据源"></a>添加 Prometheus 数据源</h3><p>Settings-&gt;Data sources -&gt; Add data source -&gt; Prometheus </p>
+<p>● 在HTTP URL中填写本机IP+Prometheus服务器运行的port.<br>● HTTP Method选择Get方法</p>
+<h3 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h3><p><strong>1.Error reading Prometheus: An error occurred within the plugin</strong><br>将添加数据源的ip设置为本机ip，当设置为localhost时由于容器环境运行的grafana，所以localhost在容器内部可能有自己的定义。</p>
+<p><strong>2.prometheus有数据 grafana无数据</strong><br>grafana可以通过PromeSQL语句查询对应的参数</p>
+<p><a target="_blank" rel="noopener" href="https://www.modb.pro/db/412613">Prometheus | Grafana导入模板后发现没有数据排查步骤 - 墨天轮</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_52837796/article/details/120768817">prometheus+grafana监控jvm，grafana上没有数据_吃葡萄不吐西瓜皮~的博客-CSDN博客_grafana没有监控数据</a><br><img src="https://img-blog.csdnimg.cn/40764d3b8f1f439da60566905e317c1d.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p><strong>3 Prometheus Histogram</strong><br>prometheus的histogram是一个累计直方图，正常理解直方图的桶内时对应范围（a&lt;x&lt;b）的数据，prometheus的直方图的桶是累计的值，即当前这个桶的数据包含前一个桶，方便函数筛选，用户最后自己想要啥数据，自己用函数筛选；使用计时相关的api单位默认就是秒，自定义的数据类型就是自定义的数据类型对应的单位。<br>rate(histogram_showcase_metric_bucket[1m]) 查看每个 bucket 的每秒变化率来了解这些 bucket 是如何随时间变化；histogram_quantile() 可以计算出哪个 bucket 标签包含给定的分位数（例如第 95 个百分位数）。<br><img src="https://img-blog.csdnimg.cn/3d3e23c555af40b2801e252ed316e69c.png#pic_center" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">histogram_quantile(0.95,rate(requests_latency_seconds_bucket[1m]))<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1495303">一文搞懂 Prometheus 的直方图 - 腾讯云开发者社区-腾讯云</a><br><a target="_blank" rel="noopener" href="https://juejin.cn/post/7152837166190739486">深入理解和使用 Prometheus 的 Histogram 指标类型 - 掘金</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34556414/article/details/123151789">PromQL 直方图 跟踪请求的延迟或响应大小 99%的请求是在多少延迟下完成的？_富士康质检员张全蛋的博客-CSDN博客_promql 直方图</a></p>
+<p><strong>4.这俩行代码不在一个线程好像没法用？</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">new PerfCustomCollector().register();<br>HTTPServer server = new HTTPServer(1234);<br></code></pre></td></tr></table></figure>
+
+<p><strong>5. windows install curl</strong><br>假设您是从<a target="_blank" rel="noopener" href="https://curl.haxx.se/download.html%E8%8E%B7%E5%BE%97%E7%9A%84%EF%BC%8C%E5%8F%AA%E9%9C%80%E5%B0%86%E5%85%B6%E8%A7%A3%E5%8E%8B%E7%BC%A9%E5%88%B0%E6%82%A8%E6%83%B3%E8%A6%81%E7%9A%84%E4%BB%BB%E4%BD%95%E4%BD%8D%E7%BD%AE%E3%80%82%E6%97%A0%E9%9C%80%E5%AE%89%E8%A3%85%E3%80%82%E5%A6%82%E6%9E%9C%E6%82%A8%E6%89%93%E7%AE%97%E4%BD%BF%E7%94%A8">https://curl.haxx.se/download.html获得的，只需将其解压缩到您想要的任何位置。无需安装。如果您打算使用</a> SSL，则需要下载 OpenSSL DLL，可从 curl 的网站获得。<br>下载卷曲压缩包<br>提取内容（如果您下载了正确的版本，您应该找到 curl.exe）<br>将 curl.exe 放在您保存软件的文件夹中（例如 D:\software\curl\curl.exe）<br>从命令行运行 curl<br>a) 右击“我的电脑”图标<br>b) 选择属性<br>c) 点击“高级系统设置”链接<br>d) 转到选项卡 [高级] - “环境变量”按钮<br>e) 在系统变量下选择“路径”和“编辑”按钮<br>f) 添加一个分号，后跟放置 curl.exe 的路径（例如；D:\software\curl）<br>现在您可以通过键入以下命令从命令行运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl www.google.com<br></code></pre></td></tr></table></figure>
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904062157062151">https://juejin.cn/post/6844904062157062151</a></p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1495303">https://cloud.tencent.com/developer/article/1495303</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7152837166190739486">https://juejin.cn/post/7152837166190739486</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34556414/article/details/123151789">https://blog.csdn.net/qq_34556414/article/details/123151789</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%BF%90%E7%BB%B4%E9%83%A8%E7%BD%B2/" class="category-chain-item">运维部署</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>基于Prometheus+Grafana搭建性能监控系统</div>
+      <div>http://example.com/2023/10/25/基于Prometheus-Grafana搭建性能监控系统/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Whlok</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年10月25日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/10/24/Operating-System-Three-Pieces/" title="Operating System Three Pieces">
+                        <span class="hidden-mobile">Operating System Three Pieces</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

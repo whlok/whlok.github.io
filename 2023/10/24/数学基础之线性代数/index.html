@@ -1,0 +1,1100 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/hugh.png">
+  <link rel="icon" href="/img/hugh.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Whlok">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="第一章 行列式行列式的计算行列式：不同行不同列元素乘积的代数和$det(A)$​​或$|A|$​​。 注：只有方阵才能计算行列式。当矩阵维度为$n\times n$​​，也称$n$​​阶行列式。 $|A|&#x3D;\begin{vmatrix}  a_{11} \quad a_{12}\  a_{21} \quad  a_{22} \end{vmatrix}   &#x3D;a_{11} a_{">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数学基础之线性代数">
+<meta property="og:url" content="http://example.com/2023/10/24/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E4%B9%8B%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/index.html">
+<meta property="og:site_name" content="Whlok">
+<meta property="og:description" content="第一章 行列式行列式的计算行列式：不同行不同列元素乘积的代数和$det(A)$​​或$|A|$​​。 注：只有方阵才能计算行列式。当矩阵维度为$n\times n$​​，也称$n$​​阶行列式。 $|A|&#x3D;\begin{vmatrix}  a_{11} \quad a_{12}\  a_{21} \quad  a_{22} \end{vmatrix}   &#x3D;a_{11} a_{">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://render.githubusercontent.com/render/math?math=n&mode=inline">
+<meta property="og:image" content="https://render.githubusercontent.com/render/math?math=i&mode=inline">
+<meta property="og:image" content="https://render.githubusercontent.com/render/math?math=I&mode=inline">
+<meta property="og:image" content="https://render.githubusercontent.com/render/math?math=LUP&mode=inline">
+<meta property="og:image" content="https://render.githubusercontent.com/render/math?math=n&mode=inline">
+<meta property="og:image" content="https://render.githubusercontent.com/render/math?math=A&mode=inline">
+<meta property="og:image" content="https://render.githubusercontent.com/render/math?math=V&mode=inline">
+<meta property="og:image" content="https://render.githubusercontent.com/render/math?math=A&mode=inline">
+<meta property="og:image" content="https://render.githubusercontent.com/render/math?math=n%5Ctimes%20n&mode=inline">
+<meta property="og:image" content="https://render.githubusercontent.com/render/math?math=A&mode=inline">
+<meta property="og:image" content="https://render.githubusercontent.com/render/math?math=%5CBbb%7BR%7D%5E%7Bn%7D&mode=inline">
+<meta property="og:image" content="https://render.githubusercontent.com/render/math?math=c_%7B1%7D,%5Ccdots,c_%7Bn%7D&mode=inline">
+<meta property="og:image" content="https://render.githubusercontent.com/render/math?math=A&mode=inline">
+<meta property="og:image" content="https://render.githubusercontent.com/render/math?math=n&mode=inline">
+<meta property="og:image" content="https://render.githubusercontent.com/render/math?math=n&mode=inline">
+<meta property="og:image" content="https://render.githubusercontent.com/render/math?math=n%5Ctimes%20n&mode=inline">
+<meta property="og:image" content="https://render.githubusercontent.com/render/math?math=n&mode=inline">
+<meta property="og:image" content="https://render.githubusercontent.com/render/math?math=5%5Ctimes%2010&mode=inline">
+<meta property="og:image" content="https://render.githubusercontent.com/render/math?math=5%5Ctimes%2010&mode=inline">
+<meta property="og:image" content="https://render.githubusercontent.com/render/math?math=T&mode=inline">
+<meta property="article:published_time" content="2023-10-24T14:57:27.000Z">
+<meta property="article:modified_time" content="2023-10-25T04:15:14.538Z">
+<meta property="article:author" content="Whlok">
+<meta property="article:tag" content="线性代数">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://render.githubusercontent.com/render/math?math=n&mode=inline">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>数学基础之线性代数 - Whlok</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Whlok</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="数学基础之线性代数"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-10-24 22:57" pubdate>
+          2023年10月24日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          34k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          281 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">数学基础之线性代数</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="第一章-行列式"><a href="#第一章-行列式" class="headerlink" title="第一章 行列式"></a><strong>第一章 行列式</strong></h1><h2 id="行列式的计算"><a href="#行列式的计算" class="headerlink" title="行列式的计算"></a>行列式的计算</h2><p><strong>行列式</strong>：不同行不同列元素乘积的代数和$det(A)$​​或$|A|$​​。</p>
+<p>注：只有方阵才能计算行列式。当矩阵维度为$n\times n$​​，也称$n$​​阶行列式。</p>
+<p>$|A|&#x3D;\begin{vmatrix}  a_{11} \quad a_{12}\  a_{21} \quad  a_{22} \end{vmatrix}   &#x3D;a_{11} a_{22}-a_{12}a_{21}$</p>
+<p>$|A|&#x3D;\begin{vmatrix}  a_{11} \quad a_{12} \quad  a_{13}\  a_{21} \quad  a_{22} \quad  a_{23}\  a_{31} \quad  a_{32} \quad  a_{33} \end{vmatrix}   &#x3D;a_{11}a_{22}a_{33}+a_{12}a_{23}a_{31}+a_{13}a_{21}a_{32}-a_{11}a_{23}a_{32}-a_{12}a_{21}a_{33}-a_{13}a_{22}a_{31}$</p>
+<p><strong>余子式</strong>：在<img src="https://render.githubusercontent.com/render/math?math=n&mode=inline" srcset="/img/loading.gif" lazyload alt="$n$">阶行列式中，把元素$a_{ij}$在行列在矩阵中删去后，余下的$n-1$阶行列式叫做$a_{ij}$元素的<strong>余子式</strong>，记作$M_{ij}$​</p>
+<p><strong>代数余子式</strong>: $A_{ij}&#x3D;(-1)^{i+j}M_{ij}$​​叫做$a_{ij}$​​​的<strong>代数余子式</strong></p>
+<p>注：余子式和代数余子式均为行列式</p>
+<p>$A&#x3D;\begin{vmatrix}  1&amp;-2&amp;5&amp;0 \  2&amp;0&amp;4&amp;-1\3&amp;1&amp;0&amp;7 \ 0&amp;4&amp;-2&amp;0  \end{vmatrix}$​​        $M_{23}&#x3D;$$\begin{vmatrix}  1&amp;-2&amp;0\  3&amp;1&amp;7\  0&amp;4&amp;0 \end{vmatrix}$​​     $A_{23}&#x3D;(-1)^{2+3}M_{23}&#x3D;(-1)^5\begin{vmatrix}  1&amp;-2&amp;0\  3&amp;1&amp;7\  0&amp;4&amp;0 \end{vmatrix}$​​</p>
+<p>$det(A) &#x3D; |A|&#x3D;\begin{vmatrix}  a_{11} \quad a_{12} \quad  … \quad a_{1n}\  a_{21} \quad  a_{22} \quad … \quad a_{2n} \  \vdots \qquad  \vdots \quad  \ddots \quad \vdots \  a_{n1} \quad  a_{n2} \quad  … \quad a_{nn} \end{vmatrix}   &#x3D; a_{i1}A_{i1}+a_{i2}A_{i2}+…+a_{in}A_{in} &#x3D; a_{1j}A_{1j}+a_{2j}A_{2j}+…+a_{nj}A_{nj}$​</p>
+<h2 id="行列式性质"><a href="#行列式性质" class="headerlink" title="行列式性质"></a>行列式性质</h2><p>借助行列式的行变换性质帮我们简化运算，矩阵$A$是一个<strong>方阵</strong>：  </p>
+<ul>
+<li><p>若$A$的某一行的<strong>倍数加到另一行</strong>得矩阵$B$，则$|B|&#x3D;|A|$；</p>
+</li>
+<li><p>若$A$的<strong>两行互换</strong>得矩阵$B$，则$|B|&#x3D;-|A|$​；</p>
+</li>
+<li><p>若$A$的<strong>某行乘以$k$倍</strong>得到矩阵$B$，则$|B|&#x3D;k\cdot |A|$；</p>
+</li>
+<li><p>$|A|&#x3D;|A|^{T}$，这证明了行列式的列变换和行变换具有一样的效果;</p>
+</li>
+<li><p>若$A,B$​​均为$n\times n$​​矩阵，则$|AB|&#x3D;|A||B|$​​. </p>
+<p>​     根据行列式的性质，我们在计算一个矩阵的行列式时，可以先对其进行一系列的行变换使其化简为阶梯型矩阵，这时直接计算对角线上的元素乘积即可，大约需要$2n^{3}&#x2F;3$次运算次数。</p>
+</li>
+</ul>
+<p>例： $det(A)&#x3D;\begin{vmatrix}  1&amp;-4&amp;2\-2&amp;8&amp;-9 \ -1&amp;7&amp;0 \end{vmatrix} &#x3D; \begin{vmatrix}  1&amp;-4&amp;2\0&amp;0&amp;-5 \ 0&amp;3&amp;2 \end{vmatrix} &#x3D; -\begin{vmatrix}  1&amp;-4&amp;2\0&amp;3&amp;2 \ 0&amp;0&amp;-5 \end{vmatrix}&#x3D;-1<em>3</em>(-5)&#x3D;15$​​​</p>
+<h2 id="克拉默法则"><a href="#克拉默法则" class="headerlink" title="克拉默法则"></a>克拉默法则</h2><p>设$A$​​是一个可逆的$n\times n$​​矩阵，对$\Bbb{R}^{n}$​​中任意向量$\mathbf{b}$​​，方程$A\mathbf{x}&#x3D;\mathbf{b}$​​的唯一解可由下式给出：$$x_{i}&#x3D;\frac{|A_{i}(\mathbf{b})|}{|A|},i&#x3D;1,2,\dots,n$$​​</p>
+<p>其中$A_{i}(\mathbf{b})$​​表示$A$​​中第<img src="https://render.githubusercontent.com/render/math?math=i&mode=inline" srcset="/img/loading.gif" lazyload alt="$i$">列由向量$\mathbf{b}$​​替换：$A_{i}(\vec{b})&#x3D;\left[\vec{a_{1}} …\vec{b} … \vec{a_{n}}\right] \qquad\quad\quad\@AAA\{第i列}$​​</p>
+<p>例：      $\begin{cases}3x_{1}-2x_{2}&#x3D;6 \<br>-5x_{1}+4x_{2}&#x3D;8<br>\end{cases}$​​</p>
+<p>视方程为$A \mathbf{x}&#x3D;\mathbf{b}$​​​​则 </p>
+<p>$A&#x3D;\left[<br>\begin{matrix}<br>   3&amp;-2\-5&amp;4<br>  \end{matrix}<br>  \right] \quad A_{1}(\vec b)&#x3D; \left[<br>\begin{matrix}<br>   6&amp;-2\8&amp;4<br>  \end{matrix}<br>  \right] \quad A_{2}(\vec b)&#x3D; \left[<br>\begin{matrix}<br>   3&amp;6\-5&amp;8<br>  \end{matrix}<br>  \right]$​​​​</p>
+<p>&#x3D;&gt; $detA&#x3D;2 \quad $​故此方程组有唯一解，由克拉默法则得，</p>
+<p>$x_{1}&#x3D; detA_{1}(\vec b)&#x2F;detA&#x3D;20\x_{2}&#x3D;detA_{2}(\vec b)&#x2F;detA&#x3D;27$​</p>
+<p>注：克拉默法则对一个很大的矩阵是无效的，仅计算一个行列式就大约与用行化简解𝐴𝐱&#x3D;𝐛有相同的工作量。</p>
+<h2 id="逆矩阵公式"><a href="#逆矩阵公式" class="headerlink" title="逆矩阵公式"></a>逆矩阵公式</h2><p>设$A$是一个可逆的$n\times n$矩阵，则$A^{-1}&#x3D;\frac{1}{|A|}adj(A)$。其中$adj(A)$为矩阵$A$​的伴随矩阵，是由代数余子式组成的矩阵的转置：</p>
+<p>$adj(A) &#x3D; \left[    \begin{array}{}      A_{11}&amp;A_{12}&amp; … &amp;A_{1n}\  A_{21}&amp;A_{22}&amp; … &amp;A_{2n} \  \vdots &amp; \vdots &amp; \ddots &amp; \vdots \  A_{n1}&amp;A_{n2}&amp; … &amp;A_{nn}    \end{array} \right]^T &#x3D; \left[    \begin{array}{}      A_{11}&amp;A_{21}&amp; … &amp;A_{n1}\  A_{12}&amp;A_{22}&amp; … &amp;A_{n2} \  \vdots &amp; \vdots &amp; \ddots &amp; \vdots \  A_{1n}&amp;A_{2n}&amp; … &amp;A_{nn}    \end{array} \right]$</p>
+<p>逆矩阵公式也印证了行列式与逆矩阵的关系：<strong>矩阵可逆当且仅当行列式不为零</strong>。</p>
+<h1 id="第二章-线性方程组和矩阵"><a href="#第二章-线性方程组和矩阵" class="headerlink" title="第二章 线性方程组和矩阵"></a>第二章 线性方程组和矩阵</h1><h2 id="方程组的几何解释"><a href="#方程组的几何解释" class="headerlink" title="方程组的几何解释"></a>方程组的几何解释</h2><p>$$<br>{方程组}\begin{cases}<br>2x-y&#x3D;0 \<br>-x+2y&#x3D;3<br>\end{cases}<br>$$</p>
+<h3 id="行空间角度"><a href="#行空间角度" class="headerlink" title="行空间角度"></a>行空间角度</h3><h1 id="left-begin-array-c-2-1-1-2-end-array-right-left-begin-array-c-x-y-end-array-right"><a href="#left-begin-array-c-2-1-1-2-end-array-right-left-begin-array-c-x-y-end-array-right" class="headerlink" title="$$\left[    \begin{array}{c}      2&amp;-1\      -1&amp;2    \end{array}\right]\left[    \begin{array}{c}      x\      y    \end{array}\right]"></a>$$<br>\left[<br>    \begin{array}{c}<br>      2&amp;-1\<br>      -1&amp;2<br>    \end{array}<br>\right]<br>\left[<br>    \begin{array}{c}<br>      x\<br>      y<br>    \end{array}<br>\right]</h1><p>\left[<br>    \begin{array}{c}<br>      0\<br>      3<br>    \end{array}<br>\right]<br>\<br>\ Ax&#x3D;b<br>$$</p>
+<p><strong>系数矩阵(A):</strong> 将方程组系数按行提取出来，构造完成的一个矩阵。<br><strong>未知向量(x)</strong>: 将方程组的未知数提取出来，按列构成一个向量。<br><strong>向量(b)</strong>: 将等号右侧结果按列提取，构成一个向量。</p>
+<h3 id="列空间角度"><a href="#列空间角度" class="headerlink" title="列空间角度"></a>列空间角度</h3><p>$$<br>{方程组}\begin{cases}<br>2x-y&#x3D;0 \<br>-x+2y&#x3D;3<br>\end{cases}<br>$$</p>
+<h1 id="x-left-begin-array-c-2-1-end-array-right-y-left-begin-array-c-1-2-end-array-right"><a href="#x-left-begin-array-c-2-1-end-array-right-y-left-begin-array-c-1-2-end-array-right" class="headerlink" title="$$x\left[    \begin{array}{c}      2\      -1    \end{array}\right]+y\left[    \begin{array}{c}      -1\      2    \end{array}\right]"></a>$$<br>x<br>\left[<br>    \begin{array}{c}<br>      2\<br>      -1<br>    \end{array}<br>\right]<br>+<br>y<br>\left[<br>    \begin{array}{c}<br>      -1\<br>      2<br>    \end{array}<br>\right]</h1><p>\left[<br>    \begin{array}{c}<br>      0\<br>      3<br>    \end{array}<br>\right]<br>$$</p>
+<p>列向量构成系数矩阵，将问题转化为寻找合适的 <strong>x，y</strong> 使得 <strong>x</strong> 倍的 <strong>(2,-1)</strong> + <strong>y</strong> 倍的 **(-1,2)**得到最终的向量 **(0,3)**。</p>
+<h3 id="例：矩阵乘法"><a href="#例：矩阵乘法" class="headerlink" title="例：矩阵乘法"></a>例：矩阵乘法</h3><p>$$<br>A &#x3D; \left[<br>    \begin{array}{c}<br>      2&amp;5\<br>      1&amp;3<br>    \end{array}<br>\right]<br>,<br>x &#x3D; \left[<br>    \begin{array}{c}<br>      2\<br>      1<br>    \end{array}<br>\right]<br>$$</p>
+<p>$$<br>方法一（行空间角度）：Ax &#x3D;  \left[<br>    \begin{array}{c}<br>      2&amp;5\<br>      1&amp;3<br>    \end{array}<br>\right]<br>\left[<br>    \begin{array}{c}<br>      2\<br>      1<br>    \end{array}<br>\right]<br>&#x3D; \left[<br>    \begin{array}{c}<br>      (2,5)<em>(1,2)\<br>      (1,3)</em>(1,2)<br>    \end{array}<br>\right] &#x3D;<br>\left[<br>    \begin{array}{c}<br>      12\<br>      7<br>    \end{array}<br>\right]<br>$$</p>
+<p>$$<br>方法二（列空间角度）：Ax &#x3D;  \left[<br>    \begin{array}{c}<br>      2&amp;5\<br>      1&amp;3<br>    \end{array}<br>\right]<br>\left[<br>    \begin{array}{c}<br>      2\<br>      1<br>    \end{array}<br>\right]<br>&#x3D; 1\left[<br>    \begin{array}{c}<br>      2\<br>      1<br>    \end{array}<br>\right] +<br>2\left[<br>    \begin{array}{c}<br>      5\<br>      3<br>    \end{array}<br>\right] &#x3D;<br>\left[<br>    \begin{array}{c}<br>      12\<br>      7<br>    \end{array}<br>\right]<br>$$</p>
+<h2 id="线性方程组"><a href="#线性方程组" class="headerlink" title="线性方程组"></a>线性方程组</h2><p><strong>线性方程</strong>：包含未知数$x_{1},x_{2},\cdots,x_{n}$​​的一个<strong>线性方程</strong>如下所示：</p>
+<p>​												$$a_{1}x_{1}+a_{2}x_{2}+\cdots+a_{n}x_{n}&#x3D;b$$</p>
+<p><strong>线性方程组</strong>：是由一个或多个包含相同变量$x_{1},x_{2},\cdots,x_{n}$​的线性方程组成的，例如：</p>
+<p>​										      $\begin{equation}<br>\begin{cases}<br>x_{1}-2x_{2}+x_{3}&#x3D;0\<br>x_{2}-4x_{3}&#x3D;4\<br>x_{3}&#x3D;3<br>\end{cases}<br>\end{equation}$​​​</p>
+<p><strong>齐次线性方程组</strong>：当常数项$b_{1},b_{2},,,b_{m}$ 全为0时</p>
+<p><strong>非齐次线性方程组</strong>：当常数项$b_{1},b_{2},,,b_{m}$​ 不全为0时</p>
+<p><strong>解集</strong>: 线性方程组的一组解就是一组数$(s_{1},s_{2},\cdots,s_{n})$，用这组数替代线性方程组中的$x_{1},x_{2},\cdots,x_{n}$时方程两边成立。方程组所有的解称为该线性方程组的<strong>解集</strong>。  </p>
+<p>​    线性方程组包含的主要信息可以通过<strong>矩阵</strong>来表示，以上式为例子，可以将原方程组写为</p>
+<p>​											$$\begin{equation}<br>\begin{cases}<br>1<em>x_{1}-2</em>x_{2}+1<em>x_{3}&#x3D;0\<br>0</em>x_{1}+1<em>x_{2}-4</em>x_{3}&#x3D;4\<br>0<em>x_{1}+0</em>x_{2}+1*x_{3}&#x3D;3.<br>\end{cases}<br>\end{equation}$$</p>
+<p>将每一个变量的系数写在对齐的一列中，形成<strong>系数矩阵</strong>：</p>
+<p>​											$$\left[<br>\begin{matrix}<br>   1 &amp; -2 &amp; 1\<br>   0 &amp; 1 &amp; -4\<br>   0 &amp; 0 &amp; 1\<br>  \end{matrix}<br>  \right]$$</p>
+<p>如果我们把系数和等式右边的常数写在一个矩阵，我们称之为<strong>增广矩阵</strong>，如下所示：</p>
+<p>​                                           $$\left[<br>\begin{matrix}<br>   1 &amp; -2 &amp; 1 &amp; 0\<br>   0 &amp; 1 &amp; -4 &amp; 4\<br>   0 &amp; 0 &amp; 1 &amp; 3\<br>  \end{matrix}<br>  \right]$$​</p>
+<h2 id="矩阵消元"><a href="#矩阵消元" class="headerlink" title="矩阵消元"></a>矩阵消元</h2><h3 id="矩阵初等变换"><a href="#矩阵初等变换" class="headerlink" title="矩阵初等变换"></a>矩阵初等变换</h3><h4 id="初等行变换"><a href="#初等行变换" class="headerlink" title="初等行变换"></a>初等行变换</h4><ul>
+<li>（对换变换）把两行对换</li>
+<li>（倍加变换）把某一行换成它本身与另一行的$k$倍数的和；</li>
+<li>（倍乘变换）把某一行的所有元素乘以同一个非零数$k$​。</li>
+</ul>
+<p>将“行”替换成列，即可得到初等列变换；初等行变换和初等列变换统称为初等变换。</p>
+<p>如果矩阵A 经有限次初等行变换变成矩阵B，就称矩阵A 与B 行等价；</p>
+<p>如果矩阵A 经有限次初等列变换变成矩阵B，就称矩阵A 与B 列等价；</p>
+<p>如果矩阵A经有限次初等变换变成矩阵B，就称矩阵A与B等价.</p>
+<h3 id="消元法求解方程"><a href="#消元法求解方程" class="headerlink" title="消元法求解方程"></a>消元法求解方程</h3><p>​		两个线性方程组的增广矩阵行等价时，它们的解集是相同的。主要思路就是对一个矩阵进行一系列<strong>初等行变换</strong>，将其转换为一个<strong>阶梯型矩阵</strong>进而求解。</p>
+<p><strong>行阶梯型矩阵</strong>：非零矩阵若满足</p>
+<p>（i）非零行在零行的上面；　</p>
+<p>（ii）非零行的首非零元所在列在上一行（如果存在的话）的首非零元所在列的右面，</p>
+<p>则称此矩阵为行阶梯形矩阵；		</p>
+<p>阶梯型矩阵的每一行的首个非零元素我们称之为<strong>主元</strong>，主元所在的列称之为<strong>主元列</strong>。阶梯型矩阵中主元所在列，主元以下全为0；某一行的主元所在列位于前一行主元的右边。</p>
+<p>如：</p>
+<p>$\begin{cases}<br>x_{1}+2x_{2}+x_{3}&#x3D;2\<br>3x_{1}+8x_{2}+x_{3}&#x3D;12\<br>4x_{2}+x_{3}&#x3D;2<br>\end{cases}            $$\Rightarrow$​​ $\left[<br>\begin{matrix}<br>   1 &amp; 2 &amp; 1 &amp; 2\<br>   3 &amp; 8 &amp; 1 &amp; 12\<br>   0 &amp; 4 &amp; 1 &amp; 2\<br>  \end{matrix}<br>  \right]$</p>
+<ol>
+<li>$row_{2}-3*row_{1}$</li>
+</ol>
+<p>$\left[<br>\begin{matrix}<br>   1 &amp; 2 &amp; 1 &amp; 2\<br>   0 &amp; 2 &amp; -2 &amp; 6\<br>   0 &amp; 4 &amp; 1 &amp; 2\<br>  \end{matrix}<br>  \right]$​</p>
+<ol start="2">
+<li>$row_{3}-2*row_{2}$</li>
+</ol>
+<p>$\left[<br>\begin{matrix}<br>   1 &amp; 2 &amp; 1 &amp; 2\<br>   0 &amp; 2 &amp; -2 &amp; 6\<br>   0 &amp; 0 &amp; 5 &amp; -10\<br>  \end{matrix}<br>  \right]$</p>
+<ol start="3">
+<li>直至矩阵为一个阶梯型矩阵。如果消元过程中所求位置为0，则切换至下一列继续消元；过程中如果已经为阶梯型矩阵则结束算法。</li>
+</ol>
+<p>​      将增广矩阵还原回线性方程组，称对应于主元列的变量$x_{1},x_{2},x_{3}$​为<strong>基本变量</strong>,被消去的变量称为<strong>自由变量</strong></p>
+<p>$$\left[<br>\begin{matrix}<br>   1 &amp; 2 &amp; 1 &amp; 2\<br>   0 &amp; 2 &amp; -2 &amp; 6\<br>   0 &amp; 0 &amp; 5 &amp; -10\<br>  \end{matrix}<br>  \right]<br>  \begin{equation}<br>  \Rightarrow<br>\begin{cases}<br>x_{1}+2x_{2}+x_{3}&#x3D;2\<br>2x_{2}-2x_{3}&#x3D;6\<br>5x_{3}&#x3D;-10<br>\end{cases}<br>\end{equation}$$​​​</p>
+<h2 id="矩阵的秩"><a href="#矩阵的秩" class="headerlink" title="矩阵的秩"></a>矩阵的秩</h2><p>对于$n$ 阶矩阵$A$，由于$A$ 的$n$阶子式只有一个$|A|$，故当$|A|\neq 0$ 时$R(A)&#x3D;n$，当$|A|&#x3D;0$ 时$R(A)&lt;n$​​. 可见可逆矩阵的秩等于矩阵的阶数，不可逆矩阵的秩小于矩阵的阶数.因此，可逆矩阵又称满秩矩阵，不可逆矩阵（奇异矩阵）又称降秩矩阵.</p>
+<p>定理. 若$A$​~$B$​​，则$R(A)&#x3D;R(B)$​​​​</p>
+<p>推论：若可逆矩阵$P$、$Q$使得$PAQ&#x3D;B$，则$R(A)&#x3D;R(B)$</p>
+<h1 id="第三章-矩阵及其运算"><a href="#第三章-矩阵及其运算" class="headerlink" title="第三章 矩阵及其运算"></a><strong>第三章 矩阵及其运算</strong></h1><p>若$A$是$m\times n$，即有$m$行$n$列的矩阵。$A$的第$i$行第$j$列元素用$a_{ij}$表示，称为$A$的$(i,j)$元素。  </p>
+<h2 id="常见矩阵"><a href="#常见矩阵" class="headerlink" title="常见矩阵"></a><strong>常见矩阵</strong></h2><ul>
+<li>单位矩阵$I_{n}$，对角线上元素全为1，非对角线上元素全为0；</li>
+<li>对角矩阵，是一个方阵，它的非对角线元素全为0。单位矩阵也是一个对角矩阵；</li>
+<li>零矩阵，矩阵元素全为0。</li>
+</ul>
+<p>若$A,B,C$​​是<strong>相同维数</strong>的矩阵，$r$​​与$s$​​为一实数，则有：</p>
+<p>​													$A+B&#x3D;B+A\(A+B)+C&#x3D;A+(B+C)\(A+\mathbf{0})&#x3D;A\r(A+B)&#x3D;rA+rB\(r+s)A&#x3D;rA+sA\r(sA)&#x3D;(rs)A\AB\neq BA$</p>
+<p>设$A$为$m\times n$矩阵，$B,C$维数使下列各式的乘积有定义（矩阵$A,B$​相乘，前者的列数等于后者的行数)。</p>
+<p>关于矩阵乘法则有：</p>
+<p>​											$A(BC)&#x3D;(AB)C\A(B+C)&#x3D;AB+AC\(B+C)A&#x3D;BA+CA\对任意实数r,r(AB)&#x3D;(rA)B&#x3D;A(rB)\I_{m}A&#x3D;A&#x3D;AI_{m}$​</p>
+<p>矩阵的<strong>乘幂</strong>表示为$A^{k}$​，其中$A$​是$n\times n$​矩阵，$A^{k}$​表示为$k$​个$A$​的乘积$A^{k}&#x3D;A\cdots A$​。$A^{0}$​为单位矩阵。<br>矩阵的<strong>转置</strong>表示为$A^{T}$​，其中$A$​是一个$m\times n$​矩阵，则$A^{T}$​是一个$n\times m$​矩阵，$A^{T}$​的列是由$A$​的行构成的。设$A,B$​​为矩阵，其维数使下列和与积有定义，则有：</p>
+<p>​														$(A^T)^T&#x3D;A\(A+B)^T&#x3D;A^T+B^T\对任意实数r,(rA)^T&#x3D;rA^T\(AB)^T&#x3D;B^TA^T$​</p>
+<p><strong>伴随矩阵</strong>：若$|A|\neq 0$，则矩阵$A$可逆，且</p>
+<p>​																		$A^{-1}&#x3D;\frac{1}{|A|}A^*$</p>
+<p>其中$A^*$为矩阵$A$ 的伴随矩阵.</p>
+<h2 id="逆矩阵"><a href="#逆矩阵" class="headerlink" title="逆矩阵"></a>逆矩阵</h2><p>对于一个矩阵$A$来说，若存在一个矩阵$C$使得下式成立：</p>
+<p>​															$$AC&#x3D;I,CA&#x3D;I$$​</p>
+<p>那么矩阵$C$称为矩阵$A$的<strong>逆矩阵</strong>，若这样的$C$存在，我们称矩阵$A$是<strong>可逆矩阵</strong>。我们将$C$写为$A^{-1}$，于是</p>
+<p>​														$$AA^{-1}&#x3D;I,A^{-1}A&#x3D;I$$​</p>
+<p>不可逆矩阵也称之为<strong>奇异矩阵</strong>，可逆矩阵也称为<strong>非奇异矩阵</strong>。</p>
+<p>可逆矩阵一定是方阵。<br>下面是有关可逆矩阵的基本定理，假设$A$​​可逆：</p>
+<p>​										$(A^{-1})^{-1}&#x3D;A\若A，B可逆，则(AB)^{-1}&#x3D;B^{-1}A^{-1}\A^T可逆,且(A^T)^{-1}&#x3D;((A)^{-1})^T$​</p>
+<h2 id="伴随矩阵求逆矩阵"><a href="#伴随矩阵求逆矩阵" class="headerlink" title="伴随矩阵求逆矩阵"></a>伴随矩阵求逆矩阵</h2><p>假设求矩阵$A$的逆矩阵，将同维度的单位矩阵$I$与$A$构成增广矩阵$[A \quad I]$，要么有一系列行变换把$A$变成$I$，同时<img src="https://render.githubusercontent.com/render/math?math=I&mode=inline" srcset="/img/loading.gif" lazyload alt="$I$">变成$A^{-1}$；要么$A$​是不可逆的。</p>
+<p>例如：求$A^{-1}$</p>
+<p>$A &#x3D; \left[<br>\begin{matrix}<br>   0 &amp; 1 &amp; 2\<br>   1 &amp; 1 &amp; 4\<br>   2 &amp; -1 &amp;0\<br>  \end{matrix}<br>  \right] $​​ $\quad$ </p>
+<p>$B&#x3D; [A|I] &#x3D; \left[<br>\begin{matrix}<br>   0 &amp; 1 &amp; 2 &amp; 1 &amp; 0 &amp; 0\<br>   1 &amp; 1 &amp; 4 &amp; 0 &amp; 1 &amp; 0\<br>   2 &amp; -1 &amp;0 &amp; 0 &amp; 0 &amp; 1\<br>  \end{matrix}<br>  \right] \Rightarrow \left[<br>\begin{matrix}<br>   1 &amp; 0 &amp; 0 &amp; 2 &amp; -1 &amp; 1\<br>   0 &amp; 1 &amp; 0 &amp; 4 &amp; -2 &amp; 1\<br>   0 &amp; 0 &amp; 1 &amp; -3&#x2F;2 &amp; 1 &amp; -1&#x2F;2\<br>  \end{matrix}<br>  \right]$​</p>
+<p>$A^{-1} &#x3D; \left[<br>\begin{matrix}<br>   2 &amp; -1 &amp; 1\<br>   4 &amp; -2 &amp; 1\<br>   -3&#x2F;2 &amp; 1 &amp;-1&#x2F;2\<br>  \end{matrix}<br>  \right] $</p>
+<p>伴随矩阵求逆矩阵时间复杂度过大，只适合于手算；计算机中求逆矩阵会借助矩阵的<a target="_blank" rel="noopener" href="https://render.githubusercontent.com/view/%E3%80%8A%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%E3%80%8B%E7%AC%94%E8%AE%B016.%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3-LU%E5%88%86%E8%A7%A3.ipynb"><img src="https://render.githubusercontent.com/render/math?math=LUP&mode=inline" srcset="/img/loading.gif" lazyload alt="$LUP$">分解</a>。还可以通过逆矩阵公式求$A^{-1}$。</p>
+<h2 id="可逆矩阵定理"><a href="#可逆矩阵定理" class="headerlink" title="可逆矩阵定理"></a>可逆矩阵定理</h2><p>​         如果一个$n\times n$​​矩阵经过一系列行变换形成阶梯型矩阵，具有$n$​​个主元（对角线上元素均不为0），说明$|A|\neq 0$​​，再结合回<a href="%E3%80%8A%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%E3%80%8B%E7%AC%94%E8%AE%B003.%E7%9F%A9%E9%98%B5%E8%BF%90%E7%AE%97%E4%B8%8E%E9%80%86%E7%9F%A9%E9%98%B5.ipynb">可逆矩阵定理</a>，可以得出结论：$A$​​可逆当且仅当$|A|\neq 0$​​​，可逆矩阵定理可再做补充：</p>
+<p>$|A|\neq0\Leftrightarrow A$​可逆$\Leftrightarrow$​​​​</p>
+<p>(1) $A\mathbf{x}&#x3D;0$​仅有平凡解($\mathbf{x}&#x3D;A^{-1}\mathbf{0}&#x3D;\mathbf{0}$$)\Leftrightarrow$​A各列先行无关$\Leftrightarrow$​A各列生成$\Bbb{R}^n$​</p>
+<p>(2) $A\mathbf{x}&#x3D;b$​​至少有一解$\Leftrightarrow$​A有n个主元位置$\Leftrightarrow$​A等价于$n \times n$​​单位矩阵</p>
+<p>利用可逆矩阵定理，我们可以从不同的角度去判断一个矩阵$A$是否可逆，例如给出一个矩阵$A$:</p>
+<p>$$<br>A&#x3D;\begin{bmatrix}<br>   1 &amp; 0 &amp; -2\<br>   3 &amp; 1 &amp; -2\<br>   -5 &amp; -1 &amp; 9<br>  \end{bmatrix}<br>$$</p>
+<p>对$A$做初等行变换，判断主元个数：</p>
+<p>​									                      $A \sim \begin{bmatrix}<br>   1 &amp; 0 &amp; -2\<br>   0 &amp; 1 &amp; 4\<br>   0 &amp; 0 &amp; 3<br>  \end{bmatrix}<br>$​​</p>
+<p>$A$​有三个主元，故$A$​是可逆的。</p>
+<p><strong>逆矩阵求解方程</strong>：若$A$可逆，则对每一个$\Bbb{R}^{n}$中的$\mathbf{b}$，方程$A\mathbf{x}&#x3D;\mathbf{b}$都有唯一解：$\mathbf{x}&#x3D;A^{-1}\mathbf{b}$。  </p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h1 id="第三章-向量"><a href="#第三章-向量" class="headerlink" title="第三章 向量"></a><strong>第三章 向量</strong></h1><h2 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h2><p><strong>定义</strong>：$n$ 个有次序的数$a1，a2，…，an $所组成的数组称为$n$ 维向量，这$n$ 个数称为该向量的$n$ 个分量，第$i$个数$a_i$ 称为第$i$​个分量</p>
+<p><strong>零向量</strong>：所有元素都为0的向量称为零向量，用$\mathbf{0}$表示。</p>
+<p><strong>向量组</strong>：若干个同维数的列向量（或同维数的行向量）所组成的集合叫做向量组.</p>
+<p>向量通常写为$n\times1$​列矩阵的形式，如<br>$$<br>\mathbf{u}&#x3D;\begin{bmatrix}    u_{1} \    \vdots\    u_{n}   \end{bmatrix}<br>$$<br><strong>向量运算</strong>：</p>
+<p>（1）向量之间可以进行加减法得到新的向量（平行四边形法则）；</p>
+<p>（2）支持和实数做标量乘法，即向量中的每个元素和该实数做乘法得到新的向量。</p>
+<p>若$n$​​​是正整数，$\Bbb{R}^n$​​​表示所有具有<img src="https://render.githubusercontent.com/render/math?math=n&mode=inline" srcset="/img/loading.gif" lazyload alt="$n$">个元素的向量的集合。$\Bbb{R}^2$​​​可以理解为一个平面上的直角坐标系，那么$\Bbb{R}^2$​​​中的每个向量$\mathbf{u}&#x3D;\begin{bmatrix}u_{1}\u_{2}\end{bmatrix}$​​​可看作是平面上的一个点$(u_{1},u_{2})$​​​，或者看成是平面上的一个从原点指向$(u_{1},u_{2})$​​​​​​​的有向箭头。</p>
+<h2 id="线性组合"><a href="#线性组合" class="headerlink" title="线性组合"></a>线性组合</h2><p>给定$\Bbb{R}^n$​中<strong>向量</strong>$\mathbf{v}<em>{1},\mathbf{v}</em>{2},\cdots,\mathbf{v}<em>{p}$​和<strong>标量</strong>$c</em>{1},c_{2},\cdots,c_{p}$​，向量</p>
+<p>​                               					$$\mathbf{y}&#x3D;c_{1}\mathbf{v}<em>{1}+\cdots+c</em>{p}\mathbf{v}_{p}$$</p>
+<p>称为向量$\mathbf{v}<em>{1},\mathbf{v}</em>{2},\cdots,\mathbf{v}<em>{p}$​以$c</em>{1},c_{2},\cdots,c_{p}$​为权的<strong>线性组合</strong>。</p>
+<p>线性组合在几何上可以理解为是原点沿着向量的移动，也可理解为是向量伸缩后的相加，例如：</p>
+<p>$$ \mathbf{u}&#x3D;3\mathbf{v}<em>{1}-2\mathbf{v}</em>{2}&#x3D;3\begin{bmatrix}-1\1\end{bmatrix}- 2\begin{bmatrix}2\ 1 \end{bmatrix} $$</p>
+<p>其中$\mathbf{v}<em>{1},\mathbf{v}</em>{2}$​在$\Bbb{R}^2$​中表示如下图所示：</p>
+<p>接着我们在图中表示出线性组合$\mathbf{u}&#x3D;3\mathbf{v}<em>{1}-2\mathbf{v}</em>{2}$​的生成过程。其中左图的线性组合表示为：</p>
+<p>原点分别沿着$3\mathbf{v}<em>{1}$、$-2\mathbf{v}</em>{2}$生成所求$\mathbf{u}$；</p>
+<p>右图的线性组合表示为：向量$3\mathbf{v}<em>{1}$​、$-2\mathbf{v}</em>{2}$​的一次相加（平行四边形法则)。</p>
+<p><strong>定理</strong> 向量$b$​​​​​​​ 能由向量组$A：a_1,a_2,…,a_m$​​​​​​​ 线性表示的充分必要条件是矩阵$A &#x3D;(a_1, a_2,… , a_m)$​​​​​​​的秩等于矩阵 $B &#x3D;（a_1, a_2,…,a_m,b）$​​​​​​​的秩.</p>
+<p><strong>定义</strong> 设有两个向量组$A：a_1,a_2,…,a_m$​ 及$B &#x3D;(b_1, b_2,…,b_l)$​若$B$​ 组中的每个向量都能由向量组A线性表示，则称向量组$B$​能由向量组$A$​ 线性表示.若向量组$A$​ 与向量组$B$​ 能相互线性表示，则称这两个向量组等价.</p>
+<p><strong>定理</strong> 向量组$B:b_1,b_2,…,b_l $​能由向量组$A:a_1,a_2,…,a_m$​线性表示的充分必要条件是矩阵$A&#x3D;(a_1,a_2,…,a_m)$​的秩等于矩阵$(A,B)&#x3D;(a_1,..,a_m,b_1,..,b_l)$的秩，即$R(A)&#x3D;R(A,B)$​</p>
+<p><strong>推论</strong>　向量组$A：a_1,a_2,…,a_m$ 与向量组$B:b_1,b_2,…,b_l $能等价的充分必要条件是$R(A)&#x3D;R(B)&#x3D;R(A,B)$</p>
+<p>其中$A$ 和$B$ 是向量组$A$ 和$B$​ 所构成的矩阵.</p>
+<p>线性代数的一个<strong>主要思想</strong>是研究可以表示为某一固定向量集合${\mathbf{v}<em>{1},\mathbf{v}</em>{2},\cdots,\mathbf{v}_{p}}$​​的线性组合的所有向量（基）。</p>
+<p>若$\mathbf{v}<em>{1},\cdots,\mathbf{v}</em>{p}$​是$\Bbb{R}^n$​中的向量，则$\mathbf{v}<em>{1},\cdots,\mathbf{v}</em>{p}$​的所有线性组合所成的集合用记号$Span{\mathbf{v}<em>{1},\cdots,\mathbf{v}</em>{p}}$​表示，称为由!$\mathbf{v}<em>{1},\cdots,\mathbf{v}</em>{p}$​所生成（张成）的$\Bbb{R}^n$​的子集。更具体地说，$Span{\mathbf{v}<em>{1},\cdots,\mathbf{v}</em>{p}}$​​是所有形如：</p>
+<p>​																				$$c_{1}\mathbf{v}<em>{1}+\cdots+c</em>{p}\mathbf{v}_{p}$$</p>
+<p>的向量集合。特别地，一定包含零向量。<br>要判断向量$\mathbf{b}$是否属于$Span{\mathbf{v}<em>{1},\cdots,\mathbf{v}</em>{p}}$，就是判断向量方程</p>
+<p>​																			 $$x_{1}\mathbf{v}<em>{1}+\cdots+x</em>{p}\mathbf{v}_{p}&#x3D;\mathbf{b}$$</p>
+<p>是否有解，或等价地，判断增广矩阵为$\begin{bmatrix}\mathbf{v}<em>{1};\cdots;\mathbf{v}</em>{p};\mathbf{b}\end{bmatrix}$的线性方程组是否有解。</p>
+<h2 id="向量组的线性相关性"><a href="#向量组的线性相关性" class="headerlink" title="向量组的线性相关性"></a>向量组的线性相关性</h2><p>假设${\mathbf{v}<em>{1},\cdots,\mathbf{v}</em>{n}}$为$\Bbb{R}_{n}$的一组向量，我们定义有：</p>
+<ul>
+<li>若向量方程$x_{1}\mathbf{v}<em>{1}+\cdots+x</em>{p}\mathbf{v}<em>{p}&#x3D;\mathbf{0}$仅有平凡解，称$\mathbf{v}</em>{1},\cdots,\mathbf{v}_{n}$为<strong>线性无关</strong>；</li>
+<li>若向量方程$x_{1}\mathbf{v}<em>{1}+\cdots+x</em>{p}\mathbf{v}<em>{p}&#x3D;\mathbf{0}$存在非平凡解$c</em>{1},\cdots,c_{p}$，称$\mathbf{v}<em>{1},\cdots,\mathbf{v}</em>{n}$为<strong>线性相关</strong>。</li>
+</ul>
+<h2 id="向量组的秩"><a href="#向量组的秩" class="headerlink" title="向量组的秩"></a>向量组的秩</h2><h2 id="线性方程组的解"><a href="#线性方程组的解" class="headerlink" title="线性方程组的解"></a>线性方程组的解</h2><h2 id="向量空间"><a href="#向量空间" class="headerlink" title="向量空间"></a>向量空间</h2><p>实际上我们在<a target="_blank" rel="noopener" href="https://render.githubusercontent.com/view/%E3%80%8A%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%E3%80%8B%E7%AC%94%E8%AE%B002.%E5%90%91%E9%87%8F%E4%B8%8E%E7%9F%A9%E9%98%B5%E6%96%B9%E7%A8%8B.ipynb">向量与矩阵方程</a>中已经介绍过向量空间的一些概念了，这次我们打算更深入而具体地讨论向量空间为何物。<br>一个<strong>向量空间</strong>是由一些向量构成的非空集合$V$​，在这个集合上定义了两个运算：加法和标量乘法，服从以下公理，这些公理必须对$V$​中所有向量$\mathbf{u},\mathbf{v},\mathbf{w}$​及所有标量$c,d$​成立:</p>
+<h3 id="子空间"><a href="#子空间" class="headerlink" title="子空间"></a>子空间</h3><p><strong>子空间</strong>是由一个向量空间中适当的向量的子集所构成。在此情形下，向量空间的十个公理我们只需要验证三个，其余的自然成立。<br>因此我们可以说，向量空间$V$的一个子空间是$V$的一个满足性质的子集$H$:</p>
+<p>每个子空间都是一个向量空间，每个向量空间都是一个子空间(针对本身或更大的空间而言)。特别地，向量空间$V$中仅由零向量组成的集合是$V$中一个子空间，成为零子空间，写成${\mathbf{0}}$。<br>对两个向量空间，若其中一个在另一个内部，此时子空间这个词被使用，如下图所示，$H$为$V$的一个子空间</p>
+<h3 id="三个基本子空间"><a href="#三个基本子空间" class="headerlink" title="三个基本子空间"></a>三个基本子空间</h3><h4 id="零空间"><a href="#零空间" class="headerlink" title="零空间"></a>零空间</h4><p>满足$A\mathbf{x}&#x3D;\mathbf{0}$的所有$\mathbf{x}$的集合为矩阵$A$的<strong>零空间</strong>，$NulA&#x3D;{\mathbf{x}:\mathbf{x}\in\Bbb{R}^{n},A\mathbf{x}&#x3D;\mathbf{0}}$。特别地，零空间也叫核空间。<br>要判断一个向量$\mathbf{x}$是否属于$A$的零空间，只需判断$A\mathbf{x}$是否为$\mathbf{0}$即可。<br>从几何上理解，矩阵$A$是一个线性变换，若$A\mathbf{x}&#x3D;\mathbf{0}$说明向量$\mathbf{x}$经过了$A$线性变换后变为$\mathbf{0}$​。因此矩阵的零空间就是线性变换后落在原点的向量。例如下图所示：</p>
+<h4 id="列空间"><a href="#列空间" class="headerlink" title="列空间"></a>列空间</h4><p>一个$m\times n$矩阵$A$的列向量的所有线性组合组成的向量集合称为<strong>列空间</strong>。<br>若$A&#x3D;\begin{bmatrix}{}a_{1} ; \cdots ; a_{n}\end{bmatrix}$，则$ColA&#x3D;Span{a_{1},\cdots,a_{n}}$，也可以表示为$ColA&#x3D;{\mathbf{b}:\mathbf{x}\in\Bbb{R}^{n},\mathbf{b}&#x3D;A\mathbf{x}}$。<br>要判断一个向量$\mathbf{v}$是否属于$A$的列空间，只需判断方程$A\mathbf{x}&#x3D;\mathbf{v}$是否有解即可。故$m\times n$矩阵<img src="https://render.githubusercontent.com/render/math?math=A&mode=inline" srcset="/img/loading.gif" lazyload alt="$A$">的列空间等于$\Bbb{R}^{m}$当且仅当方程$A\mathbf{x}&#x3D;\mathbf{b}$对$\Bbb{R}^{m}$中每一个$\mathbf{b}$有一个解。<br>从几何上理解，矩阵$A$是一个线性变换，$A\mathbf{x}&#x3D;\mathbf{b}$表明$\mathbf{b}$是由$\mathbf{x}$经过$A$线性变换后形成。因此每个位于列空间的向量都是从一个向量线性变换而来，如下图所示：</p>
+<h4 id="行空间"><a href="#行空间" class="headerlink" title="行空间"></a>行空间</h4><p>一个$m\times n$​矩阵$A$​的每一行具有$n$​个元素，即可以视为$\Bbb{R}^{n}$​中的一个向量，$A$​的行向量的所有线性组合的集合称为$A$​的行空间，记作$RowA$​，易知$ColA^{T}&#x3D;RowA$​。</p>
+<h2 id="基"><a href="#基" class="headerlink" title="基"></a>基</h2><h3 id="基-1"><a href="#基-1" class="headerlink" title="基"></a>基</h3><p>基是刻画向量空间的基本工具，向量空间中的任何向量都可以唯一地表示成基的线性组合。<br>如果一个向量空间$V$和一组向量${\mathbf{v}<em>{1},\cdots,\mathbf{v}</em>{p}}$满足以下条件，那么这组向量被称之为<img src="https://render.githubusercontent.com/render/math?math=V&mode=inline" srcset="/img/loading.gif" lazyload alt="$V$">的一组<strong>基</strong>:</p>
+<ul>
+<li>${\mathbf{v}<em>{1},\cdots,\mathbf{v}</em>{p}}$是一组<a target="_blank" rel="noopener" href="https://render.githubusercontent.com/view/%E3%80%8A%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%E3%80%8B%E7%AC%94%E8%AE%B002.%E5%90%91%E9%87%8F%E4%B8%8E%E7%9F%A9%E9%98%B5%E6%96%B9%E7%A8%8B.ipynb">线性无关</a>集；</li>
+<li>${\mathbf{v}<em>{1},\cdots,\mathbf{v}</em>{p}}$生成的子空间与$V$相同，即$V&#x3D;Span{\mathbf{v}<em>{1},\cdots,\mathbf{v}</em>{p}}$.</li>
+</ul>
+<p>例如，若<img src="https://render.githubusercontent.com/render/math?math=A&mode=inline" srcset="/img/loading.gif" lazyload alt="$A$">是一个可逆的<img src="https://render.githubusercontent.com/render/math?math=n%5Ctimes%20n&mode=inline" srcset="/img/loading.gif" lazyload alt="$n\times n$">矩阵，则由<a target="_blank" rel="noopener" href="https://render.githubusercontent.com/view/%E3%80%8A%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%E3%80%8B%E7%AC%94%E8%AE%B004.%E8%A1%8C%E5%88%97%E5%BC%8F%E5%8F%8A%E5%85%B6%E5%87%A0%E4%BD%95%E6%84%8F%E4%B9%89.ipynb">可逆矩阵定理</a>可知，<img src="https://render.githubusercontent.com/render/math?math=A&mode=inline" srcset="/img/loading.gif" lazyload alt="$A$">的列向量组成<img src="https://render.githubusercontent.com/render/math?math=%5CBbb%7BR%7D%5E%7Bn%7D&mode=inline" srcset="/img/loading.gif" lazyload alt="$\Bbb{R}^{n}$">的一组基。<br>例如，令$e_{i},\cdots,e_{n}$是$n\times n$单位矩阵$I_{n}$的列，集合${e_{i},\cdots,e_{n}}$称为$\Bbb{R}^{n}$的<strong>标准基</strong>，如下图所示：</p>
+<p>通常地，我们也会将基写为矩阵的形式，例如${\begin{bmatrix}    0\    1   \end{bmatrix}    ,\begin{bmatrix}    1\    0   \end{bmatrix}}$​，写成$\begin{bmatrix}    0 ; 1\    1 ; 0   \end{bmatrix}$​。</p>
+<h3 id="两个重要定理"><a href="#两个重要定理" class="headerlink" title="两个重要定理"></a>两个重要定理</h3><p><strong>唯一表示定理</strong>：令${\mathbf{b}<em>{1},\cdots,\mathbf{b}</em>{n}}$称为$V$的一组基，则对$V$中的每个向量$\mathbf{x}$，存在唯一的一组数<img src="https://render.githubusercontent.com/render/math?math=c_%7B1%7D,%5Ccdots,c_%7Bn%7D&mode=inline" srcset="/img/loading.gif" lazyload alt="$c_{1},\cdots,c_{n}$">使得：</p>
+<p>​										$\mathbf{x}&#x3D;c_{1}\mathbf{b}<em>{1}+\cdots+c</em>{n}\mathbf{b}<em>{n}&#x3D;\begin{bmatrix}    \mathbf{b}</em>{1} &amp; \cdots &amp; \mathbf{b}<em>{n}\   \end{bmatrix} \begin{bmatrix}    c</em>{1} \    \vdots \    c_{n}   \end{bmatrix} $​​</p>
+<p>该定理表明，向量空间中的每一个向量均可被基唯一地表示。<br><strong>生成集定理</strong>： 令$S&#x3D;{\mathbf{v}<em>{1},\cdots,\mathbf{v}</em>{p}}$是$V$中的向量集，$H&#x3D;Span{\mathbf{v}<em>{1},\cdots,\mathbf{v}</em>{p}}$:</p>
+<ul>
+<li>若$S$中某一向量（比如说$\mathbf{v}<em>{k}$）是$S$中其余向量的线性组合，则$S$中去掉$\mathbf{v}</em>{k}$后形成的向量仍可以生成$H$;</li>
+<li>若$H\neq {\mathbf{0}}$，则$S$的某一子集是$H$的一个基。</li>
+</ul>
+<p>生成集定理表明，基是一个不包含不必要向量的“高效率”的生成集。<br>一方面，一组向量中如果其中一个向量可以表示为其他向量的线性组合，也意味着该向量已经落在了其他向量张成的空间中，并不能为空间带来新的维度。<br>另一方面，一个基中的每个向量如果都为张成的空间增添新的维度，它们也称之为线性无关。一个基可以通过去掉生成集中不必要的向量生成出来。</p>
+<h3 id="零空间的基"><a href="#零空间的基" class="headerlink" title="零空间的基"></a>零空间的基</h3><p>令$NulA$是方程$A\mathbf{x}&#x3D;\mathbf{0}$中所有$\mathbf{x}$的集合，要求矩阵的零空间的基，先解方程$A\mathbf{x}&#x3D;\mathbf{0}$​，解方程可以通过高斯消元化为阶梯型、逆矩阵等。<br>我们给出例子来说明如何求矩阵零空间的基：</p>
+<h3 id="列空间的基"><a href="#列空间的基" class="headerlink" title="列空间的基"></a>列空间的基</h3><p>一个矩阵$A$被行化简为$B$时，虽然两个矩阵的列通常不同，但是$A\mathbf{x}&#x3D;\mathbf{0}$与$B\mathbf{x}&#x3D;\mathbf{0}$有完全相同的解集，即$A$的列和$B$的列具有<strong>完全相同的线性相关关系</strong>。<br>令$ColA$为矩阵$A$的列向量所有线性组合组成的集合，要求矩阵$A$的列空间的基，通常是将矩阵$A$行变换为阶梯型矩阵$B$​、判断主元列位置来确定基。我们给出例子来说明如何求矩阵的列空间的基。</p>
+<h3 id="行空间的基"><a href="#行空间的基" class="headerlink" title="行空间的基"></a>行空间的基</h3><p>若两个矩阵$A$和$B$等价，则它们的行空间相同。若$B$是阶梯型矩阵，则的$B$非零行构成$A$的行空间的一个基同时也是$B$的行空间的一个基。<br>要求一个矩阵$A$的行空间的一个基，通常是将<img src="https://render.githubusercontent.com/render/math?math=A&mode=inline" srcset="/img/loading.gif" lazyload alt="$A$">行变换为阶梯型矩阵$B$​，判断主元位置来确定，做法和求矩阵的列空间的基相似，但是又不同。例子如下：</p>
+<h1 id="第三章-矩阵的初等变换与"><a href="#第三章-矩阵的初等变换与" class="headerlink" title="第三章 矩阵的初等变换与"></a><strong>第三章 矩阵的初等变换与</strong></h1><h2 id="初等变换的性质和定理"><a href="#初等变换的性质和定理" class="headerlink" title="初等变换的性质和定理"></a><strong>初等变换的性质和定理</strong></h2><h2 id="理解矩阵的秩"><a href="#理解矩阵的秩" class="headerlink" title="理解矩阵的秩"></a><strong>理解矩阵的秩</strong></h2><h3 id="维数"><a href="#维数" class="headerlink" title="维数"></a>维数</h3><p>若向量空间$V$有一组基含$n$个向量，则$V$的每一组基一定恰好含有$n$个向量。<br>若向量空间$V$由一个有限集生成，则$V$称为有限维的，$V$的<strong>维数</strong>写为$dimV$，是$V$的<strong>基向量的个数</strong>。零向量空间${\mathbf{0}}$的维数定义为零。如果$V$不是由一有限集生成的，则称$V$为无穷维的。<br>例如，$\Bbb{R}^{3}$的子空间可用维数分类，如下：</p>
+<ul>
+<li>零维子空间。只有零子空间是零维子空间。</li>
+<li>一维子空间。任一由单一非零向量生成的子空间，这样的子空间是经过原点的直线。</li>
+<li>二维子空间。任一由两个线性无关向量生成的子空间，这样的子空间是通过原点的平面。</li>
+<li>三维子空间。只有$\Bbb{R}^{3}$​本身是三维子空间，由可逆矩阵定理，$\Bbb{R}^{3}$​中任意3个线性无关向量生成整个$\Bbb{R}^{3}$​。</li>
+</ul>
+<h3 id="秩"><a href="#秩" class="headerlink" title="秩"></a>秩</h3><p>矩阵$A$的秩即$A$的列空间的维数，记作$rankA$。<br><strong>秩定理</strong>：$m\times n$矩阵$A$的列空间和行空间维数相等，这个公共的维数（即$A$的秩）还等于$A$的主元位置的个数且满足方程：</p>
+<p>​																						$$rankA+dimNulA&#x3D;n$$</p>
+<p>也可理解为：{主元列个数}+{非主元列个数}&#x3D;{列的个数}。<br>秩定理是处理线性方程组的信息的一个有力工具。</p>
+<p>一个矩阵如果可逆，说明有<img src="https://render.githubusercontent.com/render/math?math=n&mode=inline" srcset="/img/loading.gif" lazyload alt="$n$">个主元，说明秩为<img src="https://render.githubusercontent.com/render/math?math=n&mode=inline" srcset="/img/loading.gif" lazyload alt="$n$">，当一个<img src="https://render.githubusercontent.com/render/math?math=n%5Ctimes%20n&mode=inline" srcset="/img/loading.gif" lazyload alt="$n\times n$">矩阵秩为<img src="https://render.githubusercontent.com/render/math?math=n&mode=inline" srcset="/img/loading.gif" lazyload alt="$n$">时，称之为<strong>满秩矩阵</strong></p>
+<p>当一个矩阵秩为1，我们称它为<strong>秩一矩阵</strong>。秩一矩阵易于分解为一个列向量乘以一个行向量，类似$A&#x3D;\mathbf{u}\mathbf{v}^{T}$​​​​​​​。<br>例如矩阵$A&#x3D;\begin{bmatrix}{}5&amp;8&amp; 9\15&amp;24&amp;27\end{bmatrix},B&#x3D;\begin{bmatrix}2&amp;-1 &amp;8\ 4&amp;-2&amp;16\ 6&amp;3&amp;24 \end{bmatrix}$​​​​​​​​​​​​​，可以被分解为两个向量相乘：</p>
+<p>​								$A&#x3D;\begin{bmatrix}{}5&amp;8&amp;9\15&amp;24&amp;27\end{bmatrix} &#x3D; \begin{bmatrix}{}1\3\end{bmatrix}\begin{bmatrix}{}5&amp;8&amp;9\end{bmatrix}$​</p>
+<p>​								$B&#x3D;\begin{bmatrix}2&amp;-1 &amp;8\ 4&amp;-2&amp;16\ 6&amp;3&amp;24 \end{bmatrix}&#x3D; \begin{bmatrix}{}1\2\3\end{bmatrix}\begin{bmatrix}{}2&amp;-1&amp;8\end{bmatrix}$​</p>
+<p>秩一矩阵可以组合为其他矩阵，例如想得到一个<img src="https://render.githubusercontent.com/render/math?math=5%5Ctimes%2010&mode=inline" srcset="/img/loading.gif" lazyload alt="$5\times 10$">的秩为3的矩阵，可用3个不同的<img src="https://render.githubusercontent.com/render/math?math=5%5Ctimes%2010&mode=inline" srcset="/img/loading.gif" lazyload alt="$5\times 10$">的秩一矩阵相加得到。</p>
+<h2 id="秩的性质"><a href="#秩的性质" class="headerlink" title="秩的性质"></a><strong>秩的性质</strong></h2><h2 id="矩阵初等变换-1"><a href="#矩阵初等变换-1" class="headerlink" title="矩阵初等变换"></a><strong>矩阵初等变换</strong></h2><h2 id="矩阵方程"><a href="#矩阵方程" class="headerlink" title="矩阵方程"></a><strong>矩阵方程</strong></h2><h2 id="矩阵的几何解释"><a href="#矩阵的几何解释" class="headerlink" title="矩阵的几何解释"></a>矩阵的几何解释</h2><h3 id="线性变换"><a href="#线性变换" class="headerlink" title="线性变换"></a>线性变换</h3><p><strong>矩阵代表了一种线性变换，矩阵乘法能将一个向量线性变换为另一个向量</strong>。</p>
+<p><strong>线性变换</strong>，可理解为函数，它有输入有输出，输入即与矩阵相乘的向量，输出即相乘的结果。假设线性变换为<img src="https://render.githubusercontent.com/render/math?math=T&mode=inline" srcset="/img/loading.gif" lazyload alt="$T$">，则需满足：</p>
+<ul>
+<li>对$T$的定义域中一切$\mathbf{u},\mathbf{v}$，$T(\mathbf{u}+\mathbf{v})&#x3D;T(\mathbf{u})+T(\mathbf{v})$，即$A(\mathbf{u}+\mathbf{v})&#x3D;A\mathbf{u}+A\mathbf{v}$；</li>
+<li>对$T$​的定义域中一切$\mathbf{u}$​和数$c$​，$T(c\mathbf{u})&#x3D;cT(\mathbf{u})$​，即$A(c\mathbf{u})&#x3D;cA\mathbf{u}$​​；</li>
+</ul>
+<h4 id="矩阵方程与逆矩阵"><a href="#矩阵方程与逆矩阵" class="headerlink" title="矩阵方程与逆矩阵"></a>矩阵方程与逆矩阵</h4><p>解方程$A\mathbf{x}&#x3D;\mathbf{b}$​，矩阵$A$​是一次线性变换，那么我们要解的$\mathbf{x}$​就是在线性变换后为$\mathbf{b}$​的向量。比如说解方程$\begin{bmatrix}0&amp;-1\1&amp;0\end{bmatrix}\begin{bmatrix}\mathbf{x}<em>{1}\ \mathbf{x}</em>{2}\end{bmatrix} &#x3D;\begin{bmatrix}-2\ 2\end{bmatrix}$​，我们需要找到与$A$​相反的线性变换将$\mathbf{b}$​再线性变换还原为$\mathbf{x}$​，与$A$​相反的线性变换就是<strong>逆矩阵</strong>$A^{-1}$​。比如$A$​是逆时针旋转90°，那么$A^{-1}$​就是顺时针旋转90°：</p>
+<p>两个矩阵相乘即为两次线性变换，逆时针旋转90°后再顺时针旋转90°，当然是没有变换，$\begin{bmatrix}0 &amp; -1\1 &amp; 0\end{bmatrix} \begin{bmatrix}0 &amp; 1\ -1 &amp; 0\end{bmatrix}&#x3D;\begin{bmatrix}1 &amp; 0\ 0 &amp; 1\end{bmatrix}$<br>因此要解出$\mathbf{x}$，只需要一次相反的线性变换$A^{-1}\mathbf{b}&#x3D;\begin{bmatrix}0&amp;1\-1&amp;0\end{bmatrix} \begin{bmatrix}-2\ 2\end{bmatrix}&#x3D;\begin{bmatrix}2\ 2\end{bmatrix}$。<br>若是方程无解呢？方程无解意味着矩阵$A$​找不到相反的线性变换，比如说：</p>
+<p>线性变换后空间少了个维度，无法从低维的空间线性变换回高维的空间，故不存在逆矩阵，因此每个线性变换后的向量再也回不去了，方程无解。再推广一下，秩是矩阵列空间的维数，那么从几何上理解，秩就是线性变换后空间的维度，故一个满秩矩阵是可逆的。</p>
+<h3 id="非方阵"><a href="#非方阵" class="headerlink" title="非方阵"></a>非方阵</h3><p>给定一个矩阵$m\times n$​，当这个矩阵与$n$​维向量做乘法时，表示将该向量从$n$​维空间映射$m$​维空间。下面分别讨论当$n&gt;m$​或 $m&gt;n$的情况。</p>
+<p>例如$n&gt;m$时$\begin{bmatrix}1&amp;0&amp;-2\-1&amp;2&amp;-5\end{bmatrix}$​​，列空间的维数为3，拥有三个基向量，如下图所示：</p>
+<p>当它与一个三维向量做矩阵乘法时，会得到一个二维向量，相当于是做了一次降维，将三维向量投影到二维上、将空间上的一个向量投影到这三个向量所在的平面上，例如：</p>
+<p>$$ \begin{bmatrix}1&amp;0&amp;-2\-1&amp;2&amp;-5\end{bmatrix}\begin{bmatrix}1 \ 2 \ 3 \end{bmatrix}&#x3D;\begin{bmatrix}-5 \ -12\end{bmatrix} $$​</p>
+<p>特别地，如果是一维的情况，例如$\begin{bmatrix}1&amp;-5\end{bmatrix}$​，就相当于是一条直线上的两个点，如图：</p>
+<p>通过矩阵相乘来做降维是机器学习中常用的手法，例如<a target="_blank" rel="noopener" href="https://render.githubusercontent.com/view/%E3%80%8A%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%E3%80%8B%E7%AC%94%E8%AE%B020.%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90%E6%B3%95.ipynb">主成分分析法</a>。<br>当一个矩阵$m&gt;n$​​时，例如$\begin{bmatrix}1&amp;2\0&amp;-4\3&amp;-1\end{bmatrix}$​​，从几何上理解，即从三维空间取两个向量构成了一个平面，该平面与平面中的一个向量做乘法得到一个三维的向量，相当于是做了升维，将平面中的的向量投影到空间中，例如：</p>
+<p>$$ \begin{bmatrix}1&amp;2\0&amp;-4\3&amp;-1\end{bmatrix}\begin{bmatrix}5 \ 6 \end{bmatrix}&#x3D;\begin{bmatrix}17\ -24\ 9\end{bmatrix}$$</p>
+<p>从矩阵方程$A\mathbf{x}&#x3D;\mathbf{b}$​​的角度，若$n&gt;m$，未知量数目大于方程数，方程要从一个低维的向量逆变换为一个高维的向量，要么无解，要么无穷多解；若$m&gt;n$方程数大于未知量数，方程要从一个高维向量逆变换回一个低维向量，要么无解，要么一个解。</p>
+<h3 id="坐标系"><a href="#坐标系" class="headerlink" title="坐标系"></a>坐标系</h3><p><strong>将矩阵乘法看成是一个函数，它的输入是一个视角下的坐标，输出是另一个视角下的坐标</strong></p>
+<p>向量空间$V$​，明确指定一个基$\cal{B}$​的一个重要原因是在$V$​上强加一个坐标系。<br>一个向量的在不同的坐标系下有不同的坐标，描述一个坐标系最好的手段就是基。我们以$\Bbb{R}^{2}$​为例，基$\begin{bmatrix}1&amp;0\ 0&amp;1\end{bmatrix}$​,$\begin{bmatrix}2&amp;0\ 0&amp;2\end{bmatrix}$​,$\begin{bmatrix}2&amp;-2\ 0&amp;2\end{bmatrix}$​，它们所表示的坐标系分别如下图所示，为了便于观察基向量的位置，图中还保留了横轴与竖轴，希望大家在看图的同时把它想象成是一个动图（坐标系在伸缩旋转)：</p>
+<p>假设$\cal{B}&#x3D;{\mathbf{b}<em>{1},\cdots,\mathbf{b}</em>{n}}$是$V$的一个基，$\mathbf{x}$在$V$中，$\mathbf{x}$相对于基$\cal{B}$的坐标是使得$\mathbf{x}&#x3D;c_{1}\mathbf{b}<em>{1}+\cdots+c</em>{n}\mathbf{b}<em>{n}&#x3D;[\mathbf{b}</em>{1} \cdots \mathbf{b}<em>{n}]\begin{bmatrix}c</em>{1}\\vdots\c_{n}\end{bmatrix}$的权$c_{1},\cdots,c_{n}$，故$\Bbb{R}^{n}$中的向量：</p>
+<p>​																	$$[\mathbf{x}]<em>{\cal{B}}&#x3D;\begin{bmatrix}c</em>{1}\\vdots\c_{n}\end{bmatrix}$$</p>
+<p>是$\mathbf{x}$的$\cal{B}$坐标向量，$\mathbf{x}\mapsto [\mathbf{x}]_{\cal{B}}$​称之为<strong>坐标映射</strong></p>
+<p>从几何上解释，虽然是同一个向量，但是在不同的坐标系下所观察的“视角”不同，因而有不同的坐标。因为不同的基要去表示同一个向量所需的基向量的伸缩都是不同的。我们以向量$\begin{bmatrix}2\2\end{bmatrix}$​为例，观察它在不同的坐标系下的差异。</p>
+<p>通过上述例子，我们可以得到关于$[\mathbf{x}]<em>{\cal{B}},\cal{B}&#x3D;{\mathbf{b}</em>{1},\cdots,\mathbf{b}<em>{n}},\mathbf{x}$三者的关系，令$P</em>{\cal{B}}&#x3D;[\mathbf{b}<em>{1} \cdots \mathbf{b}</em>{n}]$，我们可以写成：</p>
+<p>​																					$$\mathbf{x}&#x3D;P_{\cal{B}}[\mathbf{x}]<em>{\cal{B}}, P</em>{\cal{B}}^{-1}\mathbf{x}&#x3D;[\mathbf{x}]_{\cal{B}}$$</p>
+<p>式子说明，<strong>将矩阵乘法看成是一个函数，它的输入矩阵代表的坐标系下的坐标，输出是我们的视角下的坐标；逆矩阵则相反</strong>。同样的向量，在不同的坐标系下具有不同的坐标，而矩阵相乘，就是将不同视角之间的坐标转换的函数。</p>
+<h2 id="-1"><a href="#-1" class="headerlink" title=""></a></h2><h1 id="第六章-特征值与特征向量"><a href="#第六章-特征值与特征向量" class="headerlink" title="第六章 特征值与特征向量"></a><strong>第六章 特征值与特征向量</strong></h1><h2 id="特征值和特征向量"><a href="#特征值和特征向量" class="headerlink" title="特征值和特征向量"></a><strong>特征值和特征向量</strong></h2><p>假设$A$​为$n\times n$​矩阵，$\mathbf{x}$​为非零向量，若存在数$\lambda$​使$A\mathbf{x}&#x3D;\lambda \mathbf{x}$​有非平凡解$\mathbf{x}$​，则称$\lambda$​为$A$​的<strong>特征值</strong>（可以为零），$\mathbf{x}$​称为对应于$\lambda$​的<strong>特征向量</strong>（非零）。</p>
+<p>若$\lambda$为矩阵$A$的特征值，那么方程：</p>
+<p>$$(A-\lambda I)\mathbf{x}&#x3D;\mathbf{0}$$</p>
+<p>中所有解的集合（$A-\lambda I$的零空间）称为$A$的对应于$\lambda$​的<strong>特征空间</strong>。 </p>
+<p>直观地，设$A&#x3D;\begin{bmatrix}1 &amp; 6\5 &amp; 2\end{bmatrix}$,$\mathbf{u}&#x3D;\begin{bmatrix}6\-5\end{bmatrix} $,$\mathbf{v}&#x3D;\begin{bmatrix}3\-2\end{bmatrix}$，计算有：</p>
+<p>$$<br>A\mathbf{u}&#x3D;\begin{bmatrix}-24\20\end{bmatrix}&#x3D;-4\begin{bmatrix}6\<br>-5<br>\end{bmatrix}&#x3D;4\mathbf{u},A\mathbf{v}&#x3D;\begin{bmatrix}-9\<br>11<br>\end{bmatrix}\neq \lambda\begin{bmatrix}3\<br>-2\end{bmatrix}<br>$$</p>
+<p>因此$\mathbf{u}$​是特征值-4对应的特征向量，但$\mathbf{v}$​不是$A$​的特征向量。</p>
+<p>我们考虑特征值为零的情况，当矩阵$A$有零特征值时，方程：</p>
+<p>$$A\mathbf{x}&#x3D;\mathbf{0}\mathbf{x}$$</p>
+<p>有非平凡解，说明矩阵$A$不可逆，因此可以下一个结论：<strong>0是矩阵$A$的特征值当且仅当$A$不可逆</strong>。  </p>
+<h3 id="特征方程求特征根"><a href="#特征方程求特征根" class="headerlink" title="特征方程求特征根"></a>特征方程求特征根</h3><p>给定一个$n\times n$的矩阵$A$，如何求特征值和对应的特征向量？  </p>
+<p>特征值$\lambda$需满足方程$A\mathbf{x}&#x3D;\lambda \mathbf{x}$中的$\mathbf{x}$有解存在，也即方程：</p>
+<p>$$(A-\lambda I)\mathbf{x}&#x3D;\mathbf{0}$$</p>
+<p>有非零解存在，根据可逆矩阵定理，若矩阵$A-\lambda I$线性无关，则方程只有零解，因此要使方程有解，矩阵$A-\lambda I$不可逆，也即行列式$|A-\lambda I|$等于0。  </p>
+<p>引出定理：数$\lambda$是$n\times n$矩阵$A$的特征值的充要条件为$\lambda$是<strong>特征方程</strong>$|A-\lambda I|&#x3D;0$​的根。</p>
+<p>举例如下：</p>
+<p>可以发现<strong>特征方程</strong>$|A-\lambda I|&#x3D;0$是关于$\lambda$的的多项式，也称之为$\lambda$​的特征多项式。  </p>
+<p>还可以应用<a href="%E3%80%8A%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%E3%80%8B%E7%AC%94%E8%AE%B017.%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3-QR%E5%88%86%E8%A7%A3.ipynb">QR分解</a>来求矩阵的特征值。</p>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p>下面通过一个例子来说明特征值和特征向量的作用：</p>
+<h3 id="几何意义"><a href="#几何意义" class="headerlink" title="几何意义"></a>几何意义</h3><p>矩阵是一次<a href="%E3%80%8A%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%E3%80%8B%E7%AC%94%E8%AE%B008.%E7%9F%A9%E9%98%B5%E7%9A%84%E5%87%A0%E4%BD%95%E8%A7%A3%E9%87%8A-%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2.ipynb">线性变换</a>，</p>
+<p>那么特征向量就是在线性变换前后、只做了伸缩未改变方向的向量，</p>
+<p>而特征值就是伸缩的比例，当特征值为负表明特征向量被反向拉伸。</p>
+<h2 id="相似矩阵"><a href="#相似矩阵" class="headerlink" title="相似矩阵"></a><strong>相似矩阵</strong></h2><p>假设$A,B$是$n\times n$矩阵，如果存在可逆矩阵$P$使得$P^{-1}AP&#x3D;B$，或等价地$A&#x3D;PBP^{-1}$，则称$A$<strong>相似</strong>于$B$。把$A$变成$P^{-1}AP$的变换称为<strong>相似变换</strong></p>
+<p>若$n\times n$矩阵$A,B$是相似的，那么它们有相同的特征多项式，从而有相同的特征值。<br>结合回<a href="%E3%80%8A%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%E3%80%8B%E7%AC%94%E8%AE%B008.%E7%9F%A9%E9%98%B5%E7%9A%84%E5%87%A0%E4%BD%95%E8%A7%A3%E9%87%8A-%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2.ipynb">线性变换</a>和<a href="%E3%80%8A%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%E3%80%8B%E7%AC%94%E8%AE%B009.%E7%9F%A9%E9%98%B5%E7%9A%84%E5%87%A0%E4%BD%95%E8%A7%A3%E9%87%8A-%E5%9D%90%E6%A0%87%E7%B3%BB.ipynb">坐标系</a>的内容，我们来思索为什么$P^{-1}AP&#x3D;B$称$A,B$相似。  </p>
+<p>我们知道矩阵可以代表一种线性变换，也能代表一个坐标系。在我们的视角下作一次线性变换很简单，只需要记录基向量变换后的位置即可，例如下图所示做了一次逆时针旋转90°：</p>
+<p>但是如果是在别的视角下的呢？我们希望在$\begin{bmatrix}2 &amp; -2\ 0 &amp; 2\end{bmatrix}$的视角下做逆时针旋转90°，如下图所示：</p>
+<p>做法和之前<a href="%E3%80%8A%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%E3%80%8B%E7%AC%94%E8%AE%B008.%E7%9F%A9%E9%98%B5%E7%9A%84%E5%87%A0%E4%BD%95%E8%A7%A3%E9%87%8A-%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2.ipynb">线性变换</a>是相同的，只是我们很难从$\begin{bmatrix}2 &amp; -2\ 0 &amp; 2\end{bmatrix}$的视角下去观察逆时针旋转90°后所处的坐标，我们需要通过矩阵相乘转换成我们的视角下。  </p>
+<p>比如$\begin{bmatrix}2 &amp; -2\ 0 &amp; 2\end{bmatrix}$视角下有个向量$\begin{bmatrix}x\y\end{bmatrix}$，我们希望得到它经过逆时针90°旋转后的坐标。先将其转换成我们的视角下：</p>
+<p>接着在我们的视角下作一次逆时针旋转90°：</p>
+<p>最后是乘以逆矩阵还原回原来的视角：</p>
+<p>由此可以看出$A&#x3D;\begin{bmatrix}2 &amp; -2\ 0 &amp; 2\end{bmatrix}^{-1}\begin{bmatrix}0 &amp; -1\<br>1 &amp; 0<br>\end{bmatrix}\begin{bmatrix}2 &amp; -2\<br>0 &amp; 2<br>\end{bmatrix}$其实就是在$\begin{bmatrix}2 &amp; -2\ 0 &amp; 2\end{bmatrix}$的视角下做$\begin{bmatrix}0 &amp; -1\1 &amp; 0\end{bmatrix}$变换，故$A$与$B&#x3D;\begin{bmatrix}0 &amp; -1\1 &amp; 0\end{bmatrix}$可以说是相似的，因为他们都其实是逆时针旋转90°，只是一个在我们的视角下，一个是在$\begin{bmatrix}2 &amp; -2\ 0 &amp; 2\end{bmatrix}$的视角下。  </p>
+<p>这也能解释为什么相似矩阵具有相同的特征值，因为本质上都是同一种变换。  </p>
+<h2 id="对角化"><a href="#对角化" class="headerlink" title="对角化"></a>对角化</h2><p>如果方阵$A$相似于对角矩阵，即存在可逆矩阵$P$和对角矩阵$D$，有$A&#x3D;PDP^{-1}$，则称$A$可<strong>对角化</strong>。  </p>
+<p><strong>对角化定理</strong>：$n\times n$矩阵$A$可对角化的充要条件是$A$有$n$个线性无关的特征向量，这$n$个特征向量我们称之为<strong>特征向量基</strong>。若$A$可对角化，则$P$的列向量是$A$的$n$个线性无关的特征向量，此时$D$的主对角线上元素是$A$的对应于$P$​中特征向量的特征值，证：</p>
+<h3 id="矩阵对角化流程"><a href="#矩阵对角化流程" class="headerlink" title="矩阵对角化流程"></a>矩阵对角化流程</h3><p>下面通过一个例子来说明如何对一个矩阵对角化。流程如下：</p>
+<h3 id="矩阵对角化与幂"><a href="#矩阵对角化与幂" class="headerlink" title="矩阵对角化与幂"></a>矩阵对角化与幂</h3><p>矩阵对角化相当于是矩阵分解，它最大的作用是求矩阵的幂运算。推导：</p>
+<p>而对角矩阵的幂运算又非常简单，例如：</p>
+<h2 id="实对称矩阵"><a href="#实对称矩阵" class="headerlink" title="实对称矩阵"></a><strong>实对称矩阵</strong></h2><h2 id="内积与范数"><a href="#内积与范数" class="headerlink" title="内积与范数"></a>内积与范数</h2><h3 id="内积"><a href="#内积" class="headerlink" title="内积"></a>内积</h3><p>假设$\mathbf{u},\mathbf{v}$是$\Bbb{R}^{n}$中的向量，则称$\mathbf{u}\cdot \mathbf{v}$为$\mathbf{u}$和$\mathbf{v}$的<strong>内积</strong>，计算如下：</p>
+<p>$$\mathbf{u}\cdot\mathbf{v}&#x3D;\mathbf{u}^{T}\mathbf{v}&#x3D;[u_{1}\cdots u_{n}]\begin{bmatrix}<br>v_{1}\<br>\vdots\<br>v_{n}<br>\end{bmatrix}&#x3D;u_{1}v_{1}+\cdots+u_{n}v_{n}$$​</p>
+<p>内积具有如下性质，其中$\mathbf{u},\mathbf{v},\mathbf{w}$是$\Bbb{R}^{n}$中的向量，$c$​是一个数：</p>
+<p>内积也可以写成如下形式，其中$\theta$为$\mathbf{u},\mathbf{v}$向量之间的夹角：$\mathbf{u}\cdot \mathbf{v}&#x3D;\Vert\mathbf{u}\Vert\Vert\mathbf{v}\Vert cos\theta$。<br>这也是内积的几何意义，即$\mathbf{u}$投影到$\mathbf{v}$的长度乘以$\mathbf{v}$​的长度：</p>
+<h3 id="范数"><a href="#范数" class="headerlink" title="范数"></a>范数</h3><p>各种范数如下：</p>
+<ul>
+<li><strong>向量的0-范数</strong>：向量的非零元素个数，记作$\Vert\mathbf{x}\Vert_{0}$，可理解为$\mathbf{x}$到原点的汉明距离。</li>
+<li><strong>向量的1-范数</strong>：向量的元素绝对值之和，记作$\Vert\mathbf{x}\Vert_{1}&#x3D;\sum_{i&#x3D;1}^n|x_{i}|$，可理解为$\mathbf{x}$到原点的曼哈顿距离。</li>
+<li><strong>向量的2-范数（向量的长度&#x2F;范数）</strong>：向量的元素平方和再开方，恰好为与自身的内积再开方，即$\Vert\mathbf{x}\Vert&#x3D;\sqrt{\mathbf{x}\cdot\mathbf{x}}&#x3D;\sqrt{x_{1}^{2}+\cdots+x_{n}^{2}}$，$\Vert\mathbf{x}\Vert^{2}&#x3D;\mathbf{x}\cdot\mathbf{x}$，可理解为$\mathbf{x}$到原点的欧式距离。</li>
+<li><strong>向量的p-范数</strong>：向量元素绝对值的p次方和的1&#x2F;p次幂，记作$\Vert\mathbf{x}\Vert_{p}&#x3D;(\sum_{i&#x3D;1}^n|x_{i}|^{p})^{\frac{1}{p}}$</li>
+<li><strong>矩阵的1-范数</strong>：返回矩阵的每个列向量的1-范数中的最大值。</li>
+<li><strong>矩阵的2-范数</strong>：$\Vert X\Vert_{2}&#x3D;\sqrt{\lambda_{1}}$，其中$\lambda_{1}$为$X^{T}X$的最大特征值。</li>
+</ul>
+<p>对任意数$c$，向量$c\mathbf{x}$的长度等于$\Vert c\mathbf{x}\Vert&#x3D;|c|\Vert\mathbf{x}\Vert$。  </p>
+<p>长度为1的向量我们称之为<strong>单位向量</strong>，单位化是指将向量$\mathbf{u}$化为单位向量$\mathbf{v}$的过程，即$\mathbf{v}&#x3D;\mathbf{u}&#x2F;\Vert\mathbf{u}\Vert$，其中$\mathbf{u},\mathbf{v}$方向一致。  </p>
+<p><strong>两个向量之间的距离</strong>：$\Bbb{R}^{n}$中两个向量$\mathbf{u},\mathbf{v}$之间的距离记作$dist(\mathbf{u},\mathbf{v})$，表示向量$\mathbf{u}-\mathbf{v}$的长度，即$dist(\mathbf{u},\mathbf{v})&#x3D;\Vert\mathbf{u}-\mathbf{v}\Vert$​；可推广计算：</p>
+<p>即满足平方差定理。</p>
+<h2 id="正交与正交基"><a href="#正交与正交基" class="headerlink" title="正交与正交基"></a>正交与正交基</h2><h3 id="正交"><a href="#正交" class="headerlink" title="正交"></a>正交</h3><p>考虑$\Bbb{R}^{2}$或$\Bbb{R}^{3}$中通过原点且由向量$\mathbf{u},\mathbf{v}$确定的两条直线，两条直线几何上垂直当且仅当$dist(\mathbf{u},\mathbf{v})&#x3D;dist(\mathbf{u},-\mathbf{v})$，如下图所示：</p>
+<p>推导得</p>
+<p> $[dist(\vec{v},\vec{u})]&#x3D;\left |\vec{v}-\vec{u}  \right |^2 &#x3D; \left |\vec{v}  \right |^2 + \left |\vec{u}\right |^2-2\vec{v} \cdot \vec{u}$​</p>
+<p> $[dist(\vec{v},\vec{-u})]&#x3D;\left |\vec{v}+\vec{u}  \right |^2 &#x3D; \left |\vec{v}  \right |^2 + \left |\vec{u}\right |^2+2\vec{v} \cdot \vec{u}$</p>
+<p>得出结论：$\Bbb{R}^{n}$中两个向量$\mathbf{u},\mathbf{v}$相互<strong>正交</strong>（垂直）的充要条件是$\mathbf{u}\cdot\mathbf{v}&#x3D;0$。零向量与任何向量都正交。  </p>
+<p><strong>勾股定理</strong>：两个向量正交的充要条件是</p>
+<p>$\Vert\mathbf{u}+\mathbf{v}\Vert^{2}&#x3D;\Vert\mathbf{u}\Vert^{2}+\Vert\mathbf{v}\Vert^{2}$，如下图所示：</p>
+<h3 id="正交补"><a href="#正交补" class="headerlink" title="正交补"></a>正交补</h3><p>如果向量$\mathbf{z}$与$\Bbb{R}^{n}$的子空间$W$中的任意向量都正交，则称$\mathbf{z}$正交于$W$；与$W$正交的全体向量的集合称为$W$的<strong>正交补</strong>$W^{\bot}$。向量$\mathbf{x}$属于$W^{\bot}$的充要条件是向量$\mathbf{x}$与生成空间$W$的任一向量正交。</p>
+<p>假设$A$是$m\times n$矩阵，那么$A$的行空间的正交补是$A$的零空间，且$A$的列空间的正交补是$A^{T}$的零空间（因为零空间的每个向量与$A$的每个行向量正交）：</p>
+<h3 id="正交基"><a href="#正交基" class="headerlink" title="正交基"></a>正交基</h3><p><strong>正交集</strong>：如果$\Bbb{R}^{n}$中的向量集合${\mathbf{u}<em>{1},\cdots,\mathbf{u}</em>{n}}$中任意两个不同向量都正交，则被称之为正交集。  </p>
+<p><strong>正交基</strong>：如果$S&#x3D;{\mathbf{u}<em>{1},\cdots,\mathbf{u}</em>{n}}$是由$\Bbb{R}^{n}$中非零向量构成的正交集，那么$S$是线性无关集，因此构成$S$所生成的一组正交基。  </p>
+<p><strong>单位正交集</strong>：由单位向量构成的正交集集合${\mathbf{u}<em>{1},\cdots,\mathbf{u}</em>{p}}$称之为单位正交集。如果$W$是一个由单位正交集生成的子空间，那么${\mathbf{u}<em>{1},\cdots,\mathbf{u}</em>{p}}$是$W$的单位正交基或标准正交基。  </p>
+<p>正交基相较于其他基更有优越性，更易计算线性组合中的权。  </p>
+<p>假设${\mathbf{u}<em>{1},\cdots,\mathbf{u}</em>{p}}$是$\Bbb{R}^{n}$中子空间$W$的正交基，对$W$中的每个向量$\mathbf{y}$，线性组合：<br>$$\mathbf{y}&#x3D;c_{1}\mathbf{u}<em>{1}+\cdots+c</em>{p}\mathbf{u}<em>{p}$$<br>中的权可以由$c</em>{j}&#x3D;\frac{\mathbf{y}\cdot\mathbf{u}<em>{j}}{\mathbf{u}</em>{j}\cdot\mathbf{u}<em>{j}}(j&#x3D;1,\cdots,p)$计算，所以有：<br>$$\mathbf{y}&#x3D;\frac{\mathbf{y}\cdot\mathbf{u}</em>{1}}{\mathbf{u}<em>{1}\cdot\mathbf{u}</em>{1}}\mathbf{u}<em>{1}+\cdots+\frac{\mathbf{y}\cdot\mathbf{u}</em>{p}}{\mathbf{u}<em>{p}\cdot\mathbf{u}</em>{p}}\mathbf{u}_{p}$$</p>
+<p>证明如下：</p>
+<h2 id="正交分解定理"><a href="#正交分解定理" class="headerlink" title="正交分解定理"></a>正交分解定理</h2><p>若$W$是$\Bbb{R}^{n}$的一个子空间，那么$\Bbb{R}^{n}$中的每一个向量$\mathbf{y}$可以唯一地表示为：</p>
+<p>$$\mathbf{y}&#x3D;\hat{\mathbf{y}}+\mathbf{z}$$</p>
+<p>其中$\hat{\mathbf{y}}$属于$W$而$\mathbf{z}$属于$W^{\bot}$，实际上，如果${\mathbf{u}<em>{1},\cdots,\mathbf{u}</em>{p}}$是$W$的任意正交基，那么：</p>
+<p>$$\hat{\mathbf{y}}&#x3D;\frac{\mathbf{y}\cdot\mathbf{u}<em>{1}}{\mathbf{u}</em>{1}\cdot\mathbf{u}<em>{1}}\mathbf{u}</em>{1}+\cdots+\frac{\mathbf{y}\cdot\mathbf{u}<em>{p}}{\mathbf{u}</em>{p}\cdot\mathbf{u}<em>{p}}\mathbf{u}</em>{p}$$</p>
+<p>且$\mathbf{z}&#x3D;\mathbf{y}-\hat{\mathbf{y}}$。$\hat{\mathbf{y}}$称为$\mathbf{y}$在$W$上的正交投影，记作$proj_{W}\mathbf{y}$，如下图所示：</p>
+<h2 id="最佳逼近定理"><a href="#最佳逼近定理" class="headerlink" title="最佳逼近定理"></a>最佳逼近定理</h2><p>假设$W$是$\Bbb{R}^{n}$的一个子空间，$\mathbf{y}$是$\Bbb{R}^{n}$中的任意向量，$\hat{\mathbf{y}}$是$\mathbf{y}$在$W$上的正交投影，那么$\hat{\mathbf{y}}$是$W$中最接近$\mathbf{y}$的点，也就是：</p>
+<p>$$\Vert\mathbf{y}-\hat{\mathbf{y}}\Vert&lt;\Vert\mathbf{y}-\mathbf{v}\Vert$$</p>
+<p>对所有属于$W$又异于$\hat{\mathbf{y}}$的$\mathbf{v}$成立。可理解为向量$\hat{\mathbf{y}}$为$W$中元素对$\mathbf{y}$​的<strong>最佳逼近</strong>。  </p>
+<h2 id="正交矩阵"><a href="#正交矩阵" class="headerlink" title="正交矩阵"></a>正交矩阵</h2><p>各列构成单位正交集的矩阵在应用和用矩阵计算的计算机算法中都非常重要，这样的矩阵我们也称之为<strong>正交矩阵</strong>。  </p>
+<p><strong>定理</strong>：一个$m\times n$矩阵$U$具有单位正交列向量的充要条件是$U^{T}U&#x3D;I$。证明如下：</p>
+<p>易知，如果一个正交矩阵$U$可逆（具有单位正交列的方阵），则它的逆矩阵为$U^{T}$​，例如：<br>$$<br>U&#x3D;\begin{bmatrix}<br>   0 &amp; 1 &amp; 0\<br>   1 &amp; 0 &amp; 0\<br>   0 &amp; 0 &amp; 1<br>  \end{bmatrix}<br>  , U^{T}&#x3D;<br>\begin{bmatrix}<br>   0 &amp; 1 &amp; 0\<br>   0 &amp; 0 &amp; 1\<br>   1 &amp; 0 &amp; 0<br>  \end{bmatrix}<br>$$<br><strong>定理</strong>：如果${\mathbf{u}<em>{1},\cdots,\mathbf{u}</em>{p}}$是$\Bbb{R}_{n}$中子空间$W$的单位正交基，那么：</p>
+<p>$$proj_{W}\mathbf{y}&#x3D;\frac{\mathbf{y}\cdot\mathbf{u}<em>{1}}{\mathbf{u}</em>{1}\cdot\mathbf{u}<em>{1}}\mathbf{u}</em>{1}+\cdots+\frac{\mathbf{y}\cdot\mathbf{u}<em>{p}}{\mathbf{u}</em>{p}\cdot\mathbf{u}<em>{p}}\mathbf{u}</em>{p}&#x3D;(\mathbf{y}\cdot\mathbf{u}<em>{1})\mathbf{u}</em>{1}+\cdots+(\mathbf{y}\cdot\mathbf{u}<em>{p})\mathbf{u}</em>{p}$$</p>
+<p>如果$U&#x3D;[\mathbf{u}<em>{1} \cdots \mathbf{u}</em>{p}]$，则：</p>
+<p>$$proj_{W}\mathbf{y}&#x3D;UU^{T}\mathbf{y}$$​  </p>
+<p>该定理说明了一个空间的单位正交基的优越性，可以很简单地表达出任意向量在该空间的正交投影。  </p>
+<h2 id="格拉姆-施密特方法"><a href="#格拉姆-施密特方法" class="headerlink" title="格拉姆-施密特方法"></a>格拉姆-施密特方法</h2><p>我们说明了正交矩阵、单位正交基的种种好处，而<strong>格拉姆-施密特方法</strong>是对$\Bbb{R}<em>{n}$中任何非零子空间构造正交基或标准正交基的简单算法，该算法基于<a href="%E3%80%8A%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%E3%80%8B%E7%AC%94%E8%AE%B014.%E6%AD%A3%E4%BA%A4%E5%88%86%E8%A7%A3%E5%AE%9A%E7%90%86%E4%B8%8E%E6%9C%80%E4%BD%B3%E9%80%BC%E8%BF%91%E5%AE%9A%E7%90%86.ipynb">正交分解定理</a>，逐个使基向量$\mathbf{x}</em>{k}$分解为正交于前$k$个基向量的向量。对$\Bbb{R}^{n}$的子空间$W$的一个基${\mathbf{x}<em>{1},\cdots,\mathbf{x}</em>{p}}$，其中$proj_{W_{k}}\mathbf{x}<em>{k+1}$表示$\mathbf{x}</em>{k+1}$在$Span{\mathbf{x}<em>{1},\cdots,\mathbf{x}</em>{k}}$​的正交投影，算法过程为：</p>
+<p>那么得到的向量集合${\mathbf{v}<em>{1},\cdots,\mathbf{v}</em>{p}}$是$W$的一个正交基，此外$Span{\mathbf{v}<em>{1},\cdots,\mathbf{v}</em>{k}}&#x3D;Span{\mathbf{x}<em>{1},\cdots,\mathbf{x}</em>{k}}$,其中$1\leq k\leq p$。举一个简单的小例子：</p>
+<h2 id="矩阵分解"><a href="#矩阵分解" class="headerlink" title="矩阵分解"></a>矩阵分解</h2><h3 id="LU分解"><a href="#LU分解" class="headerlink" title="LU分解"></a>LU分解</h3><p>分解要求：矩阵各列线性无关。</p>
+<p>矩阵的因式分解是把A表示为两个或更多矩阵的乘积，矩阵乘法是数据的综合（把两个或更多线性变换的作用结合成一个矩阵），矩阵的因式分解是数据的分解，把数据组成两个或者更多，这种结构可能更有用，或者更便于计算。  </p>
+<p>在工业与商业问题中，$LU$​分解是常见的一种矩阵因式分解算法，用途在于解一系列具有相同系数矩阵中的线性方程：</p>
+<p>$A\vec{x}&#x3D;\vec{b_{1}} \A\vec{x}&#x3D;\vec{b_{2}} \ …\A\vec{x}&#x3D;\vec{b_{p}}$</p>
+<p>我们假设$m\times n$矩阵$A$可以行化简为阶梯型矩阵而<strong>不必进行行变换</strong>（可对比$LUP$分解），则$A$可以写成形式$A&#x3D;LU$，$L$是$m\times n$下三角矩阵（可逆），主对角线元素全是1；$U$是$A$的一个等价的$m\times n$​​阶梯型矩阵，如下图所示：</p>
+<p>$A&#x3D;\begin{bmatrix}<br>   1 &amp; 0 &amp; 0 &amp;0\<br>   “*” &amp; 1 &amp; 0&amp;0\<br>   0 &amp; 0 &amp; 1<br>  \end{bmatrix}$​​​</p>
+<p>通过$LU$分解求解$A\mathbf{x}&#x3D;\mathbf{b}$可以写成$LU\mathbf{x}&#x3D;\mathbf{b}$，可变换成解下列方程来求解$\mathbf{x}$：</p>
+<p>先解(1)再(2)，因为$L,U$都是三角矩阵，因此很容易计算。  </p>
+<h4 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h4><ol>
+<li>矩阵$A$经过一系列初等行变换变成阶梯型矩阵，即$U$;</li>
+<li>换过程在每个主元列，把主元以下的元素除以主元即为$L$​在该列主元以下的元素。</li>
+</ol>
+<h4 id="算法性能分析"><a href="#算法性能分析" class="headerlink" title="算法性能分析"></a>算法性能分析</h4><p>下列运算次数的计算适用于$n\times n$稠密矩阵$A$（大部分元素非零），$n$相当大，例如$n\geq 30$。</p>
+<ol>
+<li>计算$A$的$LU$分解大约需要$2n^{3}&#x2F;3$浮算，而求$A^{-1}$大约需要$2n^{3}$浮算。</li>
+<li>解$L\mathbf{y}&#x3D;\mathbf{b}$和$U\mathbf{x}&#x3D;\mathbf{y}$大约需要$2n^{3}$浮算，因为任意$n\times n$三角方程组可以用大约$n^{3}$浮算解出。</li>
+<li>把$\mathbf{b}$乘以$A^{-1}$也需要$2n^{3}$浮算，但结果可能不如$L$和$U$得出的精确(由于计算$A^{-1}$及$A^{-1}\mathbf{b}$的舍入误差)。</li>
+<li>若$A$是稀疏矩阵（大部分元素为0），则$L$和$U$可能也是稀疏的，然而$A^{-1}$很可能是稠密的，显然用$LU$分解来解$A\mathbf{x}&#x3D;\mathbf{b}$很可能比用$A^{-1}$快很多。</li>
+</ol>
+<h4 id="LUP分解"><a href="#LUP分解" class="headerlink" title="LUP分解"></a>LUP分解</h4><p>考虑下面一个矩阵的$LU$分解：</p>
+<p>$$A&#x3D;\begin{bmatrix}<br>   2 &amp; 4 &amp; -1\<br>   0 &amp; 0 &amp; 3\<br>   0 &amp; -5 &amp; -4<br>  \end{bmatrix}<br>$$<br>根据之前所述算法，先将矩阵$A$化为阶梯形矩阵，并在变换的过程中求出$L$。但是很明显，在这种情况下，会出现除数为0的情况，这当然是灾难性的。  </p>
+<p>除了除数为0外，还有除数很小的情况，这会产生数值不稳定，因此我们希望尽可能选一个较大的主元。所以有的时候我们必须在矩阵的非对角线元素中选主元。  </p>
+<p>我们先引入一个<strong>置换矩阵</strong>的概念，考虑下面两个矩阵的相乘：</p>
+<p>根据我们之前所学知识很容易解出来，求得：</p>
+<p>$$A&#x3D;\begin{bmatrix}<br>   2 &amp; 4 &amp; -1\<br>   0 &amp; -5 &amp; -4\<br>   0 &amp; 0 &amp; 3<br>  \end{bmatrix}<br>$$</p>
+<p>可以发现，矩阵$A$似乎没什么变化，只是行的位置改变了而已。我们把这样的矩阵称之为<strong>置换矩阵</strong>。置换矩阵是一种系数只由0和1组成的方阵。矩阵的每一行&#x2F;列的第$i$个元素为1，表示原矩阵的该行&#x2F;列为第$i$行&#x2F;列。具体置换的行or列取决于是左乘还是右乘：</p>
+<ul>
+<li>当矩阵$A$左乘一个置换矩阵，交换的是矩阵的行。即$P\cdot A$;</li>
+<li>当矩阵$A$右乘一个置换矩阵，交换的是矩阵的列。即$A\cdot P$.</li>
+</ul>
+<p>让我们回到$LUP$分解。借助这个置换矩阵，我们可以将矩阵$A$的行进行置换，每步重新选取较大的主元进行行替换。原来的$A&#x3D;LU$我们改写为$PA&#x3D;LU$，其中$P$是一个置换矩阵。该式子表示为先对$A$进行行置换，再对行置换后的$A$进行$LU$分解。  </p>
+<p>当我们要求解$A\mathbf{x}&#x3D;\mathbf{b}$，可做如下变换：</p>
+<p>于是问题可以变换为：</p>
+<p>求解到的$\mathbf{x}$就是$A\mathbf{x}&#x3D;\mathbf{b}$的解，证明如下：</p>
+<p>其实$LU$分解是$LUP$分解的一种，当$P&#x3D;I$时，$LUP$分解就成为$LU$分解。可以理解成是$A$矩阵不进行置换的情况下$LUP$分解就成为了$LU$分解。</p>
+<h4 id="应用-1"><a href="#应用-1" class="headerlink" title="应用"></a>应用</h4><p>利用好矩阵的因式分解，不只是在求解方程组，在求逆矩阵、最小二乘逼近方面也能大大提高效率。目前计算机在计算矩阵的逆都是采用$LU$​分解。</p>
+<p>在求逆矩阵时，我们可以有两种思路：</p>
+<p>通过$LUP$分解来求逆矩阵的过程中，分解的过程需要$O(n^{3})$，求解三角矩阵的过程需要$O(n^{2})$，避免了主元素为0的情况。可提高求解一系列具有相同系数矩阵中的线性方程的效率。  </p>
+<h3 id="QR分解"><a href="#QR分解" class="headerlink" title="QR分解"></a>QR分解</h3><h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>​        如果$m\times n$矩阵$A$的列线性无关，那么$A$可以分解为$A&#x3D;QR$，其中$Q$是一个$m\times n$矩阵，其列形成$ColA$的一个<a href="%E3%80%8A%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%E3%80%8B%E7%AC%94%E8%AE%B013.%E6%AD%A3%E4%BA%A4%E4%B8%8E%E6%AD%A3%E4%BA%A4%E5%9F%BA.ipynb">标准正交基</a>，$R$是一个$n\times n$上三角可逆矩阵且在对角线上的元素为正数。$QR$​​分解常用于求解<a href="%E3%80%8A%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%E3%80%8B%E7%AC%94%E8%AE%B010.%E7%89%B9%E5%BE%81%E5%80%BC%E5%92%8C%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F.ipynb">特征值</a>以及<a href="%E3%80%8A%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%E3%80%8B%E7%AC%94%E8%AE%B019.%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95.ipynb">最小二乘求解</a>。  </p>
+<p>对$m\times n$矩阵$A$做$QR$分解步骤如下：</p>
+<ul>
+<li>对$A$的列向量应用<a href="%E3%80%8A%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%E3%80%8B%E7%AC%94%E8%AE%B015.%E6%AD%A3%E4%BA%A4%E7%9F%A9%E9%98%B5%E4%B8%8E%E6%A0%BC%E6%8B%89%E5%A7%86-%E6%96%BD%E5%AF%86%E7%89%B9%E6%96%B9%E6%B3%95.ipynb">格拉姆-施密特方法</a>得到一组正交基，再单位化后得到单位正交基，单位正交基构成矩阵Q的列；</li>
+<li>可知$Q^{T}Q&#x3D;I$（正交矩阵的定理），所以有$Q^{T}A&#x3D;Q^{T}QR&#x3D;R$，因此计算$Q^{T}A$即可得到$R$​。</li>
+</ul>
+<h4 id="QR分解求特征值"><a href="#QR分解求特征值" class="headerlink" title="QR分解求特征值"></a>QR分解求特征值</h4><p>QR$分解被广泛地用来估计一般矩阵$A$的特征值。算法流程如下：  </p>
+<ol>
+<li>$A$被分解为$Q_{1},R_{1}$，计算$R_{1}Q_{1}$得到$A_{1}$；</li>
+<li>$A_{1}$被分解为$Q_{2},R_{2}$，计算$R_{2}Q_{2}$得到$A_{2}$；  </li>
+<li>以此类推，计算到第$k$次时，$A_{k}$几乎是上三角的，且对角线上单元素近似于$A$的特征值。</li>
+</ol>
+<p>可以简单地证明，$A$是相似于$A_k$的</p>
+<p>通过𝑄𝑅QR分解计算出来的矩阵除对角线外元素更趋于0；通过𝑄𝑅QR分解计算得到的矩阵对角线上元素均趋于特征值。</p>
+<h3 id="奇异值分解"><a href="#奇异值分解" class="headerlink" title="奇异值分解"></a>奇异值分解</h3><p>分解条件：条件最低，任何矩阵都有可能。</p>
+<h4 id="正交对角化"><a href="#正交对角化" class="headerlink" title="正交对角化"></a>正交对角化</h4><p><strong>对称矩阵</strong>是一个满足$A^{T}&#x3D;A$的矩阵$A$。自然地，对称矩阵是一个方阵。  </p>
+<p><strong>定理</strong>：如果$A$是对称矩阵，那么不同特征空间的任意两个特征向量是正交的。（补充：无论是不是对称矩阵，相异的特征值对应的特征向量组成的集合都是线性无关的）证：</p>
+<p>我们知道，<a href="%E3%80%8A%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%E3%80%8B%E7%AC%94%E8%AE%B011.%E7%9F%A9%E9%98%B5%E7%9B%B8%E4%BC%BC%E4%B8%8E%E5%AF%B9%E8%A7%92%E5%8C%96.ipynb">对角化</a>是对于一个方阵$A$，能找到$n$个线性无关的特征向量组成的矩阵$P$、特征值组成的对角矩阵$D$使得$A&#x3D;PDP^{-1}$。而当$P$为正交矩阵，则称上式为<strong>正交对角化</strong>。我们再引出<strong>定理</strong>：一个$n\times n$矩阵$A$可正交对角化的充要条件是$A$是对称矩阵。  </p>
+<h4 id="奇异值分解介绍"><a href="#奇异值分解介绍" class="headerlink" title="奇异值分解介绍"></a>奇异值分解介绍</h4><p>对角化在许多应用中都很重要，但是要对一个矩阵进行对角化，该矩阵必须是方阵。下面将介绍另一种矩阵分解：<strong>奇异值分解</strong>，该分解对任意$m\times n$矩阵$A$都有可能，是线性代数应用中最有用的矩阵分解，被用于求矩阵的秩、降维、压缩图像等。<br>$\quad$奇异值分解的形式如下：</p>
+<p>$$A&#x3D;U\varSigma V^{T}$$</p>
+<p>其中$U$为$m\times m$正交矩阵，$V$为$n\times n$正交矩阵，$U$的列称为$A$的左奇异向量，$V$的列称为$A$的右奇异向量；$\varSigma$为$m\times n$”对角矩阵“，$D$为一个$r\times r$对角矩阵，$\sigma_{1},\cdots,\sigma_{r}$为矩阵的$r$个奇异值，形式如下：</p>
+<h4 id="奇异值分解算法"><a href="#奇异值分解算法" class="headerlink" title="奇异值分解算法"></a>奇异值分解算法</h4><p>​		令矩阵$A$为$m\times n$矩阵，我们希望得到$A$的奇异值分解$A&#x3D;U\varSigma V^{T}$，接下来会从这个式子出发，逐步推出$U,\varSigma,V$​的求解方法以及之间的关系。  </p>
+<h5 id="结论一"><a href="#结论一" class="headerlink" title="结论一"></a>结论一</h5><p>我们计算$A^{T}A,AA^{T}$有：</p>
+<p>形式与对角化是一致，其中而对称矩阵是可以正交对角化的，为此可以下一个结论：$A^{T}A$以及$AA^{T}$的特征向量规范化（指化为单位正交基）后可构成$V$和$U$，特征值的非零项开方称之为<strong>奇异值</strong>，记作$\sigma_{i}$，奇异值构成$\varSigma$。</p>
+<h5 id="结论二"><a href="#结论二" class="headerlink" title="结论二"></a>结论二</h5><p>令${\mathbf{v}<em>{1},\cdots,\mathbf{v}</em>{n}}$是$\Bbb{R}^n$的单位正交基且构成$A^{T}A$的特征向量，$\lambda_{1},\cdots,\lambda_{n}$是$A^{T}A$对应的特征值，那么我们有:</p>
+<p>这里得到两个结论：  </p>
+<ul>
+<li>奇异值非负；</li>
+<li>${\mathbf{v}<em>{1},\cdots,\mathbf{v}</em>{n}}$为$A^{T}A$的特征向量，$A$的奇异值是向量$A\mathbf{v}<em>{1},\cdots,A\mathbf{v}</em>{n}$的长度.</li>
+</ul>
+<h5 id="结论三"><a href="#结论三" class="headerlink" title="结论三"></a>结论三</h5><p>我们对奇异值分解的式子变换如下：<br>$$AV&#x3D;U\varSigma$$<br>我们将其展开：</p>
+<p>是奇异值、原矩阵、左右奇异向量的关系，在我们通过结论一求出了奇异值、其中一个奇异向量时，可以直接求出另一个奇异向量。通过这些知识我们已经可以对A进行奇异值分解了。 </p>
+<h4 id="应用-2"><a href="#应用-2" class="headerlink" title="应用"></a>应用</h4><h5 id="矩阵求秩"><a href="#矩阵求秩" class="headerlink" title="矩阵求秩"></a>矩阵求秩</h5><p>计算机估计大矩阵$A$的<a href="%E3%80%8A%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%E3%80%8B%E7%AC%94%E8%AE%B007.%E7%BB%B4%E6%95%B0%E5%92%8C%E7%A7%A9.ipynb">秩</a>时，最可靠的方法就是计算非零奇异值的个数（特别小的非零奇异值在实际计算中假定为0），可参考MATLAB的rank源码。<br>$\quad$<strong>定理一</strong>：假若${\mathbf{v}<em>{1},\cdots,\mathbf{v}</em>{n}}$是包含$A^{T}A$的特征向量的$\Bbb{R}^{n}$上的单位正交基，重新整理使得对应的$A^{T}A$的特征值满足$\lambda_{1}\geq\cdots\geq\lambda_{n}$。假如$A$有$r$个非零奇异值，那么${A\mathbf{v}<em>{1},\cdots,A\mathbf{v}</em>{r}}$是$ColA$的一个正交基，且$rankA&#x3D;r$。<br>$\quad$定理一说明了，矩阵的奇异值的个数即为矩阵的秩。我们结合结论三得出定理二：<br>$\quad$<strong>定理二</strong>：给定$m\times n$矩阵$A$的一个奇异值分解，取$\mathbf{u}<em>{1},\cdots,\mathbf{u}</em>{m}$是左奇异向量，$\mathbf{v}<em>{1},\cdots,\mathbf{v}</em>{n}$是右奇异向量，且$\sigma_{1},\cdots,\sigma_{n}$是奇异值，$r$为$A$的秩；${\mathbf{u}<em>{1},\cdots,\mathbf{u}</em>{r}}$是$ColA$的一个单位正交基，${\mathbf{v}<em>{r+1},\cdots,\mathbf{v}</em>{n}}$是$NulA$的一个单位正交基，${\mathbf{v}<em>{1},\cdots,\mathbf{v}</em>{r}}$是$RowA$的一个单位正交基。<br>$\quad$上述的两条定理表明了奇异值个数、列空间、行空间、零空间之间的关系。举一个例子：</p>
+<h5 id="图像压缩"><a href="#图像压缩" class="headerlink" title="图像压缩"></a>图像压缩</h5><p>$\quad$我们知道一个图像其实就是一个矩阵，矩阵上每个元素都代表着像素。<br>$\quad$假设$A$为一个$m\times n$矩阵，对$A$做奇异值分解有：$A&#x3D;U\varSigma V^{T}$，我们展开计算有：</p>
+<p>其中$\sigma_{i}$按照从大到小排列，$\mathbf{u}<em>{i}\mathbf{v}</em>{i}^T$为一个秩一矩阵。我们知道，$r$个不同的秩一矩阵相加得到的矩阵秩为$r$，可得到两个结论：  </p>
+<ol>
+<li>$A$的奇异值个数为$A$的秩；</li>
+<li>每个奇异值可看作是一个秩一矩阵的权重。</li>
+</ol>
+<p>$\quad$奇异值一般数值间差异很大，我们可以取前$k$项来近似等于$A$从而压缩：</p>
+<h1 id="第七章-二次型"><a href="#第七章-二次型" class="headerlink" title="第七章 二次型"></a><strong>第七章 二次型</strong></h1><h2 id="二次型及矩阵表示"><a href="#二次型及矩阵表示" class="headerlink" title="二次型及矩阵表示"></a><strong>二次型及矩阵表示</strong></h2><h2 id="二次型的标准型"><a href="#二次型的标准型" class="headerlink" title="二次型的标准型"></a><strong>二次型的标准型</strong></h2><h2 id="二次型的正定"><a href="#二次型的正定" class="headerlink" title="二次型的正定"></a><strong>二次型的正定</strong></h2>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" class="print-no-link">#线性代数</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>数学基础之线性代数</div>
+      <div>http://example.com/2023/10/24/数学基础之线性代数/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Whlok</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年10月24日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
