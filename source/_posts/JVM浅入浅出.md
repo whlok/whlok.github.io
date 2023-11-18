@@ -1,9 +1,9 @@
 ---
-title: JVM浅入浅出
+title: JVM浅入深出
 date: 2023-10-24 23:30:01
 hide: true
-categories: Java
-tags: jvm
+categories: JVM
+tags:
 ---
 
 # 自动内存管理机制
