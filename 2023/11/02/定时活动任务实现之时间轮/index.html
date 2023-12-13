@@ -16,28 +16,21 @@
   <meta name="author" content="Whlok">
   <meta name="keywords" content="">
   
-    <meta name="description" content="自动内存管理机制Java运行时数据区域  程序计数器 当前线程所执行的字节码的行号指示器，字节码解释器工作时就是通过改变这个计数器的值来确定下一条要执行的字节码指令的位置 每条线程都需要有一个独立的程序计数器，各条线程之间计数器互不影响，独立存储，“线程私有”。 执行 Java 方法和 native 方法时的区别： 执行 Java 方法时：记录虚拟机正在执行的字节码指令地址； 执行 native">
-<meta property="og:type" content="article">
-<meta property="og:title" content="JVM浅入浅出">
-<meta property="og:url" content="http://example.com/2023/10/24/JVM%E6%B5%85%E5%85%A5%E6%B7%B1%E5%87%BA/index.html">
+    <meta property="og:type" content="article">
+<meta property="og:title" content="定时活动任务实现之时间轮">
+<meta property="og:url" content="http://example.com/2023/11/02/%E5%AE%9A%E6%97%B6%E6%B4%BB%E5%8A%A8%E4%BB%BB%E5%8A%A1%E5%AE%9E%E7%8E%B0%E4%B9%8B%E6%97%B6%E9%97%B4%E8%BD%AE/index.html">
 <meta property="og:site_name" content="Whlok">
-<meta property="og:description" content="自动内存管理机制Java运行时数据区域  程序计数器 当前线程所执行的字节码的行号指示器，字节码解释器工作时就是通过改变这个计数器的值来确定下一条要执行的字节码指令的位置 每条线程都需要有一个独立的程序计数器，各条线程之间计数器互不影响，独立存储，“线程私有”。 执行 Java 方法和 native 方法时的区别： 执行 Java 方法时：记录虚拟机正在执行的字节码指令地址； 执行 native">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/image/jvm/1635234540148.jpg">
-<meta property="og:image" content="http://example.com/image/jvm/JVM%E8%BF%90%E8%A1%8C%E6%97%B6%E7%9A%84%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%9F%9F.png">
-<meta property="og:image" content="http://example.com/image/jvm/%E5%8F%A5%E6%9F%84%E8%AE%BF%E9%97%AE%E5%AF%B9%E8%B1%A1.png">
-<meta property="article:published_time" content="2023-10-24T15:30:01.000Z">
-<meta property="article:modified_time" content="2023-11-30T06:53:31.009Z">
+<meta property="article:published_time" content="2023-11-02T06:29:56.000Z">
+<meta property="article:modified_time" content="2023-11-02T06:29:56.118Z">
 <meta property="article:author" content="Whlok">
-<meta property="article:tag" content="jvm">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/image/jvm/1635234540148.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>JVM浅入浅出 - Whlok</title>
+  <title>定时活动任务实现之时间轮 - Whlok</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -203,7 +196,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="JVM浅入浅出"></span>
+            <span id="subtitle" data-typed-text="定时活动任务实现之时间轮"></span>
           
         </div>
 
@@ -214,8 +207,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-24 23:30" pubdate>
-          2023年10月24日 晚上
+        <time datetime="2023-11-02 14:29" pubdate>
+          2023年11月2日 下午
         </time>
       </span>
     
@@ -226,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.7k 字
+          0 字
         
       </span>
     
@@ -237,7 +230,7 @@
         
         
         
-          23 分钟
+          1 分钟
         
       </span>
     
@@ -274,140 +267,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">JVM浅入浅出</h1>
+            <h1 id="seo-header">定时活动任务实现之时间轮</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="自动内存管理机制"><a href="#自动内存管理机制" class="headerlink" title="自动内存管理机制"></a>自动内存管理机制</h1><h2 id="Java运行时数据区域"><a href="#Java运行时数据区域" class="headerlink" title="Java运行时数据区域"></a>Java运行时数据区域</h2><p><img src="/../image/jvm/1635234540148.jpg" srcset="/img/loading.gif" lazyload alt="1635234540148"></p>
-<p><img src="/../image/jvm/JVM%E8%BF%90%E8%A1%8C%E6%97%B6%E7%9A%84%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%9F%9F.png" srcset="/img/loading.gif" lazyload alt="JVM运行时的数据区域"></p>
-<h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><ul>
-<li>当前线程所执行的字节码的行号指示器，字节码解释器工作时就是通过改变这个计数器的值来确定下一条要执行的字节码指令的位置</li>
-<li>每条线程都需要有一个独立的程序计数器，各条线程之间计数器互不影响，独立存储，“<strong>线程私有</strong>”。</li>
-<li>执行 Java 方法和 native 方法时的区别：<ul>
-<li>执行 Java 方法时：记录虚拟机正在执行的字节码指令地址；</li>
-<li>执行 native 方法时：无定义；</li>
-</ul>
-</li>
-<li>是 5 个区域中唯一不会出现 OOM（Out Of Memory Error） 的区域。</li>
-</ul>
-<h3 id="Java-虚拟机栈"><a href="#Java-虚拟机栈" class="headerlink" title="Java 虚拟机栈"></a>Java 虚拟机栈</h3><ul>
-<li>Java 方法执行的内存模型，每个方法执行的过程，就是它所对应的栈帧在虚拟机栈中入栈到出栈的过程；</li>
-<li>服务于 Java 方法；</li>
-<li>可能抛出的异常：<ul>
-<li>OutOfMemoryError（在虚拟机栈可以动态扩展的情况下，扩展时无法申请到足够的内存）；</li>
-<li>StackOverflowError（线程请求的栈深度 &gt; 虚拟机所允许的深度）；</li>
-</ul>
-</li>
-<li>虚拟机参数设置：<code>-Xss</code>.</li>
-</ul>
-<h3 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h3><ul>
-<li>服务于 native 方法；</li>
-<li>可能抛出的异常：与 Java 虚拟机栈一样。</li>
-</ul>
-<h3 id="Java-堆"><a href="#Java-堆" class="headerlink" title="Java 堆"></a>Java 堆</h3><ul>
-<li>唯一的目的：存放对象实例；</li>
-<li>垃圾收集器管理的主要区域；</li>
-<li>可以处于物理上不连续的内存空间中；</li>
-<li>可能抛出的异常：<ul>
-<li>OutOfMemoryError（堆中没有内存可以分配给新创建的实例，并且堆也无法再继续扩展了）。</li>
-</ul>
-</li>
-<li>虚拟机参数设置：<ul>
-<li>最大值：<code>-Xmx</code></li>
-<li>最小值：<code>-Xms</code></li>
-<li>两个参数设置成相同的值可避免堆自动扩展。</li>
-</ul>
-</li>
-</ul>
-<h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3><ul>
-<li>存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据；<ul>
-<li>类信息：即 Class 类，如类名、访问修饰符、常量池、字段描述、方法描述等。</li>
-</ul>
-</li>
-<li>垃圾收集行为在此区域很少发生；<ul>
-<li>不过也不能不清理，对于经常动态生成大量 Class 的应用，如 Spring 等，需要特别注意类的回收状况。</li>
-</ul>
-</li>
-<li>运行时常量池也是方法区的一部分；<ul>
-<li>Class 文件中除了有类的版本、字段、方法、接口等描述信息外，还有一项是常量池，用于存放编译器生成的各种字面量（就是代码中定义的 static final 常量）和符号引用，这部分信息就存储在运行时常量池中。</li>
-</ul>
-</li>
-<li>可能抛出的异常：<ul>
-<li>OutOfMemoryError（方法区无法满足内存分配需求时）。</li>
-</ul>
-</li>
-</ul>
-<h3 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h3><ul>
-<li><p>JDK 1.4 的 NIO 类可以使用 native 函数库直接分配堆外内存，这是一种基于通道与缓冲区的 I&#x2F;O 方式，它在 Java 堆中存储一个 DirectByteBuffer 对象作为堆外内存的引用，这样就可以对堆外内存进行操作了。因为可以避免 Java 堆和 Native 堆之间来回复制数据，在一些场景可以带来显著的性能提高。</p>
-</li>
-<li><p>虚拟机参数设置：</p>
-<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs diff"><span class="hljs-deletion">-XX:MaxDirectMemorySize</span><br></code></pre></td></tr></table></figure>
-
-<ul>
-<li>默认等于 Java 堆最大值，即 <code>-Xmx</code> 指定的值。</li>
-</ul>
-</li>
-<li><p>将直接内存放在这里讲解的原因是它也可能会出现 OutOfMemoryError；</p>
-<ul>
-<li>服务器管理员在配置 JVM 参数时，会根据机器的实际内存设置 <code>-Xmx</code> 等信息，但经常会忽略直接内存（默认等于 <code>-Xmx</code> 设置值），这可能会使得各个内存区域的总和大于物理内存限制，从而导致动态扩展时出现 OOM。</li>
-</ul>
-</li>
-</ul>
-<h2 id="HotSpot-虚拟机堆中的对象"><a href="#HotSpot-虚拟机堆中的对象" class="headerlink" title="HotSpot 虚拟机堆中的对象"></a>HotSpot 虚拟机堆中的对象</h2><p>这一小节将对 JVM 对 Java 堆中的对象的创建、布局和访问的全过程进行讲解。</p>
-<h3 id="对象的创建（遇到一条-new-指令时）"><a href="#对象的创建（遇到一条-new-指令时）" class="headerlink" title="对象的创建（遇到一条 new 指令时）"></a>对象的创建（遇到一条 new 指令时）</h3><ol>
-<li>检查这个指令的参数能否在常量池中定位到一个类的符号引用，并检查这个符号引用代表的类是否已被加载、解析和初始化过。如果没有，先把这个类加载进内存；</li>
-<li>类加载检查通过后，虚拟机将为新对象分配内存，此时已经可以确定存储这个对象所需的内存大小；</li>
-<li>在堆中为新对象分配可用内存；</li>
-<li>将分配到的内存初始化；</li>
-<li>设置对象头中的数据；</li>
-<li>此时，从虚拟机的角度看，对象已经创建好了，但从 Java 程序的角度看，对象创建才刚刚开始，构造函数还没有执行。</li>
-</ol>
-<p>第 3 步，在堆中为新对象分配可用内存时，会涉及到以下两个问题：</p>
-<p><strong>如何在堆中为新对象划分可用的内存？</strong></p>
-<ul>
-<li>指针碰撞（内存分配规整）<ul>
-<li>用过的内存放一边，没用过的内存放一边，中间用一个指针分隔；</li>
-<li>分配内存的过程就是将指针向没用过的内存那边移动所需的长度；</li>
-</ul>
-</li>
-<li>空闲列表（内存分配不规整）<ul>
-<li>维护一个列表，记录哪些内存块是可用的；</li>
-<li>分配内存时，从列表上选取一块足够大的空间分给对象，并更新列表上的记录；</li>
-</ul>
-</li>
-</ul>
-<p><strong>如何处理多线程创建对象时，划分内存的指针的同步问题？</strong></p>
-<ul>
-<li>对分配内存空间的动作进行同步处理（CAS）；</li>
-<li>把内存分配动作按照线程划分在不同的空间之中进行；<ul>
-<li>每个线程在 Java 堆中预先分配一小块内存，称为本地线程分配缓冲（Thread Local Allocation Buffer，TLAB）；</li>
-<li>哪个线程要分配内存就在哪个线程的 TLAB 上分配，TLAB 用完需要分配新的 TLAB 时，才需要同步锁定；</li>
-<li>通过 <code>-XX:+/-UseTLAB</code> 参数设定是否使用 TLAB。</li>
-</ul>
-</li>
-</ul>
-<h3 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h3><ul>
-<li>对象头：<ul>
-<li>第一部分：存储对象自身运行时的数据，HashCode、GC分代年龄等（Mark Word）；</li>
-<li>第二部分：类型指针，指向它的类元数据的指针，虚拟机通过这个指针来判断这个对象是哪个类的实例（HotSpot 采用的是直接指针的方式访问对象的）；</li>
-<li>如果是个数组对象，对象头中还有一块用于记录数组长度的数据。</li>
-</ul>
-</li>
-<li>实例数据：<ul>
-<li>默认分配顺序：longs&#x2F;doubles、ints、shorts&#x2F;chars、bytes&#x2F;booleans、oops (Ordinary Object Pointers)，相同宽度的字段会被分配在一起，除了 oops，其他的长度由长到短；</li>
-<li>默认分配顺序下，父类字段会被分配在子类字段前面。</li>
-</ul>
-</li>
-</ul>
-<p><em>注：HotSpot VM要求对象的起始地址必须是8字节的整数倍，所以不够要补齐。</em></p>
-<h3 id="对象的访问"><a href="#对象的访问" class="headerlink" title="对象的访问"></a>对象的访问</h3><p>Java 程序需要通过虚拟机栈上的 reference 数据来操作堆上的具体对象，reference 数据是一个指向对象的引用，不过如何通过这个引用定位到具体的对象，目前主要有以下两种访问方式：句柄访问和直接指针访问。</p>
-<h4 id="句柄访问"><a href="#句柄访问" class="headerlink" title="句柄访问"></a>句柄访问</h4><p>句柄访问会在 Java 堆中划分一块内存作为句柄池，每一个句柄存放着到对象实例数据和对象类型数据的指针。</p>
-<p>优势：对象移动的时候（这在垃圾回收时十分常见）只需改变句柄池中对象实例数据的指针，不需要修改reference本身。</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a><img src="/../image/jvm/%E5%8F%A5%E6%9F%84%E8%AE%BF%E9%97%AE%E5%AF%B9%E8%B1%A1.png" srcset="/img/loading.gif" lazyload alt="句柄访问对象"></h2><h4 id="直接指针访问"><a href="#直接指针访问" class="headerlink" title="直接指针访问"></a>直接指针访问</h4><p>直接指针访问方式在 Java 堆对象的实例数据中存放了一个指向对象类型数据的指针，在 HotSpot 中，这个指针会被存放在对象头中。</p>
-<p>优势：减少了一次指针定位对象实例数据的开销，速度更快 </p>
-<p>![直接指针访问对象](..&#x2F;..&#x2F;..&#x2F;Java学习&#x2F;文档&#x2F;JVM &#x2F;pic&#x2F;直接指针访问对象.png)</p>
-<h2 id="垃圾回收策略与算法"><a href="#垃圾回收策略与算法" class="headerlink" title="垃圾回收策略与算法"></a>垃圾回收策略与算法</h2><h1 id="虚拟机执行子系统"><a href="#虚拟机执行子系统" class="headerlink" title="虚拟机执行子系统"></a>虚拟机执行子系统</h1><h2 id="类文件结构组成"><a href="#类文件结构组成" class="headerlink" title="类文件结构组成"></a>类文件结构组成</h2><h2 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a>类加载过程</h2><h1 id="程序编译与代码优化"><a href="#程序编译与代码优化" class="headerlink" title="程序编译与代码优化"></a>程序编译与代码优化</h1><h1 id="高效并发"><a href="#高效并发" class="headerlink" title="高效并发"></a>高效并发</h1><h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1>
+                
                 
               </div>
             
@@ -415,34 +280,6 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Java/" class="category-chain-item">Java</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/jvm/" class="print-no-link">#jvm</a>
-      
-    </div>
   
 </div>
 
@@ -452,8 +289,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>JVM浅入浅出</div>
-      <div>http://example.com/2023/10/24/JVM浅入深出/</div>
+      <div>定时活动任务实现之时间轮</div>
+      <div>http://example.com/2023/11/02/定时活动任务实现之时间轮/</div>
     </div>
     <div class="license-meta">
       
@@ -465,7 +302,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年10月24日</div>
+          <div>2023年11月2日</div>
         </div>
       
       
@@ -492,6 +329,29 @@
 
 
 
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/11/18/IDEA%E5%BC%80%E5%8F%91%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/" title="IDEA开发软件配置">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">IDEA开发软件配置</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/10/30/Kotlin%E5%8D%8F%E7%A8%8B%E5%85%A5%E9%97%A8/" title="Kotlin协程入门">
+                        <span class="hidden-mobile">Kotlin协程入门</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
